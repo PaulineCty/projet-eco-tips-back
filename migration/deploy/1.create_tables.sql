@@ -1,0 +1,78 @@
+-- Deploy ecotips:1.create_tables to pg
+
+BEGIN;
+
+CREATE DOMAIN posint as int CHECK( VALUE >= 0 );
+CREATE DOMAIN rating as NUMERIC(3,2) CHECK( VALUE >= 0 AND VALUE <= 5 );
+CREATE DOMAIN email as TEXT CHECK( VALUE ~ '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$' );
+CREATE DOMAIN color AS TEXT CHECK ( VALUE ~ '^#[a-fA-F0-9]{6}$' );
+
+CREATE TABLE role
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "name" TEXT NOT NULL DEFAULT 'user'
+);
+
+CREATE TABLE "user"
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "firstname" TEXT NOT NULL,
+    "lastname" TEXT NOT NULL,
+    "email" email NOT NULL UNIQUE,
+    "password" TEXT NOT NULL,
+    "birthdate" DATE NOT NULL,
+    "ecocoins" posint NOT NULL DEFAULT 0,
+    "score" posint NOT NULL DEFAULT 0,
+    "role_id" INTEGER REFERENCES role(id) ON DELETE CASCADE
+);
+
+CREATE INDEX email_idx ON "user" USING hash(email);
+
+CREATE TABLE card
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "image" TEXT NOT NULL,
+    "title" TEXT NOT NULL UNIQUE,
+    "description" TEXT NOT NULL,
+    "environmental_rating" rating NOT NULL,
+    "economic_rating" rating NOT NULL,
+    "value" posint NOT NULL,
+    "proposal" BOOLEAN NOT NULL DEFAULT TRUE,
+    "user_id" INTEGER REFERENCES "user"(id) ON DELETE CASCADE,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
+);
+
+CREATE TABLE category
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "name" TEXT NOT NULL UNIQUE,
+    "color" color NOT NULL UNIQUE
+);
+
+CREATE TABLE achievement 
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "title" TEXT NOT NULL UNIQUE, 
+    "picture" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "user_id" INTEGER REFERENCES "user"(id) ON DELETE CASCADE
+);
+
+CREATE TABLE user_card
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "user_id" INTEGER REFERENCES "user"(id) ON DELETE CASCADE,
+    "card_id" INTEGER REFERENCES card(id) ON DELETE CASCADE,
+    "expiration_date" DATE NOT NULL,
+    "state" BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE category_card
+(
+    "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "category_id" INTEGER REFERENCES category(id) ON DELETE CASCADE,
+    "card_id" INTEGER REFERENCES card(id) ON DELETE CASCADE
+);
+
+COMMIT;
