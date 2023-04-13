@@ -15,10 +15,13 @@ const userAuthController = {
         }
         
         //Testing email uniqueness
-        const user = await User.findByEmail(email);
-        
-        if(user) {
-            return res.status(400).json({ errorMessage : 'Cet email est déjà pris.'});
+        try {
+            const user = await User.findByEmail(email);
+            if(user) {
+                return res.status(400).json({ errorMessage : 'Cet email est déjà pris.'});
+            }
+        } catch (error) {
+            next(new APIError("Erreur interne",500));
         }
         
         // Validating password format
@@ -45,12 +48,13 @@ const userAuthController = {
 
         //Testing user input 
         if(password !== confirmation) {
-            return res.json({ errorMessage : 'Erreur dans la saisie du formulaire'});
+            return res.status(400).json({ errorMessage : 'Erreur dans la saisie du formulaire'});
         }
         
         //Checking if an account exists with this email
+        let user;
         try {
-            const user = await User.findByEmail(email);
+            user = await User.findByEmail(email);
             if(!user) {
                 return res.status(400).json({ errorMessage : 'Couple login/mot de passe est incorrect.'});
             }
@@ -63,13 +67,9 @@ const userAuthController = {
         if(!hasMatchingPassword) {
             return res.status(400).json({ errorMessage : 'Couple login/mot de passe est incorrect.'});
         }
-        
-        if(newUser) {
-            // req.session.user = user;
-            res.redirect('/'); 
-        } else {
-            next(new APIError("Erreur lors l'authentification", 500));
-        }
+
+        // req.session.user = user;
+        res.redirect('/'); 
      },
 
      signOut(req,res) {
