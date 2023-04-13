@@ -16,7 +16,7 @@ const userAuthController = {
         
         //Testing email uniqueness
         const user = await User.findByEmail(email);
-        debug(user);
+        
         if(user) {
             return res.status(400).json({ errorMessage : 'Cet email est déjà pris.'});
         }
@@ -31,10 +31,9 @@ const userAuthController = {
         const salt = await bcrypt.genSalt(saltRounds);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        //Creating the new user in the user table, only standard can be created this way (no admin)
+        //Creating the new user in the user table, only standard users can be created this way (no admin)
         try {
             const newUser = await User.create({firstname, lastname, email, password: hashedPassword, birthdate, role_id : 1});
-            debug(newUser);
             res.redirect(`/profile/${newUser.id}`); 
         } catch (error) {
             next(new APIError("Erreur lors de l'inscription", 500));

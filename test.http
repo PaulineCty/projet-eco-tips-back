@@ -4,9 +4,9 @@ POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
-    "firstname": "admin",
+    "firstname": "Jean",
     "lastname": "Bon",
-    "email":"admin.admin@gmail.com",
+    "email":"jean.bon@gmail.com",
     "password":"jean",
     "confirmation": "jean",
     "birthdate": "01/01/2001"
