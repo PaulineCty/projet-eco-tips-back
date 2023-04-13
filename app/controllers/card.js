@@ -5,7 +5,7 @@ const cardController = {
     async getByUser (req, res) {
         const cards = await Card.findByUser(req.params.id);
         // const cards = await Card.findAll();
-        debug(cards);
+        debug(req.user);
     },
 };
 
