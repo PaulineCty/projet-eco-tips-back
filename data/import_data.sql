@@ -93,7 +93,6 @@ VALUES
 (1, 4, '12/10/2023'),
 (1, 5, '25/05/2023');
 
-
 -- category_card table
 INSERT INTO category_card(category_id, card_id)
 VALUES 

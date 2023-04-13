@@ -1,22 +1,22 @@
-# Je prends l'identité de spedata :
+# Being the user spedata, I can then,
 export PGUSER=spedata
 
-# Je supprime la BDD ecotips et l'utilisateur ecotips
+# delete the ecotips DB and user,
 dropdb ecotips
 echo "BDD supprimée"
 dropuser ecotips
 echo "ecotips supprimé"
 
-# Je crèe la BDD ecotips et l'utilisateur admin_ocolis
+# create the ecotips DB and user,
 createuser ecotips -P
 echo "ecotips créé"
 createdb ecotips -O ecotips
 echo "BDD créée"
 
-# Je supprime sqitch.conf et sqitch.plan
+# delete the sqitch.conf and sqitch.plan files,
 rm sqitch.conf
 rm sqitch.plan
 
-# J'initiase Sqitch
+# initiate sqitch.
 sqitch init ecotips --target db:pg:ecotips
 echo "Sqitch initialisé"
