@@ -16,6 +16,12 @@ const userCardController = {
         debug(cards);
         res.json(cards);
     },
+
+    async deleteUserCard (req, res) {
+        const cards = await UserCard.deleteUserCard(req.params.id, req.params.cardId);
+        debug(cards);
+        res.json(cards); // ou res.status(204).json() ?;
+    }
 };
 
 module.exports = userCardController;

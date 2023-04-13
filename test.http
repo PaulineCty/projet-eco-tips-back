@@ -40,3 +40,7 @@ Content-Type: application/json
     "expiration_date":"01-01-2024",
     "state":false
 }
+
+###
+
+DELETE http://localhost:3000/collection/1/delete/53
