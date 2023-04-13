@@ -1,10 +1,9 @@
-import { cardController } from "../controllers/index.js";
-import Debug from 'debug';
-const debug = Debug("router:collection");
-import { Router } from "express";
+const { cardController } = require("../controllers/index.js");
+const debug = require('debug')("router:collection");
 
-const collectionRouter = Router();
+const express = require('express');
+const collectionRouter = express.Router();
 
 collectionRouter.get("/:id(\\d+)", cardController.getByUser);
 
-export { collectionRouter };
+module.exports = collectionRouter;

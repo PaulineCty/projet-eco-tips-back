@@ -65,8 +65,8 @@ VALUES
 ('image', 'Ouvrir les rideaux et les volets en journée', 'Ce geste simple permet d’’optimiser l’apport de lumière naturelle dans votre intérieur. Non seulement cela réduit la consommation d’énergie nécessaire pour l’’éclairage artificiel, mais cela peut également avoir des effets bénéfiques sur votre humeur et votre bien-être en général. Laissez entrer la lumière du jour autant que possible !', 4, 5, 20, false, CURRENT_TIMESTAMP, 1),
 ('image', 'Brancher sa box internet à un programmateur', 'Une box internet consomme en moyenne de 150 à 300 kWh par an. Pour économiser de l''énergie, il est conseillé de débrancher votre box lorsque vous n''en avez pas besoin. Pour faciliter cette tâche, vous pouvez brancher votre box sur un programmateur électrique qui permettra de l''éteindre automatiquement à des heures définies.', 3, 3, 9, false, CURRENT_TIMESTAMP, 1);
 
--- category table
-INSERT INTO category(name, color)
+-- tag table
+INSERT INTO tag(name, color)
 VALUES 
 ('Économie d’énergie','#fb923c'),
 ('Transport', '#94a3b8'),
@@ -93,8 +93,8 @@ VALUES
 (1, 4, '12/10/2023'),
 (1, 5, '25/05/2023');
 
--- category_card table
-INSERT INTO category_card(category_id, card_id)
+-- tag_card table
+INSERT INTO tag_card(tag_id, card_id)
 VALUES 
 (1, 1),
 (9, 1),

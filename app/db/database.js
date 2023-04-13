@@ -1,13 +1,7 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-import Debug from 'debug';
-const debug = Debug("database");
-
-import pkg from 'pg';
-const {Pool} = pkg;
+const { Pool } = require('pg');
 
 const client = new Pool();
 
 client.connect();
 
-export {client};
+module.exports = client;

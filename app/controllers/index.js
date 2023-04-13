@@ -1,1 +1,5 @@
-export {cardController} from './card.js';
+const cardController = require("./card.js");
+
+module.exports = {
+    cardController
+};

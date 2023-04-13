@@ -1,16 +1,15 @@
-import Core from "./Core.js";
-import { client } from "../db/database.js";
-import Debug from 'debug';
-const debug = Debug("model:card");
+const Core = require('./Core');
+const client = require('../db/database');
+const debug = require('debug')("model:card");
 
 class Card extends Core {
-    // client = dbClient;
     tableName = 'card';
 
     async findByUser(id) {
         const preparedQuery = {
-            text : `SELECT * FROM card
-            WHERE user_id = $1`,
+            text : `SELECT * FROM card c
+            JOIN user_card uc ON uc.card_id = c.id
+            WHERE uc.user_id = $1`,
             values: [id]
         }
         const result = await this.client.query(preparedQuery);
@@ -20,4 +19,3 @@ class Card extends Core {
 };
 
 module.exports = new Card(client);
-// export default new Card();

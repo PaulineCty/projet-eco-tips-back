@@ -1,4 +1,4 @@
-export default class Core {
+class Core {
     tableName;
 
     constructor(client) {
@@ -129,4 +129,4 @@ export default class Core {
     }
 }
 
-// module.exports = CoreDatamapper;
+module.exports = Core;

@@ -1,2 +1,5 @@
-// export {Category} from "./Category.js";
-// export new Card() from "./Card.js";
+const Card = require("./Card.js");
+
+module.exports = {
+    Card
+};
