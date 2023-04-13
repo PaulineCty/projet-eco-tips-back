@@ -1,9 +1,9 @@
 const Core = require('./Core');
 const client = require('../db/database');
-const debug = require('debug')("model:card");
+const debug = require('debug')("model:tag");
 
 class Tag extends Core {
-    tableName = 'category';
+    tableName = 'tag';
 };
 
 module.exports = new Tag(client);
