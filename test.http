@@ -24,3 +24,7 @@ Content-Type: application/json
     "proposal":true,
     "user_id":1
 }
+
+###
+
+GET http://localhost:3000/collection/1/add

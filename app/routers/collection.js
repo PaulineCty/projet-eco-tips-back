@@ -8,6 +8,7 @@ const collectionRouter = express.Router();
 collectionRouter.get("/:id(\\d+)", cardController.getByUser);
 collectionRouter.patch("/:id(\\d+)", userCardController.updateUserCardState);
 collectionRouter.post("/:id(\\d+)/create", cardController.addCard);
+collectionRouter.get("/:id(\\d+)/add", cardController.getOneRandomCard);
 
 
 module.exports = collectionRouter;

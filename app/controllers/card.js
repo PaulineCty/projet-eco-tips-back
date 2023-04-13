@@ -10,9 +10,14 @@ const cardController = {
     },
 
     async addCard (req, res) {
-        console.log(req.body);
         const cards = await Card.create(req.body);
 
+        debug(cards);
+        res.json(cards);
+    },
+
+    async getOneRandomCard (req, res) {
+        const cards = await Card.getOneRandomCard();
         debug(cards);
         res.json(cards);
     }
