@@ -8,6 +8,14 @@ const cardController = {
         debug(cards);
         res.json(cards);
     },
+
+    async addCard (req, res) {
+        console.log(req.body);
+        const cards = await Card.create(req.body);
+
+        debug(cards);
+        res.json(cards);
+    }
 };
 
 module.exports = cardController;

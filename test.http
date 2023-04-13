@@ -8,3 +8,19 @@ Content-Type: application/json
 {
     "state": true
 }
+
+###
+
+POST http://localhost:3000/collection/1/create
+Content-Type: application/json
+
+{
+    "image":"image",
+    "title":"test",
+    "description":"test",
+    "environmental_rating":3,
+    "economic_rating":3,
+    "value": 50,
+    "proposal":true,
+    "user_id":1
+}
