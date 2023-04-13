@@ -10,7 +10,9 @@ CREATE DOMAIN color AS TEXT CHECK ( VALUE ~ '^#[a-fA-F0-9]{6}$' );
 CREATE TABLE role
 (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "name" TEXT NOT NULL DEFAULT 'user'
+    "name" TEXT NOT NULL DEFAULT 'user',
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE "user"
@@ -23,7 +25,9 @@ CREATE TABLE "user"
     "birthdate" DATE NOT NULL,
     "ecocoins" posint NOT NULL DEFAULT 0,
     "score" posint NOT NULL DEFAULT 0,
-    "role_id" INTEGER REFERENCES role(id) ON DELETE CASCADE
+    "role_id" INTEGER REFERENCES role(id) ON DELETE CASCADE,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
 );
 
 CREATE INDEX email_idx ON "user" USING hash(email);
@@ -47,7 +51,9 @@ CREATE TABLE tag
 (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL UNIQUE,
-    "color" color NOT NULL UNIQUE
+    "color" color NOT NULL UNIQUE,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE achievement 
@@ -56,7 +62,9 @@ CREATE TABLE achievement
     "title" TEXT NOT NULL UNIQUE, 
     "picture" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "user_id" INTEGER REFERENCES "user"(id) ON DELETE CASCADE
+    "user_id" INTEGER REFERENCES "user"(id) ON DELETE CASCADE,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE user_card
@@ -65,14 +73,18 @@ CREATE TABLE user_card
     "user_id" INTEGER REFERENCES "user"(id) ON DELETE CASCADE,
     "card_id" INTEGER REFERENCES card(id) ON DELETE CASCADE,
     "expiration_date" DATE NOT NULL,
-    "state" BOOLEAN NOT NULL DEFAULT FALSE
+    "state" BOOLEAN NOT NULL DEFAULT FALSE,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE tag_card
 (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "tag_id" INTEGER REFERENCES tag(id) ON DELETE CASCADE,
-    "card_id" INTEGER REFERENCES card(id) ON DELETE CASCADE
+    "card_id" INTEGER REFERENCES card(id) ON DELETE CASCADE,
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
 );
 
 COMMIT;

@@ -1,1 +1,10 @@
 GET http://localhost:3000/collection/1
+
+###
+
+PATCH http://localhost:3000/collection/1
+Content-Type: application/json
+
+{
+    "state": true
+}

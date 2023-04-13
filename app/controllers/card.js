@@ -6,6 +6,7 @@ const cardController = {
         const cards = await Card.findByUser(req.params.id);
         // const cards = await Card.findAll();
         debug(cards);
+        res.json(cards);
     },
 };
 
