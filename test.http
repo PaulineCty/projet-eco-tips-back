@@ -28,3 +28,15 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/collection/1/add
+
+###
+
+POST http://localhost:3000/collection/1/add
+Content-Type: application/json
+
+{
+    "user_id":1,
+    "card_id":40,
+    "expiration_date":"01-01-2024",
+    "state":false
+}

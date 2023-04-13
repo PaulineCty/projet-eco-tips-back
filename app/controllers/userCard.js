@@ -9,6 +9,13 @@ const userCardController = {
         const updatedCard = await UserCard.update({ id }, updatedData);
         res.json(updatedCard);
     },
+
+    async addUserCard (req, res) {
+        const cards = await UserCard.create(req.body);
+
+        debug(cards);
+        res.json(cards);
+    },
 };
 
 module.exports = userCardController;
