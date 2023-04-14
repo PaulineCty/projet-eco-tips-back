@@ -2,12 +2,7 @@ GET http://localhost:3000/collection/1
 
 ###
 
-PATCH http://localhost:3000/collection/1
-Content-Type: application/json
-
-{
-    "state": true
-}
+PATCH http://localhost:3000/collection/1/edit/2
 
 ###
 
@@ -16,12 +11,11 @@ Content-Type: application/json
 
 {
     "image":"image",
-    "title":"test",
+    "title":"test2",
     "description":"test",
     "environmental_rating":3,
     "economic_rating":3,
     "value": 50,
-    "proposal":true,
     "user_id":1
 }
 
@@ -35,12 +29,10 @@ POST http://localhost:3000/collection/1/add
 Content-Type: application/json
 
 {
-    "user_id":1,
     "card_id":40,
-    "expiration_date":"01-01-2024",
-    "state":false
+    "expiration_date":"01-01-2024"
 }
 
 ###
 
-DELETE http://localhost:3000/collection/1/delete/53
+DELETE http://localhost:3000/collection/1/delete/40
