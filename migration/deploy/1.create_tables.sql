@@ -25,7 +25,7 @@ CREATE TABLE "user"
     "birthdate" DATE NOT NULL,
     "ecocoins" posint NOT NULL DEFAULT 0,
     "score" posint NOT NULL DEFAULT 0,
-    "role_id" INTEGER REFERENCES role(id) ON DELETE CASCADE,
+    "role_id" INTEGER DEFAULT 2 REFERENCES role(id) ON DELETE CASCADE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMPTZ
 );
