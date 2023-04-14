@@ -10,7 +10,7 @@ CREATE DOMAIN color AS TEXT CHECK ( VALUE ~ '^#[a-fA-F0-9]{6}$' );
 CREATE TABLE role
 (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "name" TEXT NOT NULL DEFAULT 'user'
+    "name" TEXT NOT NULL
 );
 
 CREATE TABLE "user"
@@ -23,7 +23,7 @@ CREATE TABLE "user"
     "birthdate" DATE NOT NULL,
     "ecocoins" posint NOT NULL DEFAULT 0,
     "score" posint NOT NULL DEFAULT 0,
-    "role_id" INTEGER REFERENCES role(id) ON DELETE CASCADE
+    "role_id" INTEGER DEFAULT 2 REFERENCES role(id) ON DELETE CASCADE 
 );
 
 CREATE INDEX email_idx ON "user" USING hash(email);

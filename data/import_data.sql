@@ -7,8 +7,11 @@ VALUES
 -- user table
 INSERT INTO "user"(firstname, lastname, email, password, birthdate, role_id)
 VALUES 
-('admin', 'admin', 'admin.admin@gmail.com', 'password', '12/04/2023', 1),
-('Beth', 'Rave', 'bethrave@gmail.com', 'password', '13/04/2000', 2);
+('admin', 'admin', 'admin.admin@gmail.com', 'password', '12/04/2023', 1);
+
+INSERT INTO "user"(firstname, lastname, email, password, birthdate)
+VALUES 
+('Beth', 'Rave', 'bethrave@gmail.com', 'password', '13/04/2000');
 
 
 -- card table

@@ -1,0 +1,23 @@
+
+GET http://localhost:3000/collection/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE0ODY2NTEsImV4cCI6MTY4MTQ4ODQ1MX0.KGOgh9pU2o28-j2-WmOv2Ua3ATAy12IGm1d32N_-i1w
+###
+POST http://localhost:3000/sign-up
+Content-Type: application/json
+
+{
+    "firstname": "Edgard",
+    "lastname": "Atoi",
+    "email":"sarah@croche.com",
+    "password":"Azerty123!",
+    "confirmpassword": "Azerty123!",
+    "birthdate": "05/05/1905"
+}
+###
+POST http://localhost:3000/sign-in
+Content-Type: application/json
+
+{
+    "email":"sarah@croche.com",
+    "password":"sarah"
+}
