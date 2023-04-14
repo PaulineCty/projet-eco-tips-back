@@ -13,8 +13,24 @@ class Card extends Core {
             values: [id]
         }
         const result = await this.client.query(preparedQuery);
-
         return result.rows;
+    };
+
+    async getOneRandomCard(id) {
+        const preparedQuery = {
+            text : `SELECT * 
+            FROM card 
+            WHERE id NOT IN (
+                SELECT c.id FROM card c
+                JOIN user_card uc ON uc.card_id = c.id
+                WHERE uc.user_id = $1
+            )
+            ORDER BY RANDOM() 
+            LIMIT 1;`,
+            values: [id]
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rows[0];
     }
 };
 
