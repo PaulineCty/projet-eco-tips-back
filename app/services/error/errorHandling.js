@@ -3,7 +3,7 @@ const debug = require("debug")("error");
 
 const errorModule = {
     /**
-     * Method managing error logs and client response
+     * Method managing client response
      * @param {*} err 
      * @param {*} req 
      * @param {*} res 
@@ -16,6 +16,12 @@ const errorModule = {
                 break;
             case 404:
                 res.status(404).json("Not found");
+                break;
+            case 401:
+                res.status(401).json("Unauthorized");
+                break;
+            case 500:
+                res.status(500).json("Internal Server Error");
                 break;
             default:
                 res.status(err.code).json("Internal server error");
@@ -32,7 +38,7 @@ const errorModule = {
      */
     _404(_, __, next) {
         next(new APIError('Not found', 404));
-    },
+    }
 };
 
 module.exports = errorModule;

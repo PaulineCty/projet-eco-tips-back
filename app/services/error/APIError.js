@@ -1,6 +1,6 @@
 class APIError extends Error {
     constructor(message,code){
-        super(message); // new Error(message) - super permet d'appeler le constructeur du parent
+        super(message);
         this.code = code;
     }
 };
