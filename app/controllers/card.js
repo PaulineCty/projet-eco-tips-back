@@ -2,6 +2,7 @@ const { Card } = require("../models/index");
 const debug = require('debug')("controller:card");
 
 const cardController = {
+<<<<<<< HEAD
     async getByUser (req, res, next) {
         // CAREFUL : userId will be found in req.user using JWT
         try {
@@ -11,6 +12,12 @@ const cardController = {
         } catch (error) {
             //next(new APIError(`Erreur interne : ${error}`,500));
         }        
+=======
+    async getByUser (req, res) {
+        const cards = await Card.findByUser(req.params.id);
+        // const cards = await Card.findAll();
+        debug(req.user);
+>>>>>>> 1f4d2c3044de3df8aa2b4e7561c2b1d51edb60db
     },
 
     async addCard (req, res, next) {
