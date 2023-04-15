@@ -6,16 +6,19 @@ const authentificationToken = require('../services/authentification/authentifica
 const { Router } = require("express");
 const collectionRouter = Router();
 
-collectionRouter.get("/:id(\\d+)", authentificationToken.isAuthenticated, cardController.getByUser);
+// Getting the user's card collection
+collectionRouter.get("/", authentificationToken.isAuthenticated, cardController.getByUser);
 
-collectionRouter.patch("/:id(\\d+)/edit/:cardId(\\d+)", userCardController.updateUserCardState);
+// Getting one random card to suggest to the user
+collectionRouter.get("/card", authentificationToken.isAuthenticated, cardController.getOneRandomCard);
 
-collectionRouter.post("/:id(\\d+)/create", cardController.addCard);
+// Adding the suggested card to the user's card collection
+collectionRouter.post("/card", authentificationToken.isAuthenticated, userCardController.addUserCard);
 
-collectionRouter.get("/:id(\\d+)/add", cardController.getOneRandomCard);
+// Updating the card status in the user's card collection
+collectionRouter.patch("/card/:cardId(\\d+)", authentificationToken.isAuthenticated, userCardController.updateUserCardState);
 
-collectionRouter.post("/:id(\\d+)/add", userCardController.addUserCard);
-
-collectionRouter.delete("/:id(\\d+)/delete/:cardId(\\d+)", userCardController.deleteUserCard);
+// Deleting the card from the user's card collection
+collectionRouter.delete("/card/:cardId(\\d+)", authentificationToken.isAuthenticated, userCardController.deleteUserCard);
 
 module.exports = collectionRouter;

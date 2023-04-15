@@ -1,42 +1,31 @@
-GET http://localhost:3000/collection/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE0ODY2NTEsImV4cCI6MTY4MTQ4ODQ1MX0.KGOgh9pU2o28-j2-WmOv2Ua3ATAy12IGm1d32N_-i1w
+GET http://localhost:3000/me/collection
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE1Nzg1NjksImV4cCI6MTY4MTU4MDM2OX0.XXd08GhvoZE5FQFvdwfjrjhNBCeT-yLCmRZBHYQ6j-s
 
 ###
 
-PATCH http://localhost:3000/collection/1/edit/2
+GET http://localhost:3000/me/collection/card
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE1Nzg1NjksImV4cCI6MTY4MTU4MDM2OX0.XXd08GhvoZE5FQFvdwfjrjhNBCeT-yLCmRZBHYQ6j-s
 
 ###
 
-POST http://localhost:3000/collection/1/create
+POST http://localhost:3000/me/collection/card
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE1Nzg1NjksImV4cCI6MTY4MTU4MDM2OX0.XXd08GhvoZE5FQFvdwfjrjhNBCeT-yLCmRZBHYQ6j-s
 
 {
-    "image":"image",
-    "title":"test2",
-    "description":"test",
-    "environmental_rating":3,
-    "economic_rating":3,
-    "value": 50,
-    "user_id":1
+    "card_id":11,
+    "expiration_date":"01-01-2023"
 }
 
 ###
 
-GET http://localhost:3000/collection/1/add
+PATCH http://localhost:3000/me/collection/card/11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE1Nzg1NjksImV4cCI6MTY4MTU4MDM2OX0.XXd08GhvoZE5FQFvdwfjrjhNBCeT-yLCmRZBHYQ6j-s
 
 ###
 
-POST http://localhost:3000/collection/1/add
-Content-Type: application/json
-
-{
-    "card_id":40,
-    "expiration_date":"01-01-2024"
-}
-
-###
-
-DELETE http://localhost:3000/collection/1/delete/40
+DELETE http://localhost:3000/me/collection/card/40
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE1NzY1OTIsImV4cCI6MTY4MTU3ODM5Mn0.vRxI4vFIFfEJZRDzLZgcswwb_HCe0Ejx8w8Ttkv0P-E
 
 ###
 
@@ -60,4 +49,19 @@ Content-Type: application/json
 {
     "email":"sarah@croche.com",
     "password":"sarah"
+}
+
+###
+
+POST http://localhost:3000/proposal
+Content-Type: application/json
+
+{
+    "image":"image",
+    "title":"test2",
+    "description":"test",
+    "environmental_rating":3,
+    "economic_rating":3,
+    "value": 50,
+    "user_id":1
 }
