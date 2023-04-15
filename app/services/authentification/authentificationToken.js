@@ -13,11 +13,11 @@ const authentificationToken = {
     //authHeader's authorization format is "Bearer token" hence the .split(' ')[1]
     const token = authHeader && authHeader.split(' ')[1];
 
-    if (!token) return res.status(401).json({ errorMessage : 'Veuillez vous authentifier pour accéder à cette page.' });
+    if (!token) return next(new APIError('Veuillez vous authentifier pour accéder à cette page.', 401));
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
       if (err) {
-        next(new APIError("Unauthorized", 401));
+        next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
       }
       req.user = user;
       next();

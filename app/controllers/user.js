@@ -39,7 +39,7 @@ const userAuthController = {
         try {
             user = await User.findByEmail(email);
             if(!user) {
-                return res.status(401).json({ errorMessage : 'Couple login/mot de passe est incorrect.'});
+                next(new APIError('Couple login/mot de passe est incorrect.', 401));
             }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
@@ -48,7 +48,7 @@ const userAuthController = {
         // Checking if the password is matching
         const hasMatchingPassword = await bcrypt.compare(password, user.password);
         if(!hasMatchingPassword) {
-            return res.status(401).json({ errorMessage : 'Couple login/mot de passe est incorrect.'});
+            next(new APIError('Couple login/mot de passe est incorrect.', 401));
         }
 
         // Generating a token and redirecting to the home page
