@@ -1,3 +1,4 @@
+const APIError = require("../services/error/APIError");
 const { Card } = require("../models/index");
 const debug = require('debug')("controller:card");
 

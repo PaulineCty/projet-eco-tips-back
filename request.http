@@ -1,26 +1,26 @@
 GET http://localhost:3000/me/collection
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE1Nzg1NjksImV4cCI6MTY4MTU4MDM2OX0.XXd08GhvoZE5FQFvdwfjrjhNBCeT-yLCmRZBHYQ6j-s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MTg2MTAsImV4cCI6MTY4MTcyMDQxMH0.0fyfmff8H52ak7NnT1dPkbjz2_oc0ADAMcxtdJlOX14
 
 ###
 
 GET http://localhost:3000/me/collection/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE1Nzg1NjksImV4cCI6MTY4MTU4MDM2OX0.XXd08GhvoZE5FQFvdwfjrjhNBCeT-yLCmRZBHYQ6j-s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MTc2MjksImV4cCI6MTY4MTcxOTQyOX0.0hncbmfHjVvcq-GxqjM9YJvhKDyCfDuLohPktge0l3g
 
 ###
 
 POST http://localhost:3000/me/collection/card
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE1Nzg1NjksImV4cCI6MTY4MTU4MDM2OX0.XXd08GhvoZE5FQFvdwfjrjhNBCeT-yLCmRZBHYQ6j-s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MTg2MTAsImV4cCI6MTY4MTcyMDQxMH0.0fyfmff8H52ak7NnT1dPkbjz2_oc0ADAMcxtdJlOX14
 
 {
-    "card_id":11,
+    "card_id":41,
     "expiration_date":"01-01-2023"
 }
 
 ###
 
-PATCH http://localhost:3000/me/collection/card/11
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE1Nzg1NjksImV4cCI6MTY4MTU4MDM2OX0.XXd08GhvoZE5FQFvdwfjrjhNBCeT-yLCmRZBHYQ6j-s
+PATCH http://localhost:3000/me/collection/card/41
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MTc2MjksImV4cCI6MTY4MTcxOTQyOX0.0hncbmfHjVvcq-GxqjM9YJvhKDyCfDuLohPktge0l3g
 
 ###
 
@@ -33,12 +33,12 @@ POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
-    "firstname": "Judas",
-    "lastname": "Bricot",
-    "email":"judas@bricot.com",
+    "firstname": "Laura",
+    "lastname": "Teur",
+    "email":"laura.teur@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
-    "birthdate": "05/05/190"
+    "birthdate": "05/05/1990"
 }
 
 ###
@@ -47,8 +47,8 @@ POST http://localhost:3000/sign-in
 Content-Type: application/json
 
 {
-    "email":"sarah@croche.com",
-    "password":"sarah"
+    "email":"laura.teur@gmail.com",
+    "password":"Azerty123!"
 }
 
 ###

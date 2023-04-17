@@ -1,3 +1,4 @@
+const APIError = require("../services/error/APIError");
 const { UserCard } = require("../models/index");
 const debug = require('debug')("controller:usercard");
 
