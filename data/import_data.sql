@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS "role", "user", "card", "tag", "user_card", "tag_card";
+
 -- role table
 INSERT INTO role(name)
 VALUES 
