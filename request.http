@@ -4,23 +4,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0b
 ###
 
 GET http://localhost:3000/me/collection/card
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MTc2MjksImV4cCI6MTY4MTcxOTQyOX0.0hncbmfHjVvcq-GxqjM9YJvhKDyCfDuLohPktge0l3g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MzQ4MDYsImV4cCI6MTY4MTczNjYwNn0.DaIc15IAVfOgITCBqMavnUS8Lh5h6rpX87R2i_TnAXE
 
 ###
 
 POST http://localhost:3000/me/collection/card
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MTg2MTAsImV4cCI6MTY4MTcyMDQxMH0.0fyfmff8H52ak7NnT1dPkbjz2_oc0ADAMcxtdJlOX14
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MzQ4MDYsImV4cCI6MTY4MTczNjYwNn0.DaIc15IAVfOgITCBqMavnUS8Lh5h6rpX87R2i_TnAXE
 
 {
-    "card_id":41,
+    "card_id":44,
     "expiration_date":"01-01-2023"
 }
 
 ###
 
-PATCH http://localhost:3000/me/collection/card/41
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiU2FyYWgiLCJsYXN0bmFtZSI6IkNyb2NoZSIsImVtYWlsIjoic2FyYWhAY3JvY2hlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJE0uYXZHOHlwWDVwMDV3a3dKU2ZBSE9IYklkV2NxTFFGL3Bib1hIOEZzZ2Fld1M4d2ZPN1BxIiwiYmlydGhkYXRlIjoiMTkwNS0wNS0wNFQyMzo1MDozOS4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MTc2MjksImV4cCI6MTY4MTcxOTQyOX0.0hncbmfHjVvcq-GxqjM9YJvhKDyCfDuLohPktge0l3g
+PATCH http://localhost:3000/me/collection/card/44
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MzQ4MDYsImV4cCI6MTY4MTczNjYwNn0.DaIc15IAVfOgITCBqMavnUS8Lh5h6rpX87R2i_TnAXE
 
 ###
 
@@ -33,9 +33,9 @@ POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
-    "firstname": "Laura",
-    "lastname": "Teur",
-    "email":"laura.teur@gmail.com",
+    "firstname": "Jean",
+    "lastname": "Biance",
+    "email":"jean.biance@com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "05/05/1990"
@@ -53,15 +53,14 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/proposal
+POST http://localhost:3000/me/proposal
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3MzczMDksImV4cCI6MTY4MTczOTEwOX0.dcrZblOk3jBN7zIvlqPkr_D-eQaNHceEALuCfZ2C0mA
 
 {
     "image":"image",
-    "title":"test2",
+    "title":"titre",
     "description":"test",
-    "environmental_rating":3,
     "economic_rating":3,
-    "value": 50,
-    "user_id":1
+    "value": 50
 }

@@ -13,8 +13,18 @@ class Card extends Core {
             values: [id]
         }
         const result = await this.client.query(preparedQuery);
-        return result.rows;
-    };
+        return result.rows[0];
+    }
+
+    async findByTitle(id) {
+        const preparedQuery = {
+            text : `SELECT * FROM card
+            WHERE title = $1`,
+            values: [id]
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rows[0];
+    }
 
     async getOneRandomCard(id) {
         const preparedQuery = {

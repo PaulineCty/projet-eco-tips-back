@@ -34,7 +34,7 @@ const errorModule = {
     },
 
     /**
-     * Manages 404 error
+     * Method managing 404 error
      * @param {*} _ 
      * @param {*} __ 
      * @param {*} next
