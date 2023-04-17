@@ -64,7 +64,8 @@ const cardSchema = Joi.object({
       'number.integer.base' : `'Valeur' doit être un nombre entier.`,
       'any.empty': `Le champ 'Valeur' ne peut pas être vide.`,
       'any.required': `Le champ 'Valeur' est manquant.`
-    })
+    }),
+  tags : Joi.array().items(Joi.number().integer())
 });
 
 module.exports = {
