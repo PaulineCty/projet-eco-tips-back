@@ -35,6 +35,7 @@ CREATE INDEX email_idx ON "user" USING hash(email);
 CREATE TABLE card
 (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    -- "image" BYTEA NOT NULL,
     "image" TEXT NOT NULL,
     "title" TEXT NOT NULL UNIQUE,
     "description" TEXT NOT NULL,
