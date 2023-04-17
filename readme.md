@@ -7,11 +7,11 @@ Eco Tips est une application web qui permet, de manière ludique, à ses utilisa
 
 ### Créer la base de données et importer les données
 
-1. Utiliser la commande `CREATE USER ecotips WITH PASSWORD 'ecotips';` afin de créer un utilisateur pour votre BDD.
-2. Puis utiliser la commande `CREATE DATABASE ecotips OWNER ecotips;` afin de créer votre BDD puis CTRL+D.
-3. Utiliser la commande `psql -U ecotips -d ecotips -f migration/revert/1.create_tables.sql`.
-3. Utiliser la commande `psql -U ecotips -d ecotips -f migration/deploy/1.create_tables.sql`.
-4. Puis utiliser la commande `psql -U ecotips -d ecotips -f data/import_data.sql`.
+1. Utiliser la commande `CREATE USER ecotips WITH PASSWORD 'ecotips -h localhost'` afin de créer un utilisateur pour votre BDD.
+2. Puis utiliser la commande `CREATE DATABASE ecotips OWNER ecotips -h localhost` afin de créer votre BDD puis CTRL+D.
+3. Utiliser la commande `psql -U ecotips -d ecotips -f migration/revert/1.create_tables.sql -h localhost`.
+3. Utiliser la commande `psql -U ecotips -d ecotips -f migration/deploy/1.create_tables.sql -h localhost`.
+4. Puis utiliser la commande `psql -U ecotips -d ecotips -f data/import_data.sql -h localhost`.
 
 ### Créer le fichier .env
 

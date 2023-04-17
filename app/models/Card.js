@@ -18,7 +18,7 @@ class Card extends Core {
             c.value, 
             CONCAT(u.firstname, ' ',u.lastname) AS "author",
             ARRAY_AGG (
-                t.name
+                json_build_object('name', t.name, 'color', t.color)
                 ORDER BY
                     t.name ASC
             ) tag
