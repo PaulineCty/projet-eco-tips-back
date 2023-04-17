@@ -10,17 +10,16 @@ const validationModule = {
         try {
             const user = await User.findByEmail(req.body.email);
             if(user) {
-                return res.status(400).json({ errorMessage : 'Cet email est déjà pris.'});
+                next(new APIError('Cet email est déjà pris.', 500));
             }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
 
-        // The goal here is to send to the front a more detailed error
+        // The goal here is to send to the front a detailed error
         const { error } = userSchema.validate(req.body);
-        console.log(error);
         if (error) {
-            return res.status(500).json('Erreur de saisie utilisateur.')
+            next(new APIError(error.message, 500));
         }
         else {
             next();
@@ -28,13 +27,6 @@ const validationModule = {
     } 
 
 };
-
-// const { error, value } = userSchema.validate(req.body);
-
-//   if (error) {
-//     return res.status(error.status).json({
-//       message: error.message
-//     });
 
 module.exports = validationModule;
 

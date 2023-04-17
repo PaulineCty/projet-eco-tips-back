@@ -10,24 +10,27 @@ const errorModule = {
      * @param {*} _ 
      */
     async manage(err, req, res, _) {
-        switch (err.code) {
-            case 400:
-                res.status(400).json("Bad request");
-                break;
-            case 404:
-                res.status(404).json("Not found");
-                break;
-            case 401:
-                res.status(401).json("Unauthorized");
-                break;
-            case 500:
-                res.status(500).json("Internal Server Error");
-                break;
-            default:
-                res.status(err.code).json("Internal server error");
-                break;
+        if(!err.message) {
+            switch (err.code) {
+                case 400:
+                    res.status(400).json({ message : "Bad request" });
+                    break;
+                case 404:
+                    res.status(404).json({ message : "Not found" });
+                    break;
+                case 401:
+                    res.status(401).json({ message : "Unauthorized" });
+                    break;
+                case 500:
+                    res.status(500).json({ message : "Internal Server Error" });
+                    break;
+                default:
+                    res.status(err.code).json({ message : "Internal server error" });
+                    break;
+            }
+        } else {
+            res.status(err.code).json({ message : err.message });
         }
-
     },
 
     /**
@@ -37,7 +40,7 @@ const errorModule = {
      * @param {*} next
      */
     _404(_, __, next) {
-        next(new APIError('Not found', 404));
+        next(new APIError('Page introuvable', 404));
     }
 };
 
