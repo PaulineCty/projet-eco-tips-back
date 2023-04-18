@@ -7,7 +7,7 @@ const cardController = {
         try {
             const cards = await Card.findByUser(req.user.id);
 
-            //converting the image_data to BLOB
+            //converting the image_data to base64
             cards.forEach(card => {
                 card.image_data = card.image_data.toString('base64');
             });
@@ -61,7 +61,11 @@ const cardController = {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
 
-    }
+    },
+
+    //edit image
+
+
 };
 
 module.exports = cardController;

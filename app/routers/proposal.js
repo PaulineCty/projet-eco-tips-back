@@ -26,12 +26,12 @@ const upload = multer({
     limits: {
         fileSize: 5000000
     },
-    fileFilter(req, file, cb) {
+    fileFilter(req, file, callback) {
         // Only accepting images
         if(!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new APIError('Merci d\'importer un fichier image valide (formats acceptés : .png, .jpeg, .jpg)', 400));
+            return callback(new APIError('Merci d\'importer un fichier image valide (formats acceptés : .png, .jpeg, .jpg)', 400));
         }
-        cb(undefined, true);
+        callback(undefined, true);
     }
 });
 

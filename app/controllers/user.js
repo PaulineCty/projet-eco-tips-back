@@ -48,11 +48,9 @@ const userAuthController = {
     async signIn (req,res,next) {
         const { email, password } = req.body;
         
-        let user;
-
         try {
             // Checking if an account exists with this email
-            user = await User.findByEmail(email);
+            const user = await User.findByEmail(email);
             if(!user) {
                 next(new APIError('Couple login/mot de passe est incorrect.', 401));
             } else {
