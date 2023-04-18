@@ -7,6 +7,13 @@ const bcrypt = require('bcrypt');
 
 const userAuthController = {
 
+    /**
+     * Create a new user in the user's table
+     * @param {object} req Express's request
+     * @param {object} res Express's response
+     * @param {function} next - Express.js middleware next function
+     * @return {object} return an object with jwt's access token and user's firstname
+     */
     async signUp(req,res,next) {
         const {firstname, lastname, email, password, birthdate} = req.body;
 
@@ -31,6 +38,13 @@ const userAuthController = {
         
     },
 
+    /**
+     * Verify a user by his email in the user's table
+     * @param {object} req Express's request
+     * @param {object} res Express's response
+     * @param {function} next - Express.js middleware next function
+     * @return {object} return an object with jwt's access token and user's firstname
+     */
     async signIn (req,res,next) {
         const { email, password } = req.body;
         

@@ -5,7 +5,25 @@ const authentificationToken = require('../services/authentification/authentifica
 const { Router } = require("express");
 const proposalRouter = Router();
 
-// Adding a proposal card to the site's cards
+/**
+ * A card is an object including an image, a title, a description, an environmental_rating, an economic_rating, a value and an user_id
+ * @typedef {Object} Card
+ * @property {string} image - image
+ * @property {string} title - title
+ * @property {string} description - description
+ * @property {integer} environmental_rating - environmental_rating
+ * @property {integer} economic_rating - economic_rating
+ * @property {integer} value - value
+ * @property {integer} user_id - user_id
+ */
+
+/**
+ * @route POST /proposal
+ * @group Card - Adding a proposal card to the site's cards
+ * @param {Card} user.body.required - Object Card
+ * @returns {object} 200 - New card's data
+ * @returns {Error}  default - Unexpected error
+ */
 proposalRouter.post("/", authentificationToken.isAuthenticated, cardController.addCard);
 
 module.exports = proposalRouter;
