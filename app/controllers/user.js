@@ -74,6 +74,43 @@ const userAuthController = {
 
      }
 
+        async getProfile (req, res, next) {
+            try {
+                const user = await User.findByPkWithRole(req.user.id);
+                // debug(user);
+                res.json(user);
+            } catch (error) {
+                next(new APIError(`Erreur interne : ${error}`,500));
+            }  
+        },
+
+        async updateProfile (req, res, next) {
+
+            // Try to create a coalesce SQL request in order to update one to many data 
+            // and setup a new validateschema specific profile modification
+            const {firstname, lastname, email, password, birthdate} = req.body;
+
+            let hashedPassword;
+            if (password && password.trim().length > 0) {
+            const saltRounds = 10;
+            const salt = await bcrypt.genSalt(saltRounds);
+            hashedPassword = await bcrypt.hash(password, salt);
+            }
+
+            try {
+                const updatedUser = await User.update({id: req.user.id},{firstname, lastname, email, password: hashedPassword, birthdate});
+
+                // Ask to front what information they need
+                res.json({ 
+                    firstname : updatedUser.firstname,
+                    lastname : updatedUser.lastname,
+                    email : updatedUser.email,
+                    birthdate : updatedUser.birthdate
+                });
+            } catch (error) {
+                next(new APIError("Erreur lors de la modification du profil", 500));
+            }
+        }
 };   
 
 module.exports = userAuthController;
