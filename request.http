@@ -55,11 +55,11 @@ Content-Type: application/json
 
 POST http://localhost:3000/me/proposal
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE3NTIzMjQsImV4cCI6MTY4MTc1NDEyNH0.znOWlNSFshFQlXoYnGzoI4VA2Zc7cl35PXsl2_NtdIY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE4MDExODQsImV4cCI6MTY4MTgwMjk4NH0.DRfcUGZqcm75XP-PGYjZ2OvixpCYFEcxK74A7rvva1k
 
 {
     "image":"image",
-    "title":"titre",
+    "title":"titre2",
     "description":"test",
     "environmental_rating":3,
     "economic_rating":3,

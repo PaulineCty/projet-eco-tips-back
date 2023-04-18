@@ -6,7 +6,7 @@ const tagController = {
     async getAll (_, res, next) {
         try {
             const tags = await Tag.findAll();
-            debug(tags);
+            // debug(tags);
             res.json(tags);
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));

@@ -61,11 +61,15 @@ const cardSchema = Joi.object({
     'any.required': `Le champ 'Note économique' est manquant.`
   }),
   value: Joi.number().integer().required().messages({
-      'number.integer.base' : `'Valeur' doit être un nombre entier.`,
+      'number.base' : `'Valeur' doit être un nombre entier.`,
       'any.empty': `Le champ 'Valeur' ne peut pas être vide.`,
       'any.required': `Le champ 'Valeur' est manquant.`
     }),
-  tags : Joi.array().items(Joi.number().integer())
+  tags : Joi.array().items(Joi.number().integer()).required().messages({
+    'array.base' : `'Tags' doit être un tableau.`,
+    'any.empty': `Le champ 'Tags' ne peut pas être vide.`,
+    'any.required': `Le champ 'Tags' est manquant.`
+  })
 });
 
 module.exports = {
