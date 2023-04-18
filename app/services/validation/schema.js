@@ -36,10 +36,11 @@ const userSchema = Joi.object({
 });
 
 const cardSchema = Joi.object({
-  image: Joi.string().required().messages({
-      'string.empty': `Image manquante.`,
-      'any.required': `Image manquante.`
-    }),
+  // TEMPORARY ! While working on image imports
+  // image: Joi.string().required().messages({
+  //     'string.empty': `Image manquante.`,
+  //     'any.required': `Image manquante.`
+  //   }),
   title: Joi.string().required().messages({
       'string.base' : `'Titre' doit être une chaîne de caractère.`,
       'string.empty': `Le champ 'Titre' ne peut pas être vide.`,
