@@ -48,29 +48,32 @@ const userAuthController = {
     async signIn (req,res,next) {
         const { email, password } = req.body;
         
-        // Checking if an account exists with this email
         let user;
+
         try {
+            // Checking if an account exists with this email
             user = await User.findByEmail(email);
             if(!user) {
                 next(new APIError('Couple login/mot de passe est incorrect.', 401));
+            } else {
+                // Checking if the password is matching
+                const hasMatchingPassword = await bcrypt.compare(password, user.password);
+                if(!hasMatchingPassword) {
+                    next(new APIError('Couple login/mot de passe est incorrect.', 401));
+                }
+
+                // Generating a token and redirecting to the home page
+                const accessToken = authentificationToken.generateAccessToken(user);
+                res.json({ 
+                    accessToken, 
+                    firstname : user.firstname
+                });
             }
+
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
 
-        // Checking if the password is matching
-        const hasMatchingPassword = await bcrypt.compare(password, user.password);
-        if(!hasMatchingPassword) {
-            next(new APIError('Couple login/mot de passe est incorrect.', 401));
-        }
-
-        // Generating a token and redirecting to the home page
-        const accessToken = authentificationToken.generateAccessToken(user);
-        res.json({ 
-            accessToken, 
-            firstname : user.firstname
-        });
      }
 
 };   

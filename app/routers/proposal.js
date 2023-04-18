@@ -25,6 +25,6 @@ const proposalRouter = Router();
  * @returns {object} 200 - New card's data
  * @returns {Error}  default - Unexpected error
  */
-proposalRouter.post("/", authentificationToken.isAuthenticated, validationModule.validateCard,cardController.addCard);
+proposalRouter.post("/", authentificationToken.isAuthenticated, validationModule.validateCard, cardController.addCard);
 
 module.exports = proposalRouter;
