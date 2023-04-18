@@ -25,11 +25,12 @@ const cardController = {
             const card = await Card.create({image, title, description, environmental_rating, economic_rating, value, user_id : req.user.id});
 
             //For every tag selected by the user, we create a line in the tag_card table
+            let tagCards = [];
             for (const tag of tags) {
-                await TagCard.create({tag_id : tag, card_id : card.id});
+                tagCards.push(await TagCard.create({tag_id : tag, card_id : card.id}));
             }
             
-            res.json(card);
+            res.json({card, tagCards});
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
