@@ -63,7 +63,20 @@ const cardController = {
 
     },
 
-    //edit image
+    async editCard (req, res, next) {
+        try {
+            //Temporary controller, just modifying the image for now
+            const updatedCard = await Card.update({id: req.params.id},{
+                image_type: req.file.mimetype,
+                image_name: req.file.originalname,
+                image_data: req.file.buffer
+            });
+            // debug(updatedCard);
+            res.json(updatedCard);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    }
 
 
 };
