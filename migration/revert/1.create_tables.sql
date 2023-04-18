@@ -4,7 +4,7 @@ BEGIN;
 
 DROP INDEX email_idx;
 
-DROP TABLE category_card, user_card, achievement, category, card, "user", role;
+DROP TABLE tag_card, user_card, achievement, tag, card, "user", role;
 
 DROP DOMAIN posint, rating, email, color;
 

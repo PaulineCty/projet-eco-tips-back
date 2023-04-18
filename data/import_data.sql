@@ -7,8 +7,11 @@ VALUES
 -- user table
 INSERT INTO "user"(firstname, lastname, email, password, birthdate, role_id)
 VALUES 
-('admin', 'admin', 'admin.admin@gmail.com', 'password', '12/04/2023', 1),
-('Beth', 'Rave', 'bethrave@gmail.com', 'password', '13/04/2000', 2);
+('admin', 'admin', 'admin.admin@gmail.com', 'password', '2023-04-14', 1);
+
+INSERT INTO "user"(firstname, lastname, email, password, birthdate)
+VALUES 
+('Beth', 'Rave', 'bethrave@gmail.com', 'password', '2000-04-13');
 
 
 -- card table
@@ -87,11 +90,11 @@ VALUES
 -- user_card table
 INSERT INTO user_card( user_id, card_id, expiration_date)
 VALUES 
-(1, 1, '12/05/2023'),
-(1, 2, '08/05/2023'),
-(1, 3, '17/05/2023'),
-(1, 4, '12/10/2023'),
-(1, 5, '25/05/2023');
+(1, 1, '2023-05-12'),
+(1, 2, '2023-05-08'),
+(1, 3, '2023-05-17'),
+(1, 4, '2023-10-12'),
+(1, 5, '2023-05-25');
 
 -- tag_card table
 INSERT INTO tag_card(tag_id, card_id)

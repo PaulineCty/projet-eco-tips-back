@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "DEBUG=controller:card,model:card,router:collection,database node server.js",
+    "dev": "DEBUG=controller:card,controller:user,model:card,router:collection,database node server.js",
     "start": "node server.js"
   },
   "repository": {
@@ -20,9 +20,13 @@
   },
   "homepage": "https://github.com/O-clock-Ohm/projet-03-eco-tips-back#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "joi": "^17.9.1",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^8.10.0"
   }
 }
