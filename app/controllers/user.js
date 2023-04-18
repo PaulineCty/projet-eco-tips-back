@@ -48,69 +48,69 @@ const userAuthController = {
     async signIn (req,res,next) {
         const { email, password } = req.body;
         
-        // Checking if an account exists with this email
-        let user;
         try {
-            user = await User.findByEmail(email);
+            // Checking if an account exists with this email
+            const user = await User.findByEmail(email);
             if(!user) {
                 next(new APIError('Couple login/mot de passe est incorrect.', 401));
+            } else {
+                // Checking if the password is matching
+                const hasMatchingPassword = await bcrypt.compare(password, user.password);
+                if(!hasMatchingPassword) {
+                    next(new APIError('Couple login/mot de passe est incorrect.', 401));
+                }
+
+                // Generating a token and redirecting to the home page
+                const accessToken = authentificationToken.generateAccessToken(user);
+                res.json({ 
+                    accessToken, 
+                    firstname : user.firstname
+                });
             }
+
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
 
-        // Checking if the password is matching
-        const hasMatchingPassword = await bcrypt.compare(password, user.password);
-        if(!hasMatchingPassword) {
-            next(new APIError('Couple login/mot de passe est incorrect.', 401));
+     }
+
+        async getProfile (req, res, next) {
+            try {
+                const user = await User.findByPkWithRole(req.user.id);
+                // debug(user);
+                res.json(user);
+            } catch (error) {
+                next(new APIError(`Erreur interne : ${error}`,500));
+            }  
+        },
+
+        async updateProfile (req, res, next) {
+
+            // Try to create a coalesce SQL request in order to update one to many data 
+            // and setup a new validateschema specific profile modification
+            const {firstname, lastname, email, password, birthdate} = req.body;
+
+            let hashedPassword;
+            if (password && password.trim().length > 0) {
+            const saltRounds = 10;
+            const salt = await bcrypt.genSalt(saltRounds);
+            hashedPassword = await bcrypt.hash(password, salt);
+            }
+
+            try {
+                const updatedUser = await User.update({id: req.user.id},{firstname, lastname, email, password: hashedPassword, birthdate});
+
+                // Ask to front what information they need
+                res.json({ 
+                    firstname : updatedUser.firstname,
+                    lastname : updatedUser.lastname,
+                    email : updatedUser.email,
+                    birthdate : updatedUser.birthdate
+                });
+            } catch (error) {
+                next(new APIError("Erreur lors de la modification du profil", 500));
+            }
         }
-
-        // Generating a token and redirecting to the home page
-        const accessToken = authentificationToken.generateAccessToken(user);
-        res.json({ 
-            accessToken, 
-            firstname : user.firstname
-        });
-     },
-
-    async getProfile (req, res, next) {
-        try {
-            const user = await User.findByPkWithRole(req.user.id);
-            // debug(user);
-            res.json(user);
-        } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
-        }  
-    },
-
-    async updateProfile (req, res, next) {
-
-        // Try to create a coalesce SQL request in order to update one to many data 
-        // and setup a new validateschema specific profile modification
-        const {firstname, lastname, email, password, birthdate} = req.body;
-
-        let hashedPassword;
-        if (password && password.trim().length > 0) {
-        const saltRounds = 10;
-        const salt = await bcrypt.genSalt(saltRounds);
-        hashedPassword = await bcrypt.hash(password, salt);
-        }
-
-        try {
-            const updatedUser = await User.update({id: req.user.id},{firstname, lastname, email, password: hashedPassword, birthdate});
-
-            // Ask to front what information they need
-            res.json({ 
-                firstname : updatedUser.firstname,
-                lastname : updatedUser.lastname,
-                email : updatedUser.email,
-                birthdate : updatedUser.birthdate
-            });
-        } catch (error) {
-            next(new APIError("Erreur lors de la modification du profil", 500));
-        }
-    }
-
 };   
 
 module.exports = userAuthController;

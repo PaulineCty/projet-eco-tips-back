@@ -3,7 +3,7 @@
 BEGIN;
 
 CREATE DOMAIN posint as int CHECK( VALUE >= 0 );
-CREATE DOMAIN rating as NUMERIC(3,2) CHECK( VALUE >= 0 AND VALUE <= 5 );
+CREATE DOMAIN rating as INTEGER CHECK( VALUE >= 0 AND VALUE <= 5 );
 CREATE DOMAIN email as TEXT CHECK( VALUE ~ '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$' );
 CREATE DOMAIN color AS TEXT CHECK ( VALUE ~ '^#[a-fA-F0-9]{6}$' );
 
@@ -35,8 +35,10 @@ CREATE INDEX email_idx ON "user" USING hash(email);
 CREATE TABLE card
 (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    -- "image" BYTEA NOT NULL,
-    "image" TEXT NOT NULL,
+    "image_type" TEXT NOT NULL,
+    "image_name" TEXT NOT NULL,
+    "image_data" BYTEA NOT NULL,
+    -- "image" TEXT NOT NULL,
     "title" TEXT NOT NULL UNIQUE,
     "description" TEXT NOT NULL,
     "environmental_rating" rating NOT NULL,
