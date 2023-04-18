@@ -66,3 +66,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0b
     "value": 50,
     "tags": [1,2]
 }
+
+###
+
+GET http://localhost:3000/tag
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkxhdXJhIiwibGFzdG5hbWUiOiJUZXVyIiwiZW1haWwiOiJsYXVyYS50ZXVyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHBZVkdaOFBiVm9XYS5xTWU3RTZIeU9EUUtXN1VFUUFWRmlZbEtxdzh0c09DQ1BBZUVIbkNHIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJpYXQiOjE2ODE4MDA4NzYsImV4cCI6MTY4MTgwMjY3Nn0.DKOa3xLgsPO5HMdC2z4fIePn_liijSi21HUswinvvy4
