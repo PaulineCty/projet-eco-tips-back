@@ -5,6 +5,12 @@ const debug = require('debug')("model:usercard");
 class UserCard extends Core {
     tableName = 'user_card';
 
+    /**
+     * Update an instance by setting the state of the user's card on true in the database by his id and the card id
+     * @param {integer} userId - instance's user's id
+     * @param {integer} cardId - instance's card's id
+     * @returns an instance
+     */
     async updateUserCardState (userId, cardId) {
         const preparedQuery = {
             text : `
@@ -18,6 +24,12 @@ class UserCard extends Core {
         return result.rowCount;
     }
 
+    /**
+     * Delete an instance of a user's card in the database by his id and the card id
+     * @param {integer} userId - instance's user's id
+     * @param {integer} cardId - instance's card's id
+     * @returns an instance
+     */
     async deleteUserCard(userId, cardId) {
         const preparedQuery = {
             text : `DELETE FROM user_card

@@ -3,6 +3,13 @@ const { UserCard } = require("../models/index");
 const debug = require('debug')("controller:usercard");
 
 const userCardController = {
+    /**
+     * Update the card's state
+     * @param {object} req Express's request
+     * @param {object} res Express's response
+     * @param {function} next - Express.js middleware next function
+     * @returns {void} - No Content (HTTP 204) response
+     */
     async updateUserCardState (req, res, next) {
         try {
             const updatedCard = await UserCard.updateUserCardState(req.user.id, req.params.cardId);
@@ -18,6 +25,13 @@ const userCardController = {
         }
     },
 
+    /**
+     * Create a new card in the user_card's table
+     * @param {object} req Express's request
+     * @param {object} res Express's response
+     * @param {function} next - Express.js middleware next function
+     * @return {object} return an object with all the card's data
+     */
     async addUserCard (req, res, next) {
         try {
             // We need to know more about the front form -> card_id ? expiration_date ? (make sure the columns have the same name than user_card table)
@@ -29,6 +43,13 @@ const userCardController = {
         }
     },
 
+    /**
+     * Delete an user's card in the user_card's table
+     * @param {object} req Express's request
+     * @param {object} res Express's response
+     * @param {function} next - Express.js middleware next function
+     * @returns {void} - No Content (HTTP 204) response
+     */
     async deleteUserCard (req, res, next) {
         try {
             const deletedCard = await UserCard.deleteUserCard(req.user.id, req.params.cardId);
