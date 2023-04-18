@@ -1,16 +1,19 @@
 require("dotenv").config();
+const cors = require('cors');
 const express = require("express");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-const { collectionRouter, authentificationRouter, proposalRouter } = require("./app/routers/index");
+const { collectionRouter, authentificationRouter, proposalRouter, tagRouter } = require("./app/routers/index");
 
 // app.use("/admin" /*,security*/, routerAdmin);
 app.use(authentificationRouter);
 app.use("/me/collection", collectionRouter);
-app.use("/proposal", proposalRouter);
+app.use("/me/proposal", proposalRouter);
+app.use("/tag", tagRouter);
 
 // error management
 const errorModule = require("./app/services/error/errorHandling");

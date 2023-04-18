@@ -1,6 +1,7 @@
 const { cardController } = require("../controllers/index.js");
 const debug = require('debug')("router:proposal");
 const authentificationToken = require('../services/authentification/authentificationToken');
+const validationModule = require("../services/validation/validate");
 
 const { Router } = require("express");
 const proposalRouter = Router();
@@ -24,6 +25,6 @@ const proposalRouter = Router();
  * @returns {object} 200 - New card's data
  * @returns {Error}  default - Unexpected error
  */
-proposalRouter.post("/", authentificationToken.isAuthenticated, cardController.addCard);
+proposalRouter.post("/", authentificationToken.isAuthenticated, validationModule.validateCard,cardController.addCard);
 
 module.exports = proposalRouter;
