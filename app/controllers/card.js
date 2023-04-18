@@ -1,3 +1,4 @@
+const fs = require("fs");
 const APIError = require("../services/error/APIError");
 const { Card, TagCard } = require("../models/index");
 const debug = require('debug')("controller:card");
@@ -23,12 +24,16 @@ const cardController = {
         try {
             // CAREFUL : form names have to be the exact same than the table field name --> tags for tag_ids ?
 
-            const { title, description, environmental_rating, economic_rating, value, tags } = req.body;
+            const { image, title, description, environmental_rating, economic_rating, value, tags } = req.body;
+
+            // Converting the base64 into an actual image
+            const buffer = Buffer.from(image, "base64");
+            //Removing all punctuation from the card title in order to use it as the image file name
+            const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').split(' ').join('-').toLowerCase();
+            const uploadedImage = fs.writeFileSync(`${imageTitle}.png`, buffer);
 
             const card = await Card.create({
-                image_type: req.file.mimetype,
-                image_name: req.file.originalname,
-                image_data: req.file.buffer,
+                image: uploadedImage,
                 title, 
                 description, 
                 environmental_rating, 
