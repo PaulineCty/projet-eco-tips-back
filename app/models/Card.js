@@ -41,14 +41,15 @@ class Card extends Core {
                 ORDER BY
                     t.name ASC
             ) tag,
-            uc.state 
+            uc.state,
+            uc.expiration_date 
             FROM card c
             JOIN user_card uc ON uc.card_id = c.id
             JOIN tag_card tc ON tc.card_id = c.id
             JOIN tag t ON t.id = tc.tag_id
             JOIN "user" u ON u.id = c.user_id
             WHERE uc.user_id = $1
-            GROUP BY c.id, c.image_type, c.image_name, c.image_data, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname, uc.state;`,
+            GROUP BY c.id, c.image_type, c.image_name, c.image_data, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname, uc.state, uc.expiration_date;`,
             values: [id]
         }
         const result = await this.client.query(preparedQuery);

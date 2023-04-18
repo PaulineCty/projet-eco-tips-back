@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, profileRouter } = require("./app/routers/index");
+const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, profileRouter, cardRouter } = require("./app/routers/index");
 
 // app.use("/admin" /*,security*/, routerAdmin);
 app.use(authentificationRouter);
@@ -15,6 +15,7 @@ app.use("/me/collection", collectionRouter);
 app.use("/me/proposal", proposalRouter);
 app.use("/tag", tagRouter);
 app.use("/me/profile", profileRouter);
+app.use("/card", cardRouter);
 
 // error management
 const errorModule = require("./app/services/error/errorHandling");

@@ -21,19 +21,19 @@ const proposalRouter = Router();
  */
 
 // Configuring the image upload
-const upload = multer({
-    // 5mb maximum
-    limits: {
-        fileSize: 5000000
-    },
-    fileFilter(req, file, callback) {
-        // Only accepting images
-        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return callback(new APIError('Merci d\'importer un fichier image valide (formats acceptés : .png, .jpeg, .jpg)', 400));
-        }
-        callback(undefined, true);
-    }
-});
+// const upload = multer({
+//     // 5mb maximum
+//     limits: {
+//         fileSize: 5000000
+//     },
+//     fileFilter(req, file, callback) {
+//         // Only accepting images
+//         if(!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+//             return callback(new APIError('Merci d\'importer un fichier image valide (formats acceptés : .png, .jpeg, .jpg)', 400));
+//         }
+//         callback(undefined, true);
+//     }
+// });
 
 /**
  * @route POST /proposal
@@ -42,8 +42,8 @@ const upload = multer({
  * @returns {object} 200 - New card's data
  * @returns {Error}  default - Unexpected error
  */
-proposalRouter.post("/", authentificationToken.isAuthenticated, upload.single('image'), cardController.addCard);
+// proposalRouter.post("/", authentificationToken.isAuthenticated, upload.single('image'), cardController.addCard);
 //Removing validationModule for testing
-// proposalRouter.post("/", authentificationToken.isAuthenticated, validationModule.validateCard, upload.single('image'), cardController.addCard);
+proposalRouter.post("/", authentificationToken.isAuthenticated, validationModule.validateCard, cardController.addCard);
 
 module.exports = proposalRouter;
