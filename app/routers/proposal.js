@@ -1,4 +1,4 @@
-const multer = require('multer');
+// const multer = require('multer');
 const APIError = require("../services/error/APIError");
 const { cardController } = require("../controllers/index.js");
 const debug = require('debug')("router:proposal");
@@ -6,6 +6,7 @@ const authentificationToken = require('../services/authentification/authentifica
 const validationModule = require("../services/validation/validate");
 
 const { Router } = require("express");
+const authentificationRouter = require("./authentification");
 const proposalRouter = Router();
 
 /**
@@ -45,5 +46,9 @@ const proposalRouter = Router();
 // proposalRouter.post("/", authentificationToken.isAuthenticated, upload.single('image'), cardController.addCard);
 
 proposalRouter.post("/", authentificationToken.isAuthenticated, validationModule.validateCard, cardController.addCard);
+
+proposalRouter.get("/", authentificationToken.isAuthenticated, cardController.getAllProposalCard);
+
+proposalRouter.patch("/:id", authentificationToken.isAuthenticated, cardController.updateProposalCard);
 
 module.exports = proposalRouter;

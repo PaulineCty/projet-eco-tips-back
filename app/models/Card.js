@@ -102,7 +102,49 @@ class Card extends Core {
         }
         const result = await this.client.query(preparedQuery);
         return result.rows[0];
-    }
+    };
+
+    async findAllProposals() {
+        const preparedQuery = {
+            text : `
+           SELECT 
+            c.id, 
+            c.image,
+            c.title, 
+            c.description, 
+            c.environmental_rating, 
+            c.economic_rating, 
+            c.value, 
+            CONCAT(u.firstname, ' ',u.lastname) AS "author",
+            ARRAY_AGG (
+                json_build_object('name', t.name, 'color', t.color)
+                ORDER BY
+                    t.name ASC
+            ) tag,
+            uc.state 
+            FROM card c
+            LEFT JOIN user_card uc ON uc.card_id = c.id
+            LEFT JOIN tag_card tc ON tc.card_id = c.id
+            LEFT JOIN tag t ON t.id = tc.tag_id
+            JOIN "user" u ON u.id = c.user_id
+            WHERE c.proposal = true
+            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname, uc.state;`,
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
+    };
+
+     async updateProposalCard(id) {
+        const preparedQuery = {
+            text : `
+            UPDATE card
+            SET proposal = false
+            WHERE id = $1`,
+            values : [id]
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rowCount;
+     }
 };
 
 module.exports = new Card(client);
