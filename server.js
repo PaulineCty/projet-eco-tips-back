@@ -1,6 +1,9 @@
 require("dotenv").config();
 const cors = require('cors');
 const express = require("express");
+const authentificationTokenMiddleware = require('./app/services/authentification/authentificationToken.js');
+const adminMiddleware = require('./app/services/authentification/isAdmin.js');
+
 
 const app = express();
 app.use(express.json());
@@ -11,11 +14,16 @@ const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, pro
 
 // app.use("/admin" /*,security*/, routerAdmin);
 app.use(authentificationRouter);
-app.use("/me/collection", collectionRouter);
-app.use("/me/proposal", proposalRouter);
-app.use("/tag", tagRouter);
-app.use("/me/profile", profileRouter);
-app.use("/card", cardRouter);
+app.use("/me/collection", authentificationTokenMiddleware.isAuthenticated , collectionRouter);
+app.use("/", authentificationTokenMiddleware.isAuthenticated, proposalRouter);
+
+// app.use("/tag", authentificationTokenMiddleware.isAuthenticated, adminMiddleware.isAdmin, tagRouter);
+app.use("/tag", authentificationTokenMiddleware.isAuthenticated, tagRouter);
+
+app.use("/me/profile", authentificationTokenMiddleware.isAuthenticated, profileRouter);
+
+// app.use("/card", authentificationTokenMiddleware.isAuthenticated, adminMiddleware.isAdmin, cardRouter);
+app.use("/card", authentificationTokenMiddleware.isAuthenticated, cardRouter);
 
 // error management
 const errorModule = require("./app/services/error/errorHandling");

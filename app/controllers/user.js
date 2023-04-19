@@ -5,7 +5,7 @@ const authentificationToken = require('../services/authentification/authentifica
 const debug = require('debug')("controller:user");
 const bcrypt = require('bcrypt');
 
-const userAuthController = {
+const userController = {
 
     /**
      * Create a new user in the user's table
@@ -113,4 +113,4 @@ const userAuthController = {
     }
 };   
 
-module.exports = userAuthController;
+module.exports = userController;
