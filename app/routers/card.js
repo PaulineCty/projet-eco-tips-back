@@ -21,6 +21,6 @@ const upload = multer({
     }
 });
 
-cardRouter.patch("/:id", authentificationToken.isAuthenticated, upload.single('image'), cardController.editCard);
+// cardRouter.patch("/:id", authentificationToken.isAuthenticated, upload.single('image'), cardController.editCard);
 
 module.exports = cardRouter;

@@ -27,9 +27,7 @@ class Card extends Core {
             text : `
             SELECT 
             c.id, 
-            c.image_type, 
-            c.image_name, 
-            c.image_data, 
+            c.image, 
             c.title, 
             c.description, 
             c.environmental_rating, 
@@ -49,7 +47,7 @@ class Card extends Core {
             JOIN tag t ON t.id = tc.tag_id
             JOIN "user" u ON u.id = c.user_id
             WHERE uc.user_id = $1
-            GROUP BY c.id, c.image_type, c.image_name, c.image_data, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname, uc.state, uc.expiration_date;`,
+            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname, uc.state, uc.expiration_date;`,
             values: [id]
         }
         const result = await this.client.query(preparedQuery);
@@ -75,9 +73,7 @@ class Card extends Core {
         const preparedQuery = {
             text : `SELECT 
             c.id, 
-            c.image_type, 
-            c.image_name, 
-            c.image_data, 
+            c.image, 
             c.title, 
             c.description, 
             c.environmental_rating, 
@@ -99,7 +95,7 @@ class Card extends Core {
                         JOIN user_card uc ON uc.card_id = c.id
                         WHERE uc.user_id = $1
                     )
-            GROUP BY c.id, c.image_type, c.image_name, c.image_data, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname
+            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname
             ORDER BY RANDOM() 
             LIMIT 1;`,
             values: [id]

@@ -43,7 +43,7 @@ const proposalRouter = Router();
  * @returns {Error}  default - Unexpected error
  */
 // proposalRouter.post("/", authentificationToken.isAuthenticated, upload.single('image'), cardController.addCard);
-//Removing validationModule for testing
+
 proposalRouter.post("/", authentificationToken.isAuthenticated, validationModule.validateCard, cardController.addCard);
 
 module.exports = proposalRouter;
