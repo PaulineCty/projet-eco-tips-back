@@ -29,7 +29,7 @@ const cardController = {
             // Converting the base64 into an actual image
             const buffer = Buffer.from(image, "base64");
             //Removing all punctuation from the card title in order to use it as the image file name
-            const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').split(' ').join('-').toLowerCase();
+            const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}= \-_`~()]/g, '').split(' ').join('-').toLowerCase();
             fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/${imageTitle}.png`), buffer);
 
             const card = await Card.create({
