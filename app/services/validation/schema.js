@@ -1,9 +1,11 @@
 const Joi = require('joi');
 
-const nameFormat = /^[À-ÿA-Za-z]+$/;
+const nameFormat = /^[À-ÿA-Za-z -]+$/;
 const emailFormat = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 // 8 characters minimum : 1 digit, 1 special character, 1 uppercase letter and 1 lowercase letter minimum
 const passwordFormat = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+// hexadecimal code
+const colorFormat = /^#[a-fA-F0-9]{6}$/;
 
 const userSchema = Joi.object({
     firstname: Joi.string().pattern(nameFormat).required().messages({
@@ -36,11 +38,10 @@ const userSchema = Joi.object({
 });
 
 const cardSchema = Joi.object({
-  // TEMPORARY ! While working on image imports
-  // image: Joi.string().required().messages({
-  //     'string.empty': `Image manquante.`,
-  //     'any.required': `Image manquante.`
-  //   }),
+  image: Joi.string().messages({ // TEMPORARY ! While working on image imports
+      'string.empty': `Image manquante.`,
+      'any.required': `Image manquante.`
+    }),
   title: Joi.string().required().messages({
       'string.base' : `'Titre' doit être une chaîne de caractère.`,
       'string.empty': `Le champ 'Titre' ne peut pas être vide.`,
@@ -73,7 +74,21 @@ const cardSchema = Joi.object({
   })
 });
 
+const tagSchema = Joi.object({
+  name: Joi.string().pattern(nameFormat).required().messages({
+      'string.pattern.base' : `Caractère(s) non autorisé(s) dans le champ 'Nom'`,
+      'string.empty': `Le champ 'Nom' ne peut pas être vide.`,
+      'any.required': `Le champ 'Nom' est manquant.`
+    }),
+  color: Joi.string().pattern(colorFormat).required().messages({
+      'string.pattern.base' : `Caractère(s) non autorisé(s) dans le champ 'Couleur', code hexadécimal attendu.`,
+      'string.empty': `Le champ 'Couleur' ne peut pas être vide.`,
+      'any.required': `Le champ 'Couleur' est manquant.`
+    }),
+});
+
 module.exports = {
     userSchema,
-    cardSchema
+    cardSchema,
+    tagSchema
 };

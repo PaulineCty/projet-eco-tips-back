@@ -1,7 +1,6 @@
 const { cardController } = require("../controllers/index.js");
 const { userCardController } = require("../controllers/index.js");
 const debug = require('debug')("router:collection");
-const authentificationToken = require('../services/authentification/authentificationToken');
 
 const { Router } = require("express");
 const collectionRouter = Router();
@@ -13,7 +12,7 @@ const collectionRouter = Router();
  * @returns {object} 200 - User's card collection data
  * @returns {Error}  default - Unexpected error
  */
-collectionRouter.get("/", authentificationToken.isAuthenticated, cardController.getByUser);
+collectionRouter.get("/", cardController.getByUser);
 
 
 /**
@@ -22,7 +21,7 @@ collectionRouter.get("/", authentificationToken.isAuthenticated, cardController.
  * @returns {object} 200 - Random card's data data (not owned by user)
  * @returns {Error}  default - Unexpected error
  */
-collectionRouter.get("/card", authentificationToken.isAuthenticated, cardController.getOneRandomCard);
+collectionRouter.get("/card", cardController.getOneRandomCard);
 
 
 /**
@@ -33,7 +32,7 @@ collectionRouter.get("/card", authentificationToken.isAuthenticated, cardControl
  * @returns {object} 200 - New usercard's data
  * @returns {Error}  default - Unexpected error
  */
-collectionRouter.post("/card", authentificationToken.isAuthenticated, userCardController.addUserCard);
+collectionRouter.post("/card", userCardController.addUserCard);
 
 
 /**
@@ -42,7 +41,7 @@ collectionRouter.post("/card", authentificationToken.isAuthenticated, userCardCo
  * @returns {void} 204 - No content response
  * @returns {Error}  default - Unexpected error
  */
-collectionRouter.patch("/card/:cardId(\\d+)", authentificationToken.isAuthenticated, userCardController.updateUserCardState);
+collectionRouter.patch("/card/:cardId(\\d+)", userCardController.updateUserCardState);
 
 
 /**
@@ -51,6 +50,6 @@ collectionRouter.patch("/card/:cardId(\\d+)", authentificationToken.isAuthentica
  * @returns {void} 204 - No content response
  * @returns {Error}  default - Unexpected error
  */
-collectionRouter.delete("/card/:cardId(\\d+)", authentificationToken.isAuthenticated, userCardController.deleteUserCard);
+collectionRouter.delete("/card/:cardId(\\d+)", userCardController.deleteUserCard);
 
 module.exports = collectionRouter;
