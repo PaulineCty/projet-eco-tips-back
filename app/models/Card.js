@@ -95,6 +95,7 @@ class Card extends Core {
                         JOIN user_card uc ON uc.card_id = c.id
                         WHERE uc.user_id = $1
                     )
+            AND c.proposal = false
             GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname
             ORDER BY RANDOM() 
             LIMIT 1;`,

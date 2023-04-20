@@ -78,6 +78,32 @@ const validationModule = {
     },
 
     async validateTagEdition(req, res, next) {
+        const previousTag = await Tag.findByPk(req.params.id);
+
+        // If the user is not changing any values then we send a error 400.
+        if(previousTag.name === req.body.name && previousTag.color === req.body.color) {
+            next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
+        }
+
+        try {
+            const tag = await Tag.findByName(req.body.name);
+
+            if(tag && tag.name !== previousTag.name) {
+                next(new APIError('Un tag ayant le même nom existe déjà.', 400));
+            }
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+
+        try {
+            const tag = await Tag.findByColor(req.body.color);
+
+            if(tag && tag.color !== previousTag.color) {
+                next(new APIError('Un tag ayant la même couleur existe déjà.', 400));
+            }
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
 
         // The goal here is to send to the front a detailed error
         const { error } = tagSchema.validate(req.body);

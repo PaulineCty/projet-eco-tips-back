@@ -75,7 +75,7 @@ const cardSchema = Joi.object({
 });
 
 const tagSchema = Joi.object({
-  name: Joi.string().pattern(nameFormat).required().messages({ // TEMPORARY ! While working on image imports
+  name: Joi.string().pattern(nameFormat).required().messages({
       'string.pattern.base' : `Caractère(s) non autorisé(s) dans le champ 'Nom'`,
       'string.empty': `Le champ 'Nom' ne peut pas être vide.`,
       'any.required': `Le champ 'Nom' est manquant.`

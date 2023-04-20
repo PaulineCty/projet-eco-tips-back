@@ -33,9 +33,9 @@ POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
-    "firstname": "Laura",
-    "lastname": "Teur",
-    "email":"laura.teur@gmail.com",
+    "firstname": "Jean",
+    "lastname": "Biance",
+    "email":"jean.biance@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "05/05/1990"
@@ -48,6 +48,16 @@ Content-Type: application/json
 
 {
     "email":"laura.teur@gmail.com",
+    "password":"Azerty123!"
+}
+
+###
+
+POST http://localhost:3000/sign-in
+Content-Type: application/json
+
+{
+    "email":"jean.biance@gmail.com",
     "password":"Azerty123!"
 }
 
@@ -70,34 +80,34 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuY
 ###
 
 GET http://localhost:3000/tag
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWng5V0EyZXdjYWFDbmJnN1l2ZFg1dVMzbGxXSm9nNG5CLmVaU2tPYmJnQzZkNkxDenpaNnEiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6MCwic2NvcmUiOjAsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTE5VDEyOjI0OjI4LjI5MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODE5MTQyMTgsImV4cCI6MTY4MTkxNjAxOH0.CAk0DS8Y4qkSeXMZWgLKdCtohQTfjFDzasifsl33KBg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRjTjJoQnBQb1hKbTFtN3Q2cGp2RXJleEZkQkNtYzhRQm03UkE4MHZVUDBoLzQ4cGhaaVZtLiIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMDc6Mzk6MzkuNzQ3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MTk3Nzk0MCwiZXhwIjoxNjgxOTc5NzQwfQ.PZ0CD_O6Z053wfJdQNvPcOlke7ihSnHlz-iKmlrfyGY
 
 ####
 
 POST http://localhost:3000/tag
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWng5V0EyZXdjYWFDbmJnN1l2ZFg1dVMzbGxXSm9nNG5CLmVaU2tPYmJnQzZkNkxDenpaNnEiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6MCwic2NvcmUiOjAsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTE5VDEyOjI0OjI4LjI5MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODE5MTQyMTgsImV4cCI6MTY4MTkxNjAxOH0.CAk0DS8Y4qkSeXMZWgLKdCtohQTfjFDzasifsl33KBg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRjTjJoQnBQb1hKbTFtN3Q2cGp2RXJleEZkQkNtYzhRQm03UkE4MHZVUDBoLzQ4cGhaaVZtLiIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMDc6Mzk6MzkuNzQ3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MTk3Nzk0MCwiZXhwIjoxNjgxOTc5NzQwfQ.PZ0CD_O6Z053wfJdQNvPcOlke7ihSnHlz-iKmlrfyGY
 
 {
-    "name": "Habitude",
-    "color":"#123124"
-}
-
-####
-
-PATCH http://localhost:3000/tag/22
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWng5V0EyZXdjYWFDbmJnN1l2ZFg1dVMzbGxXSm9nNG5CLmVaU2tPYmJnQzZkNkxDenpaNnEiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6MCwic2NvcmUiOjAsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTE5VDEyOjI0OjI4LjI5MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODE5MTQyMTgsImV4cCI6MTY4MTkxNjAxOH0.CAk0DS8Y4qkSeXMZWgLKdCtohQTfjFDzasifsl33KBg
-
-{
-    "name": "Habitudes",
+    "name": "Truc",
     "color":"#123123"
 }
 
 ####
 
-DELETE http://localhost:3000/tag/22
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWng5V0EyZXdjYWFDbmJnN1l2ZFg1dVMzbGxXSm9nNG5CLmVaU2tPYmJnQzZkNkxDenpaNnEiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6MCwic2NvcmUiOjAsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTE5VDEyOjI0OjI4LjI5MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODE5MTQyMTgsImV4cCI6MTY4MTkxNjAxOH0.CAk0DS8Y4qkSeXMZWgLKdCtohQTfjFDzasifsl33KBg
+PATCH http://localhost:3000/tag/24
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRjTjJoQnBQb1hKbTFtN3Q2cGp2RXJleEZkQkNtYzhRQm03UkE4MHZVUDBoLzQ4cGhaaVZtLiIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMDc6Mzk6MzkuNzQ3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MTk3Nzk0MCwiZXhwIjoxNjgxOTc5NzQwfQ.PZ0CD_O6Z053wfJdQNvPcOlke7ihSnHlz-iKmlrfyGY
+
+{
+    "name": "Machin",
+    "color":"#94a3b7"
+}
+
+####
+
+DELETE http://localhost:3000/tag/23
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRjTjJoQnBQb1hKbTFtN3Q2cGp2RXJleEZkQkNtYzhRQm03UkE4MHZVUDBoLzQ4cGhaaVZtLiIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMDc6Mzk6MzkuNzQ3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MTk3Nzk0MCwiZXhwIjoxNjgxOTc5NzQwfQ.PZ0CD_O6Z053wfJdQNvPcOlke7ihSnHlz-iKmlrfyGY
 
 ####
 
