@@ -84,7 +84,28 @@ const cardController = {
     //     }
     // }
 
+    async getAllProposalCard (req, res, next) {
+        try {
+            const card = await Card.findAllProposals();
 
+            // debug(card);
+            res.json(card);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+
+    },
+
+    async setProposalCardToFalse (req, res, next) {
+        try {
+            const updatedCard = await Card.setProposalCardToFalse(req.params.id);
+            //do we send a "success" message here using .json() ?
+            //do we notice the user if no modification ?
+            res.status(204).json();
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    },
 };
 
 module.exports = cardController;
