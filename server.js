@@ -1,10 +1,12 @@
 require("dotenv").config();
 const cors = require('cors');
 const express = require("express");
+const path = require("path");
 const authentificationTokenMiddleware = require('./app/services/authentification/authentificationToken.js');
 const adminMiddleware = require('./app/services/authentification/isAdmin.js');
 
 const app = express();
+app.use(express.static(path.join(__dirname, "uploads")));
 app.use(express.json({
     limit: '10mb'
 }));
@@ -15,7 +17,7 @@ const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, pro
 
 app.use(authentificationRouter);
 
-app.use("/me/collection", authentificationTokenMiddleware.isAuthenticated , collectionRouter);
+app.use("/me/collection", authentificationTokenMiddleware.isAuthenticated, collectionRouter);
 
 app.use(authentificationTokenMiddleware.isAuthenticated, proposalRouter);
 
