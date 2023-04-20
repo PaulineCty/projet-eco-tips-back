@@ -3,12 +3,17 @@ const path = require('path');
 const APIError = require("../services/error/APIError");
 const { Card, TagCard } = require("../models/index");
 const debug = require('debug')("controller:card");
+const imageService = require('../services/images/imageService');
 
 const cardController = {
     async getByUser (req, res, next) {
         try {
             const cards = await Card.findByUser(req.user.id);
 
+            // adding the path to the image names
+            cards.forEach(card => {
+                card.image = imageService.getImagePath(card.image);
+            });
             // debug(cards);
             res.json(cards);
         } catch (error) {
@@ -30,7 +35,7 @@ const cardController = {
             fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
 
             const card = await Card.create({
-                image: `/uploads/images/${imageTitle}.png`,
+                image: `${imageTitle}.${extension[1]}`,
                 title, 
                 description, 
                 environmental_rating, 
@@ -53,6 +58,9 @@ const cardController = {
     async getOneRandomCard (req, res, next) {
         try {
             const card = await Card.getOneRandomCard(req.user.id);
+
+            // adding the path to the image name
+            card.image = imageService.getImagePath(card.image);
 
             // debug(card);
             res.json(card);
