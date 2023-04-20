@@ -107,7 +107,7 @@ class Card extends Core {
     async findAllProposals() {
         const preparedQuery = {
             text : `
-           SELECT 
+            SELECT 
             c.id, 
             c.image,
             c.title, 
@@ -120,21 +120,19 @@ class Card extends Core {
                 json_build_object('name', t.name, 'color', t.color)
                 ORDER BY
                     t.name ASC
-            ) tag,
-            uc.state 
+            ) tag
             FROM card c
-            LEFT JOIN user_card uc ON uc.card_id = c.id
-            LEFT JOIN tag_card tc ON tc.card_id = c.id
-            LEFT JOIN tag t ON t.id = tc.tag_id
+            JOIN tag_card tc ON tc.card_id = c.id
+            JOIN tag t ON t.id = tc.tag_id
             JOIN "user" u ON u.id = c.user_id
             WHERE c.proposal = true
-            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname, uc.state;`,
+            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname;`,
         }
         const result = await this.client.query(preparedQuery);
         return result.rows;
     };
 
-     async updateProposalCard(id) {
+     async setProposalCardToFalse(id) {
         const preparedQuery = {
             text : `
             UPDATE card

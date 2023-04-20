@@ -12,7 +12,7 @@ const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, pro
 // app.use("/admin" /*,security*/, routerAdmin);
 app.use(authentificationRouter);
 app.use("/me/collection", collectionRouter);
-app.use("/me/proposal", proposalRouter);
+app.use(proposalRouter);
 app.use("/tag", tagRouter);
 app.use("/me/profile", profileRouter);
 app.use("/card", cardRouter);
