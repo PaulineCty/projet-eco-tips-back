@@ -113,8 +113,27 @@ const validationModule = {
         else {
             next();
         }  
-    }
+    },
 
+    async validateCardEdition(req, res, next) {
+        // const previousCard= await Card.findByPk(req.params.id);
+
+        // // If the user is not changing any values then we send a error 400.
+        // if(previousCard.title === req.body.title) {
+        //     next(new APIError('Aucune des valeurs n\'a été modifiées.', 400)); // Si on change autre chose que le titre
+        // };
+
+        try {
+            const card = await Card.findByTitle(req.body.title); // voir le findbytitle qui prend id en param (title à la place plus logique)
+
+            if(card /*&& card.title !== previousCard.title*/) {
+                next(new APIError('Une carte ayant le même titre existe déjà.', 400));
+            }
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+
+    }
 };
 
 module.exports = validationModule;
