@@ -22,6 +22,6 @@ authentificationRouter.post("/sign-in", userController.signIn);
  * @returns {object} 200 - Jwt's access token and user's firstname
  * @returns {Error}  default - Unexpected error
  */
-authentificationRouter.post("/sign-up", validationModule.validateUser, userController.signUp);
+authentificationRouter.post("/sign-up", validationModule.validateUserCreation, userController.signUp);
 
 module.exports = authentificationRouter;

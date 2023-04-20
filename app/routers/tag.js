@@ -9,7 +9,7 @@ const tagRouter = Router();
 // Getting all tags
 tagRouter.get("/", tagController.getAll);
 
-tagRouter.post("/", adminMiddleware, validationModule.validateNewTag, tagController.create);
+tagRouter.post("/", adminMiddleware, validationModule.validateTagCreation, tagController.create);
 
 tagRouter.patch("/:id", adminMiddleware, validationModule.validateTagEdition, tagController.edit);
 

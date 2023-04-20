@@ -3,7 +3,7 @@ const authentificationRouter = require("./authentification.js");
 const proposalRouter = require("./proposal.js");
 const tagRouter = require("./tag.js");
 const cardRouter = require("./card.js");
-const profileRouter = require("./profile.js");
+const userRouter = require("./user.js");
 
 module.exports = {
     collectionRouter,
@@ -11,5 +11,5 @@ module.exports = {
     proposalRouter,
     tagRouter,
     cardRouter,
-    profileRouter
+    userRouter
 };

@@ -27,11 +27,27 @@ class User extends Core {
             values: [email]
         }
         const result = await this.client.query(preparedQuery);
-
         return result.rows[0];
     };
 
-    async findByPkWithRole(userId) {
+    async findAllWithRole() {
+        const preparedQuery = {
+            text : `SELECT 
+                    u.firstname,
+                    u.lastname,
+                    u.email,
+                    u.birthdate,
+                    u.ecocoins,
+                    u.score,
+                    r.name AS role
+                    FROM "user" u 
+                    JOIN role r ON r.id = u.role_id`
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
+    };
+
+    async findByPkWithRole(id) {
         const preparedQuery = {
             text : `SELECT 
                     u.firstname,
@@ -44,21 +60,20 @@ class User extends Core {
                     FROM "user" u 
                     JOIN role r ON r.id = u.role_id
                     WHERE u.id = $1`,
-            values: [userId]
+            values: [id]
         }
         const result = await this.client.query(preparedQuery);
         return result.rows[0];
     };
 
-    // async updateUser(firstname, lastname, email, password, birthdate, userId) {
-    //     const preparedQuery = {
-    //         text : `UPDATE "user" SET firstname= $1, lastname= $2, email= $3, password= $4, birthdate=$5 WHERE id= $6 RETURNING *`,
-    //         values: [firstname, lastname, email, password, birthdate, userId]
-    //     }
-    //     const result = await this.client.query(preparedQuery);
-    //     console.log(result);
-    //     return result.rows;
-    // }
+    async setUserAsAdmin(id) {
+        const preparedQuery = {
+            text : `UPDATE "user" SET role_id = 1 WHERE id= $1`,
+            values: [id]
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rowCount;
+    }
 };
 
 module.exports = new User(client);

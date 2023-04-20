@@ -38,7 +38,7 @@ const userSchema = Joi.object({
 });
 
 const cardSchema = Joi.object({
-  image: Joi.string().messages({ // TEMPORARY ! While working on image imports
+  image: Joi.string().required().messages({ 
       'string.empty': `Image manquante.`,
       'any.required': `Image manquante.`
     }),

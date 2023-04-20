@@ -6,9 +6,9 @@ const debug = require('debug')("controller:card");
 const imageService = require('../services/images/imageService');
 
 const cardController = {
-    async getByUser (req, res, next) {
+    async getUsersCollection (req, res, next) {
         try {
-            const cards = await Card.findByUser(req.user.id);
+            const cards = await Card.findUserCollection(req.user.id);
 
             // adding the path to the image names
             cards.forEach(card => {
@@ -43,6 +43,7 @@ const cardController = {
                 value, 
                 user_id : req.user.id
             });
+            
             //For every tag selected by the user, we create a line in the tag_card table
             let tagCards = [];
             for (const tag of tags) {
@@ -57,7 +58,7 @@ const cardController = {
 
     async getOneRandomCard (req, res, next) {
         try {
-            const card = await Card.getOneRandomCard(req.user.id);
+            const card = await Card.findOneRandomCard(req.user.id);
 
             // adding the path to the image name
             card.image = imageService.getImagePath(card.image);
@@ -98,7 +99,7 @@ const cardController = {
 
     },
 
-    async setProposalCardToFalse (req, res, next) {
+    async updateProposalCardToFalse (req, res, next) {
         try {
             const updatedCard = await Card.setProposalCardToFalse(req.params.id);
             //do we send a "success" message here using .json() ?
@@ -108,6 +109,22 @@ const cardController = {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
+
+    async getAllUsersCards (req, res, next) {
+        try {
+            //at the moment all cards with the corresponding user_id are returned : maybe the idea would be to have a different style in the Front highlighting the ones that are still in proposal=true so he can see which ones are public and which ones are not ?
+            const cards = await Card.findByUser(req.user.id);
+
+            // adding the path to the image names
+            cards.forEach(card => {
+                card.image = imageService.getImagePath(card.image);
+            });
+            // debug(cards);
+            res.json(cards);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        } 
+    }
 };
 
 module.exports = cardController;
