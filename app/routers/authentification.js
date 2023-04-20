@@ -1,4 +1,4 @@
-const { userAuthController } = require("../controllers/index.js");
+const { userController } = require("../controllers/index.js");
 const debug = require('debug')("router:authentification");
 const validationModule = require("../services/validation/validate");
 
@@ -13,7 +13,7 @@ const authentificationRouter = Router();
  * @returns {object} 200 - Jwt's access token and user's firstname
  * @returns {Error}  default - Unexpected error
  */
-authentificationRouter.post("/sign-in", userAuthController.signIn);
+authentificationRouter.post("/sign-in", userController.signIn);
 
 
 /**
@@ -22,6 +22,6 @@ authentificationRouter.post("/sign-in", userAuthController.signIn);
  * @returns {object} 200 - Jwt's access token and user's firstname
  * @returns {Error}  default - Unexpected error
  */
-authentificationRouter.post("/sign-up", validationModule.validateUser, userAuthController.signUp);
+authentificationRouter.post("/sign-up", validationModule.validateUser, userController.signUp);
 
 module.exports = authentificationRouter;
