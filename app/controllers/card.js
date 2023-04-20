@@ -9,11 +9,6 @@ const cardController = {
         try {
             const cards = await Card.findByUser(req.user.id);
 
-            //converting the image_data to base64
-            // cards.forEach(card => {
-            //     card.image_data = card.image_data.toString('base64');
-            // });
-
             // debug(cards);
             res.json(cards);
         } catch (error) {
@@ -26,11 +21,13 @@ const cardController = {
             // CAREFUL : form names have to be the exact same than the table field name --> tags for tag_ids ?
             const { image, title, description, environmental_rating, economic_rating, value, tags } = req.body;
 
-            // Converting the base64 into an actual image
-            const buffer = Buffer.from(image, "base64");
+            const fileParts = image.split(';base64,');
+            const extension = fileParts[0].split('/');
+
             //Removing all punctuation from the card title in order to use it as the image file name
             const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}= \-_`~()']/g, '').split(' ').join('_').toLowerCase();
-            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/${imageTitle}.png`), buffer);
+            // Converting the base64 into an actual image
+            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
 
             const card = await Card.create({
                 image: `/uploads/images/${imageTitle}.png`,
@@ -41,14 +38,13 @@ const cardController = {
                 value, 
                 user_id : req.user.id
             });
-
             //For every tag selected by the user, we create a line in the tag_card table
             let tagCards = [];
             for (const tag of tags) {
                 tagCards.push(await TagCard.create({tag_id : tag, card_id : card.id}));
             }
             
-            res.json({card, tagCards});
+            return res.json({card, tagCards});
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
@@ -57,8 +53,6 @@ const cardController = {
     async getOneRandomCard (req, res, next) {
         try {
             const card = await Card.getOneRandomCard(req.user.id);
-
-            // card.image_data = card.image_data.toString('base64');
 
             // debug(card);
             res.json(card);

@@ -5,7 +5,9 @@ const authentificationTokenMiddleware = require('./app/services/authentification
 const adminMiddleware = require('./app/services/authentification/isAdmin.js');
 
 const app = express();
-app.use(express.json());
+app.use(express.json({
+    limit: '10mb'
+}));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
