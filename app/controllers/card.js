@@ -4,6 +4,7 @@ const APIError = require("../services/error/APIError");
 const { Card, TagCard } = require("../models/index");
 const debug = require('debug')("controller:card");
 const imageService = require('../services/images/imageService');
+const { log } = require("console");
 
 const cardController = {
     async getByUser (req, res, next) {
@@ -95,7 +96,6 @@ const cardController = {
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
-
     },
 
     async setProposalCardToFalse (req, res, next) {
@@ -108,6 +108,53 @@ const cardController = {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
+
+    async getAllNotProposalCard (req, res, next) {
+        try {
+            const card = await Card.findAllNotProposals();
+
+            // debug(card);
+            res.json(card);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    },
+
+    async deleteCard (req, res, next) {
+        try {
+            const card = await Card.delete(req.params.id);
+
+            // debug(card);
+            res.status(204).json();
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    },
+
+    async updateCard (req, res, next) {
+        const { image, title, description, environmental_rating, economic_rating, value, tags } = req.body;
+        console.log(tags);
+        try {
+            const card = await Card.update({id:req.params.id}, {image, title, description, environmental_rating, economic_rating, value});
+            // const tagsCard = await TagCard.findByCardId(req.params.id);
+            // console.log(tagsCard);
+            // for (const tagCard of tagsCard) {
+            //     await TagCard.update({id: tagCard.id}, {tags: tagCard.tag_id})
+            // }
+            let counter = 0
+            for (const tag of tags) {
+                const tagCard = await TagCard.findByCardId(req.params.id);
+                await TagCard.update({id: tagCard[counter].id}, {tag_id: tag});
+                counter += 1
+                console.log(tagCard);
+                console.log(tag);
+            };
+            // debug(tags);
+            res.status(204).json();
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    }
 };
 
 module.exports = cardController;
