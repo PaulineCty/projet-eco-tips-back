@@ -35,13 +35,12 @@ const userCardController = {
     async addUserCard (req, res, next) {
         try {
             // checking if the card is already in the user's card collection
-            const userCard = await UserCard.findUserCardByIds(req.user.id, req.body.card_id);
+            const userCard = await UserCard.findUserCardByIds(req.user.id, req.body.cardId);
 
             if(userCard) {
                 next(new APIError(`Cette carte est déjà dans votre collection.`,400))
             } else {
-                // We need to know more about the front form -> card_id ? expiration_date ? (make sure the columns have the same name than user_card table)
-                const card = await UserCard.create({...req.body, user_id : req.user.id});
+                const card = await UserCard.create({user_id : req.user.id, card_id : req.body.cardId, expiration_date : req.body.expirationDate});
                 // debug(cards);
                 res.json(card);
             }
