@@ -11,8 +11,8 @@ tagRouter.get("/", tagController.getAll);
 
 tagRouter.post("/", adminMiddleware, validationModule.validateTagCreation, tagController.create);
 
-tagRouter.patch("/:id", adminMiddleware, validationModule.validateTagEdition, tagController.edit);
+tagRouter.patch("/:id(\\d+)", adminMiddleware, validationModule.validateTagEdition, tagController.edit);
 
-tagRouter.delete("/:id", adminMiddleware, tagController.delete);
+tagRouter.delete("/:id(\\d+)", adminMiddleware, tagController.delete);
 
 module.exports = tagRouter;

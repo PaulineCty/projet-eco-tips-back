@@ -147,8 +147,27 @@ class Card extends Core {
 
     async findByUser(id) {
         const preparedQuery = {
-            text : `SELECT * FROM card
-            WHERE user_id = $1`,
+            text : `SELECT 
+            c.id, 
+            c.image, 
+            c.title, 
+            c.description, 
+            c.environmental_rating, 
+            c.economic_rating, 
+            c.value, 
+            CONCAT(u.firstname, ' ',u.lastname) AS "author",
+            ARRAY_AGG (
+                json_build_object('name', t.name, 'color', t.color)
+                ORDER BY
+                    t.name ASC
+            ) FILTER (WHERE t.name IS NOT NULL) tags
+            FROM card c
+            LEFT JOIN tag_card tc ON tc.card_id = c.id
+            LEFT JOIN tag t ON t.id = tc.tag_id
+            JOIN "user" u ON u.id = c.user_id
+            WHERE user_id = $1
+            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname;
+            `,
             values: [id]
         }
         const result = await this.client.query(preparedQuery);

@@ -14,7 +14,7 @@ profileRouter.delete("/me/user", userController.deleteProfile);
 
 profileRouter.get("/user", adminMiddleware, userController.getAllUsers);
 
-profileRouter.patch("/user/:id", adminMiddleware, userController.updateUserAsAdmin);
+profileRouter.patch("/user/:id(\\d+)", adminMiddleware, userController.updateUserAsAdmin);
 
 
 module.exports = profileRouter;

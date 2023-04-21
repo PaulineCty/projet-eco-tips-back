@@ -31,6 +31,6 @@ proposalRouter.get("/proposal", adminMiddleware, cardController.getAllProposalCa
 
 proposalRouter.post("/me/proposal", validationModule.validateCardCreation, cardController.addCard);
 
-proposalRouter.patch("/proposal/:id", adminMiddleware, cardController.updateProposalCardToFalse);
+proposalRouter.patch("/proposal/:id(\\d+)", adminMiddleware, cardController.updateProposalCardToFalse);
 
 module.exports = proposalRouter;
