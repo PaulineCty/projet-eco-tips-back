@@ -112,7 +112,6 @@ const cardController = {
         const previousCard = await Card.findByPk(req.params.id);
         let image;
         if(req.body.image) {
-            console.log(previousCard);
             //removing the previous image
             fs.unlinkSync(`uploads/images/${previousCard.image}`);
 
@@ -143,16 +142,12 @@ const cardController = {
             
             // We delete all tags that are available only before the card edition
             if(differenceInPrevious) {
-                differenceInPrevious.forEach( async tagId => {
-                    await TagCard.deleteByTagCardIds(tagId, req.params.id);
-                });
+                differenceInPrevious.forEach(async tagId => await TagCard.deleteByTagCardIds(tagId, req.params.id));
             }
             
             // We add all tags that are available only in the edition form
             if(differenceInNew) {
-                differenceInNew.forEach( async tagId => {
-                    await TagCard.create({tag_id : tagId, card_id : req.params.id});
-                });
+                differenceInNew.forEach(async tagId => await TagCard.create({tag_id : tagId, card_id : req.params.id}));
             }
             
             // let counter = 0

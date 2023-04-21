@@ -1,5 +1,5 @@
 GET http://localhost:3000/me/collection
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA2OTU4MCwiZXhwIjoxNjgyMDcxMzgwfQ.wof3qwe0qClbLuy5pPpylHvZX-mHZ7KALGlh1CUs75o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA3NzcwOSwiZXhwIjoxNjgyMDc5NTA5fQ.mJCgmMl6fOEgQmRQRI9B7Tm557LQ8EKU5vw8dkCxWvU
 
 ###s
 
@@ -10,10 +10,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuY
 
 POST http://localhost:3000/me/collection/card
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkWng5V0EyZXdjYWFDbmJnN1l2ZFg1dVMzbGxXSm9nNG5CLmVaU2tPYmJnQzZkNkxDenpaNnEiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6MCwic2NvcmUiOjAsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTE5VDEyOjI0OjI4LjI5MFoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODE5MDcwNjgsImV4cCI6MTY4MTkwODg2OH0.bk-3kZVnQs2ANjN2qoGGVPJUQTtIBXic5yKGa2oKRuo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA3NzcwOSwiZXhwIjoxNjgyMDc5NTA5fQ.mJCgmMl6fOEgQmRQRI9B7Tm557LQ8EKU5vw8dkCxWvU
 
 {
-    "card_id":14,
+    "card_id":57,
     "expiration_date":"01-01-2023"
 }
 
@@ -152,24 +152,24 @@ PATCH http://localhost:3000/card/57
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA3NzcwOSwiZXhwIjoxNjgyMDc5NTA5fQ.mJCgmMl6fOEgQmRQRI9B7Tm557LQ8EKU5vw8dkCxWvU
 
+# {
+#     "title": "titre6",
+#     "description": "description2",
+#     "environmentalrating": 5,
+#     "economicrating": 3,
+#     "value": 55,
+#     "tags": [8]
+# }
+
 {
-    "title": "titre4",
+    "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
+    "title": "titre6",
     "description": "description",
     "environmentalrating": 3,
     "economicrating": 3,
     "value": 50,
-    "tags": [14,16]
+    "tags": [2]
 }
-
-# {
-#     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-#     "title": "titre4",
-#     "description": "description",
-#     "environmentalrating": 3,
-#     "economicrating": 3,
-#     "value": 50,
-#     "tags": [14,16]
-# }
 
 ####
 

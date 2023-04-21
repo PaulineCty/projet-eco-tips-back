@@ -50,7 +50,7 @@ const validationModule = {
     async validateCardEdition(req, res, next) {
         const previousCard= await Card.findByPkWithTags(req.params.id);
 
-        // If the user is not changing any values then we send a error 400.
+        // If the user is not changing any values then we send an error 400.
         // Does not detect when identical because need specific verification for tags !
         // if(previousCard.image === req.body.image && previousCard.title === req.body.title && previousCard.description === req.body.description && previousCard.environmental_rating === req.body.environmentalrating && previousCard.economic_rating === req.body.economicrating && previousCard.value === req.body.value && previousCard.tags == req.body.tags) {
         //     next(new APIError('Aucune des valeurs n\'a été modifiées.', 400)); // Si on change autre chose que le titre
