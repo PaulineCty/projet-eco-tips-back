@@ -25,7 +25,7 @@ app.use("/tag", authentificationTokenMiddleware.isAuthenticated, tagRouter);
 
 app.use("/me/profile", authentificationTokenMiddleware.isAuthenticated, profileRouter);
 
-app.use("/card", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, cardRouter);
+app.use(authentificationTokenMiddleware.isAuthenticated, cardRouter);
 
 // error management
 const errorModule = require("./app/services/error/errorHandling");
