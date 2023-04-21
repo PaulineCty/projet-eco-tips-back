@@ -1,0 +1,30 @@
+openapi: 3.0.3 [A voir ce qu'on met]
+info:
+  title: Eco Tips - OpenAPI 3.0 (Est-on à jour vis-à-vis de règles OpenAPI 3.0)
+  description: |-
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at libero eget justo egestas placerat. Suspendisse pulvinar, ex nec condimentum consequat, metus turpis faucibus metus, nec tempus lectus lorem eu mauris. Morbi maximus convallis diam ac viverra. Donec at iaculis elit, ut congue ex. Nullam iaculis ultricies sodales. Proin fermentum tempor neque. Aliquam sagittis elit ut erat dapibus, quis vulputate lorem fringilla. Maecenas ac ornare neque. Donec eget velit vel tortor viverra fermentum. Etiam quis diam auctor, malesuada enim rhoncus, commodo mauris. Quisque justo purus, luctus vel quam ac, rutrum interdum sem. Phasellus rhoncus iaculis ex non bibendum. Morbi mi nunc, posuere nec blandit eget, tincidunt eu nisi. Integer fringilla lacinia est id tincidunt. Curabitur sollicitudin ex sit amet lectus vestibulum vulputate. Morbi in odio convallis, tincidunt tortor in, gravida quam.
+    
+    Some useful links:
+    - [Eco Tips back repository](https://github.com/O-clock-Ohm/projet-03-eco-tips-back)
+    - [Eco Tips back repository](https://github.com/O-clock-Ohm/projet-03-eco-tips-front)
+servers:
+  - url: http://onverraaumomentvoulu.io
+tags:
+  - name: sign-in
+    description: Log into the app
+  - name: sign-up
+    description: Create your account
+  - name: user
+    description: Operations to manage user
+  - name: collection
+    description: Operations to manage your card collection
+  - name: achievement
+    description: Add and share your achievements
+  - name: community
+    description: Keep an eye on other users score
+  - name: proposal
+    description: Operations to manage the proposed cards by users
+  - name: tag
+    description: Operations to manage the cards tags
+  - name: card
+    description: Operations to manage the cards
