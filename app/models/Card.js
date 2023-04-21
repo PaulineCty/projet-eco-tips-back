@@ -153,16 +153,6 @@ class Card extends Core {
         }
         const result = await this.client.query(preparedQuery);
         return result.rows;
-    }
-        const preparedQuery = {
-            text : `
-            UPDATE card
-            SET proposal = false
-            WHERE id = $1;`,
-            values : [id]
-        }
-        const result = await this.client.query(preparedQuery);
-        return result.rowCount;
     };
 
     async findAllNotProposals() {  // ou changer pour findAllProposedCards et findAllNotProposedCards
