@@ -22,7 +22,7 @@ class Card extends Core {
      * @param {integer} id instance's id
      * @returns an instance
      */
-    async findByUser(id) {
+    async findUserCollection(id) {
         const preparedQuery = {
             text : `
             SELECT 
@@ -69,7 +69,7 @@ class Card extends Core {
      * @param {integer} id instance's id
      * @returns an instance
      */
-    async getOneRandomCard(id) {
+    async findOneRandomCard(id) {
         const preparedQuery = {
             text : `SELECT 
             c.id, 
@@ -134,6 +134,26 @@ class Card extends Core {
     };
 
     async setProposalCardToFalse(id) {
+      const preparedQuery = {
+          text : `
+          UPDATE card
+          SET proposal = false
+          WHERE id = $1`,
+          values : [id]
+      }
+      const result = await this.client.query(preparedQuery);
+      return result.rowCount;
+    };
+
+    async findByUser(id) {
+        const preparedQuery = {
+            text : `SELECT * FROM card
+            WHERE user_id = $1`,
+            values: [id]
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
+    }
         const preparedQuery = {
             text : `
             UPDATE card
@@ -196,7 +216,6 @@ class Card extends Core {
         const result = await this.client.query(preparedQuery);
         return result.rows[0];
     };
-
 };
 
 module.exports = new Card(client);

@@ -6,6 +6,8 @@ const adminMiddleware = require('../services/authentification/isAdmin.js');
 const { Router } = require("express");
 const cardRouter = Router();
 
+cardRouter.get('/me/card', cardController.getAllUsersCards)
+
 // cardRouter.patch("/:id", authentificationToken.isAuthenticated, upload.single('image'), cardController.editCard);
 
 cardRouter.get("/card", adminMiddleware, cardController.getAllNotProposalCard);

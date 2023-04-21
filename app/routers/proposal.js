@@ -29,8 +29,8 @@ const proposalRouter = Router();
  
 proposalRouter.get("/proposal", adminMiddleware, cardController.getAllProposalCard);
 
-proposalRouter.post("/me/proposal", validationModule.validateCard, cardController.addCard);
+proposalRouter.post("/me/proposal", validationModule.validateCardCreation, cardController.addCard);
 
-proposalRouter.patch("/proposal/:id", adminMiddleware, cardController.setProposalCardToFalse);
+proposalRouter.patch("/proposal/:id", adminMiddleware, cardController.updateProposalCardToFalse);
 
 module.exports = proposalRouter;

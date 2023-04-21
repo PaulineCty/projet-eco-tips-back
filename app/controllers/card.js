@@ -7,9 +7,9 @@ const imageService = require('../services/images/imageService');
 const { log } = require("console");
 
 const cardController = {
-    async getByUser (req, res, next) {
+    async getUsersCollection (req, res, next) {
         try {
-            const cards = await Card.findByUser(req.user.id);
+            const cards = await Card.findUserCollection(req.user.id);
 
             // adding the path to the image names
             cards.forEach(card => {
@@ -44,6 +44,7 @@ const cardController = {
                 value, 
                 user_id : req.user.id
             });
+            
             //For every tag selected by the user, we create a line in the tag_card table
             let tagCards = [];
             for (const tag of tags) {
@@ -58,7 +59,7 @@ const cardController = {
 
     async getOneRandomCard (req, res, next) {
         try {
-            const card = await Card.getOneRandomCard(req.user.id);
+            const card = await Card.findOneRandomCard(req.user.id);
 
             // adding the path to the image name
             card.image = imageService.getImagePath(card.image);
@@ -82,7 +83,7 @@ const cardController = {
         }
     },
 
-    async setProposalCardToFalse (req, res, next) {
+    async updateProposalCardToFalse (req, res, next) {
         try {
             const updatedCard = await Card.setProposalCardToFalse(req.params.id);
             //do we send a "success" message here using .json() ?
@@ -91,6 +92,22 @@ const cardController = {
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
+    },
+
+    async getAllUsersCards (req, res, next) {
+        try {
+            //at the moment all cards with the corresponding user_id are returned : maybe the idea would be to have a different style in the Front highlighting the ones that are still in proposal=true so he can see which ones are public and which ones are not ?
+            const cards = await Card.findByUser(req.user.id);
+
+            // adding the path to the image names
+            cards.forEach(card => {
+                card.image = imageService.getImagePath(card.image);
+            });
+            // debug(cards);
+            res.json(cards);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        } 
     },
 
     async getAllNotProposalCard (req, res, next) {
@@ -149,15 +166,6 @@ const cardController = {
             if(differenceInNew) {
                 differenceInNew.forEach(async tagId => await TagCard.create({tag_id : tagId, card_id : req.params.id}));
             }
-            
-            // let counter = 0
-            // for (const tag of tags) {
-            //     const tagCard = await TagCard.findByCardId(req.params.id);
-            //     await TagCard.update({id: tagCard[counter].id}, {tag_id: tag});
-            //     counter += 1
-            //     console.log(tagCard);
-            //     console.log(tag);
-            // };
 
             const card = await Card.update({id:req.params.id}, {
                 image, 
@@ -183,7 +191,8 @@ const cardController = {
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
-    },
+    }
+
 };
 
 module.exports = cardController;
