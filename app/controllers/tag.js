@@ -40,6 +40,7 @@ const tagController = {
 
     async delete (req,res,next) {
         try {
+            // deleting a tag also deletes the lines associated with this tag in the tag_card table
             const tag = await Tag.delete(req.params.id);
             // debug(tag);
 

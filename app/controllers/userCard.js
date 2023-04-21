@@ -12,11 +12,11 @@ const userCardController = {
      */
     async updateUserCardState (req, res, next) {
         try {
-            const updatedCard = await UserCard.updateUserCardState(req.user.id, req.params.cardId);
-            // debug(updatedCard);
+            const card = await UserCard.updateUserCardState(req.user.id, req.params.cardId);
+            // debug(card);
             //do we send a "success" message here using .json() ?
             //do we notice the user if no modification ?
-            // if(updatedCard) {
+            // if(card) {
             //     res.status(204).json();
             // }
             res.status(204).json();
@@ -34,10 +34,17 @@ const userCardController = {
      */
     async addUserCard (req, res, next) {
         try {
-            // We need to know more about the front form -> card_id ? expiration_date ? (make sure the columns have the same name than user_card table)
-            const card = await UserCard.create({...req.body, user_id : req.user.id});
-            // debug(cards);
-            res.json(card);
+            // checking if the card is already in the user's card collection
+            const userCard = await UserCard.findUserCardByIds(req.user.id, req.body.card_id);
+
+            if(userCard) {
+                next(new APIError(`Cette carte est déjà dans votre collection.`,400))
+            } else {
+                // We need to know more about the front form -> card_id ? expiration_date ? (make sure the columns have the same name than user_card table)
+                const card = await UserCard.create({...req.body, user_id : req.user.id});
+                // debug(cards);
+                res.json(card);
+            }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
@@ -52,13 +59,13 @@ const userCardController = {
      */
     async deleteUserCard (req, res, next) {
         try {
-            const deletedCard = await UserCard.deleteUserCard(req.user.id, req.params.cardId);
+            const card = await UserCard.deleteUserCard(req.user.id, req.params.cardId);
             //do we send a "success" message here using .json() ?
             //do we notice the user if no deletion ?
-            // if(deletedCard) {
+            // if(card) {
             //     res.status(204).json();
             // }
-            // debug(deletedCard);
+            // debug(card);
             res.status(204).json();
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));

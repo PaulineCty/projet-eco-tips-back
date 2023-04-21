@@ -13,7 +13,7 @@ app.use(express.json({
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, profileRouter, cardRouter } = require("./app/routers/index");
+const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, userRouter, cardRouter } = require("./app/routers/index");
 
 app.use(authentificationRouter);
 
@@ -23,9 +23,9 @@ app.use(authentificationTokenMiddleware.isAuthenticated, proposalRouter);
 
 app.use("/tag", authentificationTokenMiddleware.isAuthenticated, tagRouter);
 
-app.use("/me/profile", authentificationTokenMiddleware.isAuthenticated, profileRouter);
+app.use(authentificationTokenMiddleware.isAuthenticated, userRouter);
 
-app.use("/card", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, cardRouter);
+app.use(authentificationTokenMiddleware.isAuthenticated, cardRouter);
 
 // error management
 const errorModule = require("./app/services/error/errorHandling");

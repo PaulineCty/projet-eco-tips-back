@@ -5,7 +5,7 @@ const debug = require("debug")("validation");
 
 const validationModule = {
 
-    async validateUser(req, res, next) {
+    async validateUserCreation(req, res, next) {
         // Testing email uniqueness
         try {
             const user = await User.findByEmail(req.body.email);
@@ -26,11 +26,40 @@ const validationModule = {
         }  
     },
 
-    async validateCard(req, res, next) {
+    async validateUserEdition(req, res, next) {
+        const previousUserInfo = await User.findByPk(req.user.id);
+
+        // We don't know yet how the password will be managed in the user edition form
+        // if(previousUserInfo.firstname === req.body.firstname && previousUserInfo.lastname === req.body.lastname && previousUserInfo.email === req.body.email && previousUserInfo.birthday === req.body.birthday ) {
+        //     next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
+        // }
+
+        // Checking if the new User email is not already taken since it has to be unique
+        try {
+            const user = await User.findByEmail(req.body.email);
+
+            if(user && user.email !== previousUserInfo.email) {
+                next(new APIError('Cet email est déjà pris.', 400));
+            }
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+
+        // The goal here is to send to the front a detailed error
+        const { error } = userSchema.validate(req.body);
+        if (error) {
+            next(new APIError(error.message, 400));
+        }
+        else {
+            next();
+        }  
+    },
+
+    async validateCardCreation(req, res, next) {
 
         try {
-            const user = await Card.findByTitle(req.body.title);
-            if(user) {
+            const card = await Card.findByTitle(req.body.title);
+            if(card) {
                 next(new APIError('Une carte ayant le même titre existe déjà.', 400));
             }
         } catch (error) {
@@ -46,8 +75,38 @@ const validationModule = {
             next();
         }  
     },
+
+    async validateCardEdition(req, res, next) {
+        const previousCard= await Card.findByPkWithTags(req.params.id);
+
+        // If the user is not changing any values then we send an error 400.
+        // Does not detect when identical because need specific verification for tags !
+        // if(previousCard.image === req.body.image && previousCard.title === req.body.title && previousCard.description === req.body.description && previousCard.environmental_rating === req.body.environmentalrating && previousCard.economic_rating === req.body.economicrating && previousCard.value === req.body.value && previousCard.tags == req.body.tags) {
+        //     next(new APIError('Aucune des valeurs n\'a été modifiées.', 400)); // Si on change autre chose que le titre
+        // };
+
+        try {
+            const card = await Card.findByTitle(req.body.title);
+
+            if(card && card.title !== previousCard.title) {
+                next(new APIError('Une carte ayant le même titre existe déjà.', 400));
+            }
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+
+        // The goal here is to send to the front a detailed error
+        const { error } = cardSchema.validate(req.body);
+        if (error) {
+            next(new APIError(error.message, 400));
+        }
+        else {
+            next();
+        }  
+
+    },
     
-    async validateNewTag(req, res, next) {
+    async validateTagCreation(req, res, next) {
 
         try {
             const tag = await Tag.findByName(req.body.name);
@@ -85,6 +144,7 @@ const validationModule = {
             next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
         }
 
+        // Checking if the new Tag name is not already taken since it has to be unique
         try {
             const tag = await Tag.findByName(req.body.name);
 
@@ -95,6 +155,7 @@ const validationModule = {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
 
+        // Checking if the new Tag color is not already taken since it has to be unique
         try {
             const tag = await Tag.findByColor(req.body.color);
 
@@ -114,7 +175,6 @@ const validationModule = {
             next();
         }  
     }
-
 };
 
 module.exports = validationModule;

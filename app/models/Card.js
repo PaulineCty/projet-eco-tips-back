@@ -22,7 +22,7 @@ class Card extends Core {
      * @param {integer} id instance's id
      * @returns an instance
      */
-    async findByUser(id) {
+    async findUserCollection(id) {
         const preparedQuery = {
             text : `
             SELECT 
@@ -38,13 +38,13 @@ class Card extends Core {
                 json_build_object('name', t.name, 'color', t.color)
                 ORDER BY
                     t.name ASC
-            ) tag,
+            ) FILTER (WHERE t.name IS NOT NULL) tags,
             uc.state,
             uc.expiration_date 
             FROM card c
             JOIN user_card uc ON uc.card_id = c.id
-            JOIN tag_card tc ON tc.card_id = c.id
-            JOIN tag t ON t.id = tc.tag_id
+            LEFT JOIN tag_card tc ON tc.card_id = c.id
+            LEFT JOIN tag t ON t.id = tc.tag_id
             JOIN "user" u ON u.id = c.user_id
             WHERE uc.user_id = $1
             GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname, uc.state, uc.expiration_date;`,
@@ -54,11 +54,11 @@ class Card extends Core {
         return result.rows;
     };
 
-    async findByTitle(id) {
+    async findByTitle(title) {
         const preparedQuery = {
             text : `SELECT * FROM card
             WHERE title = $1`,
-            values: [id]
+            values: [title]
         }
         const result = await this.client.query(preparedQuery);
         return result.rows[0];
@@ -69,7 +69,7 @@ class Card extends Core {
      * @param {integer} id instance's id
      * @returns an instance
      */
-    async getOneRandomCard(id) {
+    async findOneRandomCard(id) {
         const preparedQuery = {
             text : `SELECT 
             c.id, 
@@ -81,13 +81,13 @@ class Card extends Core {
             c.value, 
             CONCAT(u.firstname, ' ',u.lastname) AS "author",
             ARRAY_AGG (
-                json_build_object('tag', t.name, 'color', t.color)
+                json_build_object('name', t.name, 'color', t.color)
                 ORDER BY
                     t.name ASC
-            ) tag
+            ) FILTER (WHERE t.name IS NOT NULL) tags
             FROM card c
-            JOIN tag_card tc ON tc.card_id = c.id
-            JOIN tag t ON t.id = tc.tag_id
+            LEFT JOIN tag_card tc ON tc.card_id = c.id
+            LEFT JOIN tag t ON t.id = tc.tag_id
             JOIN "user" u ON u.id = c.user_id
             WHERE c.id NOT IN 
                     (
@@ -121,10 +121,10 @@ class Card extends Core {
                 json_build_object('name', t.name, 'color', t.color)
                 ORDER BY
                     t.name ASC
-            ) tag
+            ) FILTER (WHERE t.name IS NOT NULL) tags
             FROM card c
-            JOIN tag_card tc ON tc.card_id = c.id
-            JOIN tag t ON t.id = tc.tag_id
+            LEFT JOIN tag_card tc ON tc.card_id = c.id
+            LEFT JOIN tag t ON t.id = tc.tag_id
             JOIN "user" u ON u.id = c.user_id
             WHERE c.proposal = true
             GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname;`,
@@ -133,17 +133,98 @@ class Card extends Core {
         return result.rows;
     };
 
-     async setProposalCardToFalse(id) {
+    async setProposalCardToFalse(id) {
+      const preparedQuery = {
+          text : `
+          UPDATE card
+          SET proposal = false
+          WHERE id = $1`,
+          values : [id]
+      }
+      const result = await this.client.query(preparedQuery);
+      return result.rowCount;
+    };
+
+    async findByUser(id) {
         const preparedQuery = {
-            text : `
-            UPDATE card
-            SET proposal = false
-            WHERE id = $1`,
-            values : [id]
+            text : `SELECT 
+            c.id, 
+            c.image, 
+            c.title, 
+            c.description, 
+            c.environmental_rating, 
+            c.economic_rating, 
+            c.value, 
+            CONCAT(u.firstname, ' ',u.lastname) AS "author",
+            ARRAY_AGG (
+                json_build_object('name', t.name, 'color', t.color)
+                ORDER BY
+                    t.name ASC
+            ) FILTER (WHERE t.name IS NOT NULL) tags
+            FROM card c
+            LEFT JOIN tag_card tc ON tc.card_id = c.id
+            LEFT JOIN tag t ON t.id = tc.tag_id
+            JOIN "user" u ON u.id = c.user_id
+            WHERE user_id = $1
+            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname;
+            `,
+            values: [id]
         }
         const result = await this.client.query(preparedQuery);
-        return result.rowCount;
-     }
+        return result.rows;
+    };
+
+    async findAllNotProposals() {  // ou changer pour findAllProposedCards et findAllNotProposedCards
+        const preparedQuery = {
+            text : `
+            SELECT 
+            c.id, 
+            c.image,
+            c.title, 
+            c.description, 
+            c.environmental_rating, 
+            c.economic_rating, 
+            c.value, 
+            CONCAT(u.firstname, ' ',u.lastname) AS "author",
+            ARRAY_AGG (
+                json_build_object('name', t.name, 'color', t.color)
+                ORDER BY
+                    t.name ASC
+            ) FILTER (WHERE t.name IS NOT NULL) tags
+            FROM card c
+            LEFT JOIN tag_card tc ON tc.card_id = c.id
+            LEFT JOIN tag t ON t.id = tc.tag_id
+            JOIN "user" u ON u.id = c.user_id
+            WHERE c.proposal = false
+            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname;`,
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
+    };
+
+    async findByPkWithTags(id) {
+        const preparedQuery = {
+            text : `SELECT 
+            c.id, 
+            c.image,
+            c.title, 
+            c.description, 
+            c.environmental_rating, 
+            c.economic_rating, 
+            c.value,
+            ARRAY_AGG (
+                tc.tag_id
+            ) FILTER (WHERE tc.tag_id IS NOT NULL) tags
+            FROM card c
+            LEFT JOIN tag_card tc ON tc.card_id = c.id
+            JOIN "user" u ON u.id = c.user_id
+            WHERE c.id = $1
+            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname;`,
+            values: [id]
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rows[0];
+    };
 };
 
 module.exports = new Card(client);

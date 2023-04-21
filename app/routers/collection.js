@@ -12,7 +12,7 @@ const collectionRouter = Router();
  * @returns {object} 200 - User's card collection data
  * @returns {Error}  default - Unexpected error
  */
-collectionRouter.get("/", cardController.getByUser);
+collectionRouter.get("/", cardController.getUsersCollection);
 
 
 /**

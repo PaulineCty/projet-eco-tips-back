@@ -76,6 +76,7 @@ const userController = {
 
     async getProfile (req, res, next) {
         try {
+            // here we are not returning the password for security reasons
             const user = await User.findByPkWithRole(req.user.id);
             // debug(user);
             res.json(user);
@@ -92,9 +93,9 @@ const userController = {
 
         let hashedPassword;
         if (password && password.trim().length > 0) {
-        const saltRounds = 10;
-        const salt = await bcrypt.genSalt(saltRounds);
-        hashedPassword = await bcrypt.hash(password, salt);
+            const saltRounds = 10;
+            const salt = await bcrypt.genSalt(saltRounds);
+            hashedPassword = await bcrypt.hash(password, salt);
         }
 
         try {
@@ -110,6 +111,47 @@ const userController = {
         } catch (error) {
             next(new APIError("Erreur lors de la modification du profil", 500));
         }
+    },
+
+    async deleteProfile (req, res, next) {
+        try {
+            // deleting a user also deletes the lines associated with this user in the user_card table
+            const user = await User.delete(req.user.id);
+            // debug(tag);
+
+            //do we send a "success" message here using .json() ?
+            //do we notice the user if no modification ?
+            res.status(204).json();
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    },
+
+    async getAllUsers (req, res, next) {
+        try {
+            // here we are not returning the password for security reasons
+            const users = await User.findAllWithRole();
+            // debug(users);
+
+            res.json(users);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        } 
+    },
+
+    async updateUserAsAdmin (req, res, next) {
+        try {
+            const user = await User.setUserAsAdmin(req.params.id);
+            // debug(user);
+            //do we send a "success" message here using .json() ?
+            //do we notice the user if no modification ?
+            // if(user) {
+            //     res.status(204).json();
+            // }
+            res.status(204).json();
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        } 
     }
 };   
 
