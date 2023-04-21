@@ -38,7 +38,7 @@ const userSchema = Joi.object({
 });
 
 const cardSchema = Joi.object({
-  image: Joi.string().required().messages({ 
+  image: Joi.string().messages({
       'string.empty': `Image manquante.`,
       'any.required': `Image manquante.`
     }),
@@ -52,12 +52,12 @@ const cardSchema = Joi.object({
       'string.empty': `Le champ 'Description' ne peut pas être vide.`,
       'any.required': `Le champ 'Description' est manquant.`
     }),
-  environmental_rating: Joi.number().min(0).max(5).required().messages({
+  environmentalrating: Joi.number().min(0).max(5).required().messages({
       'number.base' : `'Note environnementale' doit être un nombre.`,
       'any.empty': `Le champ 'Note environnementale' ne peut pas être vide.`,
       'any.required': `Le champ 'Note environnementale' est manquant.`
     }),
-  economic_rating: Joi.number().min(0).max(5).required().messages({
+  economicrating: Joi.number().min(0).max(5).required().messages({
     'number.base' : `'Note économique' doit être un nombre.`,
     'any.empty': `Le champ 'Note économique' ne peut pas être vide.`,
     'any.required': `Le champ 'Note économique' est manquant.`
