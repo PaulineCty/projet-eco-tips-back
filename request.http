@@ -47,8 +47,8 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA4MzMzNSwiZXhwIjoxNjgyMDg1MTM1fQ.TSe0oM7SPh4tQhbz5TCiw_rR_M1GHejYN8yYezqxTuE
 
 {
-    "card_id":5,
-    "expiration_date":"01-01-2023"
+    "cardId":5,
+    "expirationDate":"01-01-2023"
 }
 
 ###
