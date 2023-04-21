@@ -70,11 +70,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuY
 
 POST http://localhost:3000/me/proposal
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA2ODA3MCwiZXhwIjoxNjgyMDY5ODcwfQ.wnOOVkV3C6zd_1dIqcPyZaXrPjBF2g0k7o1klb6QuD0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA3ODE5OSwiZXhwIjoxNjgyMDc5OTk5fQ.WGkBsMPk4PHJGSfkqbnCXOvGMPqKTY4c-QxAaGyBICM
 
 {
-    "image": "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-    "title":"titre2",
+    "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
+    "title":"titre6",
     "description":"description",
     "environmentalrating":3,
     "economicrating":3,
@@ -148,12 +148,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuY
 
 ####
 
-PATCH http://localhost:3000/card/54
+PATCH http://localhost:3000/card/57
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA3MTYxMiwiZXhwIjoxNjgyMDczNDEyfQ.JMZ1wklYbXCpPgTRvgjGpgSJKY97OB2fyod25Y7YUPM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA3NzcwOSwiZXhwIjoxNjgyMDc5NTA5fQ.mJCgmMl6fOEgQmRQRI9B7Tm557LQ8EKU5vw8dkCxWvU
 
 {
-    "image": "titre4.jpeg",
     "title": "titre4",
     "description": "description",
     "environmentalrating": 3,
@@ -161,6 +160,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuY
     "value": 50,
     "tags": [14,16]
 }
+
+# {
+#     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
+#     "title": "titre4",
+#     "description": "description",
+#     "environmentalrating": 3,
+#     "economicrating": 3,
+#     "value": 50,
+#     "tags": [14,16]
+# }
 
 ####
 

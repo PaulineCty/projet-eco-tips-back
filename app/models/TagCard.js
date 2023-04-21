@@ -17,7 +17,7 @@ class TagCard extends Core {
 
     async deleteByTagCardIds (tagId, cardId) {
         const preparedQuery = {
-            text : `SELECT * FROM tag_card WHERE tag_id = $1 AND card_id = $2`,
+            text : `DELETE FROM tag_card WHERE tag_id = $1 AND card_id = $2`,
             values : [tagId, cardId]
         }
         

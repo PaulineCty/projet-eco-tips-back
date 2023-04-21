@@ -25,7 +25,7 @@ const cardController = {
     async addCard (req, res, next) {
         try {
             // CAREFUL : form names have to be the exact same than the table field name --> tags for tag_ids ?
-            const { image, title, description, environmental_rating, economic_rating, value, tags } = req.body;
+            const { image, title, description, environmentalrating, economicrating, value, tags } = req.body;
 
             const fileParts = image.split(';base64,');
             const extension = fileParts[0].split('/');
@@ -39,8 +39,8 @@ const cardController = {
                 image: `${imageTitle}.${extension[1]}`,
                 title, 
                 description, 
-                environmental_rating, 
-                economic_rating, 
+                environmental_rating : environmentalrating, 
+                economic_rating : economicrating, 
                 value, 
                 user_id : req.user.id
             });
@@ -107,14 +107,14 @@ const cardController = {
     async updateCard (req, res, next) {
         const { title, description, environmentalrating, economicrating, value, tags } = req.body;
 
-        // We don't know yet how the front will work so for now we assume that req.body.image will be null if there is not image change
-        // Careful with validation because at the moment req.body.image is required !
+        // We don't know yet how the front will work so for now we assume that req.body.image will be null if there is no image change
+        // Careful with validation because at the moment req.body.image is not required, let's see what we can do about this later
+        const previousCard = await Card.findByPk(req.params.id);
         let image;
         if(req.body.image) {
-            const previousCard = Card.findByPk(req.params.id);
-
+            console.log(previousCard);
             //removing the previous image
-            fs.unlinkSync(imageService.getImagePath(previousCard.image));
+            fs.unlinkSync(`uploads/images/${previousCard.image}`);
 
             const fileParts = req.body.image.split(';base64,');
             const extension = fileParts[0].split('/');
@@ -125,6 +125,8 @@ const cardController = {
 
             // new image column value
             image = `${imageTitle}.${extension[1]}`;
+        } else {
+            image = previousCard.image;
         }
 
         try {
@@ -145,14 +147,14 @@ const cardController = {
                     await TagCard.deleteByTagCardIds(tagId, req.params.id);
                 });
             }
-
+            
             // We add all tags that are available only in the edition form
             if(differenceInNew) {
                 differenceInNew.forEach( async tagId => {
                     await TagCard.create({tag_id : tagId, card_id : req.params.id});
                 });
             }
-
+            
             // let counter = 0
             // for (const tag of tags) {
             //     const tagCard = await TagCard.findByCardId(req.params.id);
