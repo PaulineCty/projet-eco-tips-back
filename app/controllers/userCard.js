@@ -36,7 +36,7 @@ const userCardController = {
         try {
             // checking if the card is already in the user's card collection
             const userCard = await UserCard.findUserCardByIds(req.user.id, req.body.card_id);
-            console.log(userCard);
+
             if(userCard) {
                 next(new APIError(`Cette carte est déjà dans votre collection.`,400))
             } else {
@@ -44,7 +44,6 @@ const userCardController = {
                 const card = await UserCard.create({...req.body, user_id : req.user.id});
                 // debug(cards);
                 res.json(card);
-
             }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
