@@ -3,7 +3,7 @@ const path = require('path');
 const APIError = require("../services/error/APIError");
 const { Card, TagCard } = require("../models/index");
 const debug = require('debug')("controller:card");
-const imageService = require('../services/images/imageService');
+const getImagePath = require('../services/images/imageService');
 const { log } = require("console");
 
 /**
@@ -27,7 +27,7 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = imageService.getImagePath(card.image);
+                card.image = getImagePath(card.image);
             });
             // debug(cards);
             res.json(cards);
@@ -93,7 +93,7 @@ const cardController = {
             const card = await Card.findOneRandomCard(req.user.id);
 
             // adding the path to the image name
-            card.image = imageService.getImagePath(card.image);
+            card.image = getImagePath(card.image);
 
             // debug(card);
             res.json(card);
@@ -117,7 +117,7 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = imageService.getImagePath(card.image);
+                card.image = getImagePath(card.image);
             });
             // debug(card);
             res.json(cards);
@@ -164,7 +164,7 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = imageService.getImagePath(card.image);
+                card.image = getImagePath(card.image);
             });
             // debug(cards);
             res.json(cards);

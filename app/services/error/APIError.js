@@ -1,6 +1,6 @@
 /**
  * An APIError is an object extending the default Error class including a message and a code
- * @typedef {Object} TagCard
+ * @typedef {Object} APIError
  * @property {string} message - error message
  * @property {integer} code - error code
  */
