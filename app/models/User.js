@@ -11,7 +11,7 @@ const debug = require('debug')("model:user");
  * @property {string} password - password
  * @property {string} confirmpassword - confirmpassword
  * @property {string} birthdate - birthdate
- * @property {integer} role_id - role identifyer
+ * @property {number} role_id - role identifyer
  */
 class User extends Core {
     tableName = 'user';
@@ -53,7 +53,7 @@ class User extends Core {
 
     /**
      * Gets a User instance corresponding to a given id without any password related information
-     * @param {integer} id user's id
+     * @param {number} id user's id
      * @returns {User} a User instance
      */
     async findByPk(id) {
@@ -76,8 +76,8 @@ class User extends Core {
 
     /**
      * Sets a User instance's role_id to 1 (administrator role)
-     * @param {integer} id user's id
-     * @returns {integer} number of updated rows
+     * @param {number} id user's id
+     * @returns {number} number of updated rows
      */
     async setUserAsAdmin(id) {
         const preparedQuery = {

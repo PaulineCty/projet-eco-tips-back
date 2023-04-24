@@ -5,6 +5,11 @@ const authentificationToken = require('../services/authentification/authentifica
 const debug = require('debug')("controller:user");
 const bcrypt = require('bcrypt');
 
+/**
+ * @typedef {import('../models/index').User} User;
+ * @typedef {import('../services/error/APIError')} APIError;
+ */
+
 const userController = {
 
     /**

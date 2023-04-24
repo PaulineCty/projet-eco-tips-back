@@ -6,6 +6,12 @@ const debug = require('debug')("controller:card");
 const imageService = require('../services/images/imageService');
 const { log } = require("console");
 
+/**
+ * @typedef {import('../models/index').Card} Card;
+ * @typedef {import('../models/index').TagCard} TagCard;
+ * @typedef {import('../services/error/APIError')} APIError;
+ */
+
 const cardController = {
     /**
      * Gets all cards belonging to a user's collection

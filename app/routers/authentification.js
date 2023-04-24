@@ -6,9 +6,14 @@ const { Router } = require("express");
 const authentificationRouter = Router();
 
 /**
+ * @typedef {import('../models/index').User} User;
+ * @typedef {import('../services/error/APIError')} APIError;
+ */
+
+/**
  * @route POST /sign-in
  * @group User - Managing sign in
- * @param {User} user.body.required - Object User 
+ * @param {User} user.body.required - User Object
  * @returns {object} 200 - Jwt's access token, user's firstname an user's role_id
  * @returns {APIError} error
  */

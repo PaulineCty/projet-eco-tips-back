@@ -2,6 +2,11 @@ const APIError = require("../services/error/APIError");
 const { UserCard } = require("../models/index");
 const debug = require('debug')("controller:usercard");
 
+/**
+ * @typedef {import('../models/index').UserCard} UserCard;
+ * @typedef {import('../services/error/APIError')} APIError;
+ */
+
 const userCardController = {
     /**
      * Updates a specific card's state
@@ -30,7 +35,7 @@ const userCardController = {
      * @param {object} req Express' request
      * @param {object} res Express' response
      * @param {function} next Express' function executing the succeeding middleware
-     * @return {Card} the created Card instance
+     * @return {UserCard} the created Card instance
      */
     async addUserCard (req, res, next) {
         try {
@@ -40,9 +45,9 @@ const userCardController = {
             if(userCard) {
                 next(new APIError(`Cette carte est déjà dans votre collection.`,400))
             } else {
-                const card = await UserCard.create({user_id : req.user.id, card_id : req.body.cardId, expiration_date : req.body.expirationDate});
+                const userCard = await UserCard.create({user_id : req.user.id, card_id : req.body.cardId, expiration_date : req.body.expirationDate});
                 // debug(cards);
-                res.json(card);
+                res.json(userCard);
             }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));

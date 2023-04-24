@@ -8,17 +8,17 @@ const debug = require('debug')("model:card");
  * @property {string} image - image
  * @property {string} title - title
  * @property {string} description - description
- * @property {integer} environmental_rating - environmental_rating
- * @property {integer} economic_rating - economic_rating
- * @property {integer} value - value
- * @property {integer} user_id - user_id
+ * @property {number} environmental_rating - environmental_rating
+ * @property {number} economic_rating - economic_rating
+ * @property {number} value - value
+ * @property {number} user_id - user_id
  */
 class Card extends Core {
     tableName = 'card';
 
     /**
      * Gets all Card instances belonging to a user's collection
-     * @param {integer} id user's id
+     * @param {number} id user's id
      * @returns {Card[]} an array of Card instances
      */
     async findUserCollection(id) {
@@ -55,7 +55,7 @@ class Card extends Core {
 
     /**
      * Gets a Card instance corresponding to a given title
-     * @param {integer} title card's title
+     * @param {string} title card's title
      * @returns {Card} a Card instance
      */
     async findByTitle(title) {
@@ -70,7 +70,7 @@ class Card extends Core {
 
     /**
      * Gets a random Card instance not already owned by a given user
-     * @param {integer} id user's id
+     * @param {number} id user's id
      * @returns {Card} a Card instance
      */
     async findOneRandomCard(id) {
@@ -143,7 +143,7 @@ class Card extends Core {
 
     /**
      * Sets a given Card instance to an approved state
-     * @param {integer} id card's id
+     * @param {number} id card's id
      * @returns {integer} number of updated rows
      */
     async setProposalCardToFalse(id) {
@@ -160,7 +160,7 @@ class Card extends Core {
 
     /**
      * Gets all Card instances created by a given user
-     * @param {integer} id user's id
+     * @param {number} id user's id
      * @returns {Card[]} an array of Card instances
      */
     async findByUser(id) {
@@ -226,7 +226,7 @@ class Card extends Core {
 
     /**
      * Gets a specific Card instance with its tags
-     * @param {integer} id card's id
+     * @param {number} id card's id
      * @returns {Card} a Card instance
      */
     async findByPkWithTags(id) {

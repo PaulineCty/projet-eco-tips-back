@@ -5,15 +5,15 @@ const debug = require('debug')("model:tagcard");
 /**
  * A TagCard is an object including a tag_id, and a card_id
  * @typedef {Object} TagCard
- * @property {integer} tag_id - tag identifyer
- * @property {integer} card_id - card identifyer
+ * @property {number} tag_id - tag identifyer
+ * @property {number} card_id - card identifyer
  */
 class TagCard extends Core {
     tableName = 'tag_card';
 
     /**
      * Gets all TagCard instances associated to a card
-     * @param {integer} id card's id
+     * @param {number} id card's id
      * @returns {TagCard[]} an array of TagCard instances
      */
     async findByCardId(id) {
@@ -28,9 +28,9 @@ class TagCard extends Core {
 
     /**
      * Deletes all TagCard instances according to the given parameters
-     * @param {integer[]} tagIds an array of tag ids
-     * @param {integer} cardId card's id
-     * @returns {integer} number of deleted rows
+     * @param {number[]} tagIds an array of tag ids
+     * @param {number} cardId card's id
+     * @returns {number} number of deleted rows
      */
     async deleteByTagCardIds (tagIds, cardId) {
         const values = [];
@@ -57,9 +57,9 @@ class TagCard extends Core {
 
     /**
      * Creates TagCard instances according to the given parameters
-     * @param {integer[]} tagIds an array of tag ids
-     * @param {integer} cardId card's id
-     * @returns {integer} number of created rows
+     * @param {number[]} tagIds an array of tag ids
+     * @param {number} cardId card's id
+     * @returns {number} number of created rows
      */
     async createByTagCardIds (tagIds, cardId) {
         const values = [];

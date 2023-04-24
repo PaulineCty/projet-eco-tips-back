@@ -5,8 +5,8 @@ const debug = require('debug')("model:usercard");
 /**
  * A UserCard is an object including a user_id, a card_id, an expiration_date and a state
  * @typedef {Object} UserCard
- * @property {integer} user_id - user identifyer
- * @property {integer} card_id - card identifyer
+ * @property {number} user_id - user identifyer
+ * @property {number} card_id - card identifyer
  * @property {date} expiration_date - card expiration date
  * @property {boolean} state - card state
  */
@@ -15,8 +15,8 @@ class UserCard extends Core {
 
     /**
      * Gets a specific UserCard instance corresponding to a certain user id and card id
-     * @param {integer} userId user's id
-     * @param {integer} cardId card's id
+     * @param {number} userId user's id
+     * @param {number} cardId card's id
      * @returns {UserCard} a UserCard instance
      */
     async findUserCardByIds (userId, cardId) {
@@ -31,9 +31,9 @@ class UserCard extends Core {
 
     /**
      * Updates the state of a UserCard instance corresponding to a certain user id and card id
-     * @param {integer} userId - instance's user's id
-     * @param {integer} cardId - instance's card's id
-     * @returns {integer} number of updated rows
+     * @param {number} userId - instance's user's id
+     * @param {number} cardId - instance's card's id
+     * @returns {number} number of updated rows
      */
     async updateUserCardState (userId, cardId) {
         const preparedQuery = {
@@ -50,9 +50,9 @@ class UserCard extends Core {
 
     /**
      * Deletes a specific UserCard instance corresponding to a certain user id and card id
-     * @param {integer} userId - instance's user's id
-     * @param {integer} cardId - instance's card's id
-     * @returns {integer} number of deleted rows
+     * @param {number} userId - instance's user's id
+     * @param {number} cardId - instance's card's id
+     * @returns {number} number of deleted rows
      */
     async deleteUserCard(userId, cardId) {
         const preparedQuery = {

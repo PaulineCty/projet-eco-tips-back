@@ -2,6 +2,11 @@ const APIError = require("../services/error/APIError");
 const { Tag } = require("../models/index");
 const debug = require('debug')("controller:tag");
 
+/**
+ * @typedef {import('../models/index').Tag} Tag;
+ * @typedef {import('../services/error/APIError')} APIError;
+ */
+
 const tagController = {
     /**
      * Gets all existing tags

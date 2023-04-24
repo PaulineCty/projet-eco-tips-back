@@ -13,7 +13,7 @@ class Tag extends Core {
 
     /**
      * Gets the Tag instance corresponding to a given name
-     * @param {integer} id tag's name
+     * @param {string} name tag's name
      * @returns {Tag} a Tag instance
      */
     async findByName(name) {
@@ -28,7 +28,7 @@ class Tag extends Core {
 
     /**
      * Gets the Tag instance corresponding to a given color
-     * @param {integer} id tag's color
+     * @param {number} id tag's color
      * @returns {Tag} a Tag instance
      */
     async findByColor(color) {

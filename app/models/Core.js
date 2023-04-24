@@ -7,7 +7,7 @@ class Core {
 
     /**
      * Gets a specific instance
-     * @param {integer} id identifyer
+     * @param {number} id identifyer
      * @returns an instance
      */
     async findByPk(id) {
@@ -141,7 +141,7 @@ class Core {
 
      /**
      * Deletes an instances
-     * @param {integer} id identifyer of the line to delete
+     * @param {number} id identifyer of the line to delete
      * @returns an instance
      */
     async delete(id) {
