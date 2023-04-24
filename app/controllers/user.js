@@ -79,7 +79,7 @@ const userController = {
     async getProfile (req, res, next) {
         try {
             // here we are not returning the password for security reasons
-            const user = await User.findByPkWithRole(req.user.id);
+            const user = await User.findByPk(req.user.id);
             // debug(user);
             res.json(user);
         } catch (error) {

@@ -2,24 +2,24 @@ const Core = require('./Core');
 const client = require('../db/database');
 const debug = require('debug')("model:user");
 
+/**
+ * A User is an object including a firstname, a lastname, an email, a password, a confirmpassword, a birthdate and a role_id
+ * @typedef {Object} User
+ * @property {string} firstname - firstname
+ * @property {string} lastname - lastname
+ * @property {string} email - email
+ * @property {string} password - password
+ * @property {string} confirmpassword - confirmpassword
+ * @property {string} birthdate - birthdate
+ * @property {integer} role_id - role identifyer
+ */
 class User extends Core {
     tableName = 'user';
 
     /**
-     * An user is an object including an firstname, a lastname, an email, a password, a confirmpassword and a birthdate
-     * @typedef {Object} User
-     * @property {string} firstname - firstname
-     * @property {string} lastname - lastname
-     * @property {string} email - email
-     * @property {string} password - password
-     * @property {string} confirmpassword - confirmpassword
-     * @property {string} birthdate - birthdate
-     */
-
-    /**
-     * Get an instance of a user's information in the database by his email
-     * @param {string} email instance's email
-     * @returns an instance
+     * Gets a User instance corresponding to a given email
+     * @param {string} email user's email
+     * @returns {User} a User instance
      */
     async findByEmail(email) {
         const preparedQuery = {
@@ -30,6 +30,10 @@ class User extends Core {
         return result.rows[0];
     };
 
+    /**
+     * Gets all User instances without any password related information
+     * @returns {User[]} an array of User instances
+     */
     async findAllWithRole() {
         const preparedQuery = {
             text : `SELECT 
@@ -47,7 +51,12 @@ class User extends Core {
         return result.rows;
     };
 
-    async findByPkWithRole(id) {
+    /**
+     * Gets a User instance corresponding to a given id without any password related information
+     * @param {integer} id user's id
+     * @returns {User} a User instance
+     */
+    async findByPk(id) {
         const preparedQuery = {
             text : `SELECT 
                     u.firstname,
@@ -65,6 +74,11 @@ class User extends Core {
         return result.rows[0];
     };
 
+    /**
+     * Sets a User instance's role_id to 1 (administrator role)
+     * @param {integer} id user's id
+     * @returns {integer} number of updated rows
+     */
     async setUserAsAdmin(id) {
         const preparedQuery = {
             text : `UPDATE "user" SET role_id = 1 WHERE id= $1`,

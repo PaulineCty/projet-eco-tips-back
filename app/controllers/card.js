@@ -74,10 +74,14 @@ const cardController = {
 
     async getAllProposalCard (req, res, next) {
         try {
-            const card = await Card.findAllProposals();
+            const cards = await Card.findAllProposals();
 
+            // adding the path to the image names
+            cards.forEach(card => {
+                card.image = imageService.getImagePath(card.image);
+            });
             // debug(card);
-            res.json(card);
+            res.json(cards);
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
