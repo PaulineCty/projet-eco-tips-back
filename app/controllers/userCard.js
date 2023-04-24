@@ -13,13 +13,13 @@ const userCardController = {
     async updateUserCardState (req, res, next) {
         try {
             const card = await UserCard.updateUserCardState(req.user.id, req.params.cardId);
-            // debug(card);
-            //do we send a "success" message here using .json() ?
-            //do we notice the user if no modification ?
-            // if(card) {
-            //     res.status(204).json();
-            // }
-            res.status(204).json();
+
+            if(!card) {
+                next(new APIError(`Cette carte ne peut pas être validée pour le moment.`,400));
+            } else {
+                res.status(204).json();
+            }
+
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
