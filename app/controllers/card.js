@@ -7,6 +7,14 @@ const imageService = require('../services/images/imageService');
 const { log } = require("console");
 
 const cardController = {
+    /**
+     * Gets all cards belonging to a user's collection
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Card[]} an array of Card instances
+     * @returns {APIError} error
+     */
     async getUsersCollection (req, res, next) {
         try {
             const cards = await Card.findUserCollection(req.user.id);
@@ -22,6 +30,15 @@ const cardController = {
         }        
     },
 
+    /**
+     * Adds a card to the card table as a proposal
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Card} the created Card instance
+     * @return {TagCard[]} an array of the created TagCard instances
+     * @returns {APIError} error
+     */
     async addCard (req, res, next) {
         try {
             // CAREFUL : form names have to be the exact same than the table field name --> tags for tag_ids ?
@@ -57,6 +74,14 @@ const cardController = {
         }
     },
 
+    /**
+     * Gets a random card not already owned by the user
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Card} a Card instance
+     * @returns {APIError} error
+     */
     async getOneRandomCard (req, res, next) {
         try {
             const card = await Card.findOneRandomCard(req.user.id);
@@ -72,6 +97,14 @@ const cardController = {
 
     },
 
+    /**
+     * Gets all cards that are not approved yet
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Card[]} an array of Card instances
+     * @returns {APIError} error
+     */
     async getAllProposalCard (req, res, next) {
         try {
             const cards = await Card.findAllProposals();
@@ -87,17 +120,37 @@ const cardController = {
         }
     },
 
+    /**
+     * Updates a card to an approved state
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
     async updateProposalCardToFalse (req, res, next) {
         try {
             const updatedCard = await Card.setProposalCardToFalse(req.params.id);
-            //do we send a "success" message here using .json() ?
-            //do we notice the user if no modification ?
+
+            if(!updatedCard) {
+                next(new APIError(`La carte n'a pas pu être validée.`,400));
+            } else {
+                res.status(204).json();
+            }
             res.status(204).json();
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
+    /**
+     * Gets all cards created by the user
+     * @param {object} req Express's request
+     * @param {object} res Express's response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Card[]} an array of Card instances
+     * @returns {APIError} error
+     */
     async getAllUsersCards (req, res, next) {
         try {
             //at the moment all cards with the corresponding user_id are returned : maybe the idea would be to have a different style in the Front highlighting the ones that are still in proposal=true so he can see which ones are public and which ones are not ?
@@ -114,6 +167,14 @@ const cardController = {
         } 
     },
 
+    /**
+     * Gets all approved cards
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Card[]} an array of Card instances
+     * @returns {APIError} error
+     */
     async getAllNotProposalCard (req, res, next) {
         try {
             const card = await Card.findAllNotProposals();
@@ -125,6 +186,14 @@ const cardController = {
         }
     },
 
+    /**
+     * Updates a specific card
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
     async updateCard (req, res, next) {
         const { title, description, environmentalrating, economicrating, value, tags } = req.body;
 
@@ -180,18 +249,34 @@ const cardController = {
                 value
             });
 
-            res.status(204).json({});
+            if(!card) {
+                next(new APIError(`La carte n'a pas pu être mise à jour.`,400));
+            } else {
+               res.status(204).json({}); 
+            }
+            
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
+    /**
+     * Deletes a specific card
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
     async deleteCard (req, res, next) {
         try {
             const card = await Card.delete(req.params.id);
 
-            // debug(card);
-            res.status(204).json();
+            if(!card) {
+                next(new APIError(`La carte n'a pas pu être supprimée.`,400));
+            } else {
+               res.status(204).json({}); 
+            }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }

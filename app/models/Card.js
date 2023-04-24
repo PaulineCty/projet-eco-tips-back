@@ -69,7 +69,7 @@ class Card extends Core {
     };
 
     /**
-     * Gets a random Card instance not owned by a given user
+     * Gets a random Card instance not already owned by a given user
      * @param {integer} id user's id
      * @returns {Card} a Card instance
      */
