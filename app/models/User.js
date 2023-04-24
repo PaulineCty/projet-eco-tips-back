@@ -56,9 +56,8 @@ class User extends Core {
                     u.birthdate,
                     u.ecocoins,
                     u.score,
-                    r.name AS role
-                    FROM "user" u 
-                    JOIN role r ON r.id = u.role_id
+                    u.role_id
+                    FROM "user" u
                     WHERE u.id = $1`,
             values: [id]
         }

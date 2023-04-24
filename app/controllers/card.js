@@ -159,12 +159,12 @@ const cardController = {
             
             // We delete all tags that are available only before the card edition
             if(differenceInPrevious) {
-                differenceInPrevious.forEach(async tagId => await TagCard.deleteByTagCardIds(tagId, req.params.id));
+                await TagCard.deleteByTagCardIds(differenceInPrevious, parseInt(req.params.id));
             }
             
             // We add all tags that are available only in the edition form
             if(differenceInNew) {
-                differenceInNew.forEach(async tagId => await TagCard.create({tag_id : tagId, card_id : req.params.id}));
+                await TagCard.createByTagCardIds(differenceInNew, parseInt(req.params.id));
             }
 
             const card = await Card.update({id:req.params.id}, {

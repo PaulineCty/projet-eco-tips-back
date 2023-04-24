@@ -30,7 +30,8 @@ const userController = {
             const accessToken = authentificationToken.generateAccessToken(newUser);
             res.json({ 
                 accessToken, 
-                firstname : newUser.firstname 
+                firstname : newUser.firstname,
+                role_id : newUser.role_id
             });
         } catch (error) {
             next(new APIError("Erreur lors de l'inscription", 500));
@@ -64,7 +65,8 @@ const userController = {
                 const accessToken = authentificationToken.generateAccessToken(user);
                 res.json({ 
                     accessToken, 
-                    firstname : user.firstname
+                    firstname : user.firstname,
+                    role_id : user.role_id
                 });
             }
 
