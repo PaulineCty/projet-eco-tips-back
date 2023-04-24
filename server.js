@@ -15,7 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 
 const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, userRouter, cardRouter } = require("./app/routers/index");
 
-//  swagger
+/*********************************************/
+/*****************  SWAGGER  *****************/
+/*********************************************/
 
 // we need to require swagger-ui-express's library
 const swaggerUi = require('swagger-ui-express');
@@ -28,7 +30,9 @@ const swaggerDocument = yaml.parse(fs.readFileSync('./swagger.yaml', 'utf8'));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// swagger's end
+/*********************************************/
+/**************  SWAGGER'S END  **************/
+/*********************************************/
 
 
 app.use(authentificationRouter);

@@ -10,21 +10,536 @@ info:
 servers:
   - url: http://onverraaumomentvoulu.io
 tags:
-  - name: sign-in
-    description: Log into the app
-  - name: sign-up
-    description: Create your account
+  - name: authentification
+    description: Create your account/Log into the app
   - name: user
     description: Operations to manage user
   - name: collection
     description: Operations to manage your card collection
+  - name: proposal
+    description: Operations to manage the proposed cards by users
+  - name: tag
+    description: Operations to manage the cards' tags
+  - name: card
+    description: Operations to manage the cards
   - name: achievement
     description: Add and share your achievements
   - name: community
     description: Keep an eye on other users score
-  - name: proposal
-    description: Operations to manage the proposed cards by users
-  - name: tag
-    description: Operations to manage the cards tags
-  - name: card
-    description: Operations to manage the cards
+paths:
+  /sign-in:
+    post:
+      tags:
+        - authentification
+      summary: Log into the app
+      description: Log into the app with your email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sign-in'
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: Invalid identifiers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    message:
+                      type: string
+                      example: "Couple login/mot de passe est incorrect."
+  /sign-up:
+    post:
+      tags:
+        - authentification
+      summary: Create an account on the app
+      description: Create an account on the app in order to log 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sign-up'
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: Invalid identifiers/Inputs must not be empty
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    message:
+                      type: string
+                      example: 
+                        - "Couple login/mot de passe est incorrect."
+                        - "Format du mot de passe incorrect : 8 caractères minimum comprenant au minimum 1 chiffre, 1 lettre miniscule, 1 lettre majuscule et 1 caractère spécial."
+                        - "Le champ 'nom du champ' ne peut pas être vide."
+  /me/user:
+    get:
+      tags:
+        - user
+      summary: Returns user's data
+      description: Returns user's data with hidden password
+      operationId: getProfile
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+    patch:
+      tags:
+        - user
+      summary: Updates user's data
+      description: Updates one to many user's data
+      operationId: updateProfile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sign-up'
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Invalid identifiers/Inputs must not be empty
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    message:
+                      type: string
+                      example: 
+                        - "Couple login/mot de passe est incorrect."
+                        - "Format du mot de passe incorrect : 8 caractères minimum comprenant au minimum 1 chiffre, 1 lettre miniscule, 1 lettre majuscule et 1 caractère spécial."
+                        - "Le champ 'nom du champ' ne peut pas être vide."
+      security:
+        - Jwt: []
+    delete:
+      tags:
+        - user
+      summary: Deletes user's data
+      description: Deletes user from the app
+      operationId: deleteProfile
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Jwt: []
+  /me/collection:
+    get:
+      tags:
+        - collection
+      summary: Returns all the user's cards
+      description: Returns all the user's cards (state true or false and proposal = false)
+      operationId: getUsersCollection
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /me/collection/card:
+    get:
+      tags:
+        - collection
+      summary: Returns a random card
+      description: Returns a random card not owned by the user (proposal = false)
+      operationId: getOneRandomCard
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+    post:
+      tags:
+        - collection
+      summary: Add a random card
+      description: Add a random card to teh user's deck
+      operationId: addUserCard
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+            type: object
+            properties:
+              cardId:
+                type: int
+                description: card's id
+                example: 1
+              expirationdate:
+                type: string
+                example: 01-06-2023
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /me/collection/card/{cardId}:
+    patch:
+      tags:
+        - collection
+      summary: Updates user_card state
+      description: Updates user_card state from false to true
+      operationId: updateUserCardState
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+    delete:
+      tags:
+        - collection
+      summary: Deletes user_card
+      description: Deletes a card in the user's deck
+      operationId: deleteUserCard
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /me/proposal:
+    post:
+      tags:
+        - proposal
+      summary: Add a proposed card
+      description: Add a proposed card by the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Card'
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /proposal:
+    get:
+      tags:
+        - proposal
+      summary: Returns all proposed cards (admin only)
+      description: Returns all proposed cards by users (proposal = true)
+      operationId: getAllProposalCard
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /proposal/{id}:
+    patch:
+      tags:
+        - proposal
+      summary: Sets proposed cards on false (admin only)
+      description: Sets proposed cards on false (proposal = false)
+      operationId: updateProposalCardToFalse
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /tag:
+    get:
+      tags:
+        - tag
+      summary: Returns all tags
+      description: Returns all tags in order to add them in the card creation
+      operationId: getAll
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+    post:
+      tags:
+        - tag
+      summary: Adds a tag (admin only)
+      description: Adds a tag
+      operationId: create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /tag/{id}:
+    patch:
+      tags:
+        - tag
+      summary: Updates a tag (admin only)
+      description: Updates a tag name or color
+      operationId: edit
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+    delete:
+      tags:
+        - tag
+      summary: Deletes a tag (admin only)
+      description: Deletes a tag 
+      operationId: delete
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /me/card:
+    get:
+      tags:
+        - card
+      summary: Returns all cards created by the user
+      description: Returns all cards created by the user
+      operationId: getAllUsersCards
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /card:
+    get:
+      tags:
+        - card
+      summary: Returns all proposed cards cards (admin only)
+      description: Returns all not proposed cards
+      operationId: getAllNotProposalCard
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /card/{id}:
+    patch:
+      tags:
+        - card
+      summary: Updates a card (admin only)
+      description: Updates a card (not the boolean proposal column)
+      operationId: updateCard
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+    delete:
+      tags:
+        - card
+      summary: Deletes a card (admin only)
+      description: Deletes a card 
+      operationId: deleteCard
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+components:
+  schemas:
+    Sign-in:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password: 
+          type: string
+          example: Azertyuiop*4
+      xml:
+        name: sign-in
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+          format: jwt
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRuWGNUMUVuL2NWaWlaVWZaLjFpRUR1a0xHMDh4V1lOSnBwYjNSN0ZPRkhRQWpXc0RQTmJNYSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjA4MzMzNSwiZXhwIjoxNjgyMDg1MTM1fQ.TSe0oM7SPh4tQhbz5TCiw_rR_M1GHejYN8yYezqxTuE
+        firstname: 
+          type: string
+          description: >
+            Return the firstname of the connected user
+          example: Laura
+      xml:
+        name: token
+    Sign-up:
+      type: object
+      properties:
+        firstname:
+          type: string
+          pattern: /^[À-ÿA-Za-z -]+$/
+          example: Laura
+        lastname:
+          type: string
+          pattern: /^[À-ÿA-Za-z -]+$/
+          example: Teur
+        email:
+          type: string
+          format: email
+          pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+          example: user@example.com
+        password: 
+          type: string
+          description: >
+            Password must be at least 8 characters long, contain at least one uppercase letter, // A garder pour sign-up
+            one lowercase letter, one number and one special character.
+          pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+          example: Azertyuiop*4
+        confirmpassword: 
+          type: string
+          description: >
+            Confirmpassword must be the same as password.
+        birthdate: 
+          type: string
+          format: date
+      xml:
+        name: sign-up
+    User:
+      type: object
+      properties:
+        firstname:
+          type: string
+          example: Laura
+        lastname:
+          type: string
+          example: Teur
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password: 
+          type: string
+          description: >
+            Password returned will be replaced with '*'.
+          example: '***********'
+        birthdate: 
+          type: string
+          format: date
+      xml:
+        name: user
+    Card:
+      type: object
+      properties:
+        image:
+          type: string
+          example: data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII
+        title:
+          type: string
+        description:
+          type: string
+        environmentalrating: 
+          type: int
+          description: >
+            Integer must be between 0 and 5.
+        economicrating: 
+          type: int
+          description: >
+            Integer must be between 0 and 5.
+        value: 
+          type: int
+          description: >
+            Integer must be between 0 and 50.
+        tags: 
+          type: array
+          description: >
+            Array of 1 to 4 tag_id
+          example: [1,5]
+      xml:
+        name: card
+    Tag:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          color: string
+          pattern: /^#[a-fA-F0-9]{6}$/
+          example: #123123
+      xml:
+        name: tag
