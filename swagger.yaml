@@ -147,6 +147,38 @@ paths:
           description: Successful operation
       security:
         - Jwt: []
+  /user:
+    get:
+      tags:
+        - user
+      summary: Returns all users' data (admin only)
+      description: Returns all users' data
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /user/{id}:
+    patch:
+      tags:
+        - user
+      summary: Sets user's role to admin (admin only)
+      description: Sets user's role to admin
+      operationId: updateUserAsAdmin
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
   /me/collection:
     get:
       tags:
@@ -501,6 +533,12 @@ components:
         birthdate: 
           type: string
           format: date
+        ecocoins: 
+          type: int
+          description: The total number of user's ecocoins which allow him to get cards
+        score: 
+          type: int
+          format: The total user's score obtained by validate cards
       xml:
         name: user
     Card:
@@ -540,6 +578,6 @@ components:
         title:
           color: string
           pattern: /^#[a-fA-F0-9]{6}$/
-          example: #123123
+          example: "#123123"
       xml:
         name: tag
