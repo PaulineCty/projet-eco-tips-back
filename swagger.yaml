@@ -295,7 +295,7 @@ paths:
         - tag
       summary: Returns all tags
       description: Returns all tags in order to add them in the card creation
-      operationId: getAll
+      operationId: getAllTags
       responses:
         '200':
           description: Successful operation
@@ -312,7 +312,7 @@ paths:
         - tag
       summary: Adds a tag (admin only)
       description: Adds a tag
-      operationId: create
+      operationId: createTag
       requestBody:
         required: true
         content:
@@ -336,7 +336,7 @@ paths:
         - tag
       summary: Updates a tag (admin only)
       description: Updates a tag name or color
-      operationId: edit
+      operationId: editTag
       responses:
         '204':
           description: Successful operation
@@ -349,7 +349,7 @@ paths:
         - tag
       summary: Deletes a tag (admin only)
       description: Deletes a tag 
-      operationId: delete
+      operationId: deleteTag
       responses:
         '204':
           description: Successful operation
