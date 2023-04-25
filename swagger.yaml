@@ -1,14 +1,18 @@
-openapi: 3.0.3 [A voir ce qu'on met]
+openapi: 3.0.3
 info:
-  title: Eco Tips - OpenAPI 3.0 (Est-on à jour vis-à-vis de règles OpenAPI 3.0)
+  title: Eco Tips - OpenAPI 3.0
   description: |-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at libero eget justo egestas placerat. Suspendisse pulvinar, ex nec condimentum consequat, metus turpis faucibus metus, nec tempus lectus lorem eu mauris. Morbi maximus convallis diam ac viverra. Donec at iaculis elit, ut congue ex. Nullam iaculis ultricies sodales. Proin fermentum tempor neque. Aliquam sagittis elit ut erat dapibus, quis vulputate lorem fringilla. Maecenas ac ornare neque. Donec eget velit vel tortor viverra fermentum. Etiam quis diam auctor, malesuada enim rhoncus, commodo mauris. Quisque justo purus, luctus vel quam ac, rutrum interdum sem. Phasellus rhoncus iaculis ex non bibendum. Morbi mi nunc, posuere nec blandit eget, tincidunt eu nisi. Integer fringilla lacinia est id tincidunt. Curabitur sollicitudin ex sit amet lectus vestibulum vulputate. Morbi in odio convallis, tincidunt tortor in, gravida quam.
+    Eco Tips is a web application that allows its users, in a fun way, to reduce their ecological impact and save money.
+
+    In the current context, more and more citizens are aware of the climate issues and need to take action in their daily lives to reduce their carbon footprint. The country's economic context also leads citizens to reduce their daily expenses. To meet this need, Eco Tips offers its users eco-gestures based in part on a [study by CLER - Network for Energy Transition](https://cler.org/wp-content/uploads/2021/01/Guide-100-e%CC%81cogestes-De%CC%81clics_planches.pdf), helping them to save money and live more sustainably.
+
+    Therefore, Eco Tips provides a fun solution that encourages individuals to awaken their environmental awareness, to sustainably install eco-gestures in their daily lives in order to reduce the users' carbon footprint. The application informs users about new uses while creating a community of committed citizens.
     
     Some useful links:
-    - [Eco Tips back repository](https://github.com/O-clock-Ohm/projet-03-eco-tips-back)
-    - [Eco Tips back repository](https://github.com/O-clock-Ohm/projet-03-eco-tips-front)
+    - [Eco Tips back Github repository](https://github.com/O-clock-Ohm/projet-03-eco-tips-back)
+    - [Eco Tips front Github repository](https://github.com/O-clock-Ohm/projet-03-eco-tips-front)
 servers:
-  - url: http://onverraaumomentvoulu.io
+  - url: paulinecty-server.eddi.cloud:8080
 tags:
   - name: authentification
     description: Create your account/Log into the app
@@ -31,8 +35,8 @@ paths:
     post:
       tags:
         - authentification
-      summary: Log into the app
-      description: Log into the app with your email and password
+      summary: Logs into the app
+      description: Logs into the app with your email and password
       requestBody:
         required: true
         content:
@@ -60,8 +64,8 @@ paths:
     post:
       tags:
         - authentification
-      summary: Create an account on the app
-      description: Create an account on the app in order to log 
+      summary: Creates an account on the app
+      description: Creates an account on the app in order to log 
       requestBody:
         required: true
         content:
@@ -71,10 +75,6 @@ paths:
       responses:
         '200':
           description: Successful operation
-          content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Token'
         '401':
           description: Invalid identifiers/Inputs must not be empty
           content:
@@ -85,7 +85,7 @@ paths:
                     message:
                       type: string
                       example: 
-                        - "Couple login/mot de passe est incorrect."
+                        - "La confirmation n'est pas identique au mot de passe."
                         - "Format du mot de passe incorrect : 8 caractères minimum comprenant au minimum 1 chiffre, 1 lettre miniscule, 1 lettre majuscule et 1 caractère spécial."
                         - "Le champ 'nom du champ' ne peut pas être vide."
   /me/user:
