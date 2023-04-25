@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2SWZnRU5DRzdOVDBNTmkyQTh2YzhldGh3YnNDR1ZJNTlDWFgzOW9XWHI3dVduVzFtd3NoLiIsImJpcnRoZGF0ZSI6IjE5OTEtMDUtMDVUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA0LTI1VDEwOjI4OjIzLjQwOVoiLCJpYXQiOjE2ODI0MzExNjQsImV4cCI6MTY4MjQzMjk2NH0.dFyFbWlG7CUCzBx05uflByDRWv7lMy8GzS-o4iCTJbE
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2SWZnRU5DRzdOVDBNTmkyQTh2YzhldGh3YnNDR1ZJNTlDWFgzOW9XWHI3dVduVzFtd3NoLiIsImJpcnRoZGF0ZSI6IjE5OTEtMDUtMDVUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA0LTI1VDEwOjI4OjIzLjQwOVoiLCJpYXQiOjE2ODI0MzMxMDUsImV4cCI6MTY4MjQzNDkwNX0.Sk-RxZ4MzXX8kLNK6FmN85YuD6ZVJXi3blN5IHPQZlc
 
 
 ###
@@ -80,12 +80,12 @@ Authorization: {{token}}
 
 {
     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-    "title":"titre12",
-    "description":"description12",
+    "title":"titre13",
+    "description":"description13",
     "environmentalrating":1,
     "economicrating":3,
     "value": 50,
-    "tags": []
+    "tags": [1,2]
 }
 
 ###
@@ -178,25 +178,25 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "title": "titre9mod",
+    "title": "titre9",
     "description": "description2",
     "environmentalrating": 5,
     "economicrating": 3,
     "value": 55,
-    "tags": [2,5,6]
+    "tags": [2]
 }
 
 # {
 #     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
 #     "title": "titre9",
-#     "description": "description",
-#     "environmentalrating": 3,
+#     "description": "description2",
+#     "environmentalrating": 5,
 #     "economicrating": 3,
-#     "value": 50,
-#     "tags": [5,6]
+#     "value": 55,
+#     "tags": [2]
 # }
 
 ####
 
-DELETE http://localhost:3000/card/58
+DELETE http://localhost:3000/card/61
 Authorization: {{token}}
