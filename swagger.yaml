@@ -183,7 +183,7 @@ paths:
     get:
       tags:
         - collection
-      summary: Returns all the user's cards
+      summary: Returns all the cards in user's collection
       description: Returns all the user's cards (state true or false and proposal = false)
       operationId: getUsersCollection
       responses:
@@ -218,8 +218,8 @@ paths:
     post:
       tags:
         - collection
-      summary: Add a random card
-      description: Add a random card to teh user's deck
+      summary: Adds a card to the user's deck
+      description: Adds a random card to the user's deck
       operationId: addUserCard
       responses:
         '200':
@@ -243,7 +243,7 @@ paths:
     patch:
       tags:
         - collection
-      summary: Updates user_card state
+      summary: Updates user_card state to true
       description: Updates user_card state from false to true
       operationId: updateUserCardState
       responses:
@@ -411,7 +411,7 @@ paths:
     get:
       tags:
         - card
-      summary: Returns all proposed cards cards (admin only)
+      summary: Returns all approved cards (admin only)
       description: Returns all not proposed cards
       operationId: getAllNotProposalCard
       responses:
