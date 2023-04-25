@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkR2lCN2pEdWg3SUdsUjNVaExwbXNKZVVGLjg0cnJVVjVwcVF0bWZkVHJ4SWlYRlZiSXdXSGkiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6MCwic2NvcmUiOjAsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTIwVDEyOjA5OjA2LjA4NloiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODIzNTc0MTEsImV4cCI6MTY4MjM1OTIxMX0.4M8rqUO3JjKaKHJxFKDcv3pmbMwXLjEP8y4usGlePuM
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQwUmR5Y1lKbi42ZjFXUmhOaXhmQ0tleE00ZFNwclJPYjFFZTN1YXNYRnJZek5LUmkxV2RJVyIsImJpcnRoZGF0ZSI6IjE5OTEtMDUtMDVUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA0LTIxVDEzOjU4OjEyLjI4OVoiLCJpYXQiOjE2ODI0MTgwMjEsImV4cCI6MTY4MjQxOTgyMX0.O2lsR-DS5PhYUy8FM2A8bFAc_bPE8RBQ1EWbfDpxbB8
 
 
 ###
@@ -31,7 +31,7 @@ POST http://localhost:3000/sign-in
 Content-Type: application/json
 
 {
-    "email":"jean.biance@gmail.com",
+    "email":"jeanne.biance@gmail.com",
     "password":"Azerty123!"
 }
 
@@ -53,18 +53,18 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "cardId":5,
+    "cardId":6,
     "expirationDate":"01-06-2023"
 }
 
 ###
 
-PATCH http://localhost:3000/me/collection/card/4
+PATCH http://localhost:3000/me/collection/card/5
 Authorization: {{token}}
 
 ###
 
-DELETE http://localhost:3000/me/collection/card/5
+DELETE http://localhost:3000/me/collection/card/6
 Authorization: {{token}}
 
 ###
@@ -80,7 +80,7 @@ Authorization: {{token}}
 
 {
     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-    "title":"titre8",
+    "title":"titre9",
     "description":"description",
     "environmentalrating":3,
     "economicrating":3,
@@ -90,7 +90,7 @@ Authorization: {{token}}
 
 ###
 
-PATCH http://localhost:3000/proposal/58
+PATCH http://localhost:3000/proposal/59
 Authorization: {{token}}
 
 ###
@@ -111,7 +111,7 @@ Authorization: {{token}}
 
 ####
 
-PATCH http://localhost:3000/tag/20
+PATCH http://localhost:3000/tag/21
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -122,7 +122,7 @@ Authorization: {{token}}
 
 ####
 
-DELETE http://localhost:3000/tag/20
+DELETE http://localhost:3000/tag/21
 Authorization: {{token}}
 
 ####

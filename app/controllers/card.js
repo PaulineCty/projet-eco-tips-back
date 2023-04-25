@@ -143,7 +143,7 @@ const cardController = {
             } else {
                 res.status(204).json();
             }
-            res.status(204).json();
+
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
