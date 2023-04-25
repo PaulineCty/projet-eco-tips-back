@@ -29,16 +29,9 @@ const userController = {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Creating the new user in the user table, only standard users can be created this way (no admin)
-        // And generating a token 
         try {
-            const newUser = await User.create({firstname, lastname, email, password: hashedPassword, birthdate});
-
-            const accessToken = authentificationToken.generateAccessToken(newUser);
-            res.json({ 
-                accessToken, 
-                firstname : newUser.firstname,
-                role_id : newUser.role_id
-            });
+            await User.create({firstname, lastname, email, password: hashedPassword, birthdate});
+            res.status(200).json();
         } catch (error) {
             next(new APIError("Erreur lors de l'inscription", 500));
         }
