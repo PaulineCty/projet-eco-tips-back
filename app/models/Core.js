@@ -6,9 +6,9 @@ class Core {
     }
 
     /**
-     * Récupération par identifiant
-     * @param {number|number[]} id identifiant ou liste d'identifiants
-     * @returns un enregistrement ou une liste d'enregistrement
+     * Gets a specific instance
+     * @param {number} id identifyer
+     * @returns an instance
      */
     async findByPk(id) {
         const preparedQuery = {
@@ -25,6 +25,11 @@ class Core {
         return result.rows[0];
     }
 
+    /**
+     * Gets all instances
+     * @param {Object} params an object with two keys : param and value
+     * @returns an instance
+     */
     async findAll(params) {
         let filter = '';
         const values = [];
@@ -64,6 +69,11 @@ class Core {
         return result.rows;
     }
 
+    /**
+     * Creates an instances
+     * @param {Object} inputData an object with keys matching the columns to fill
+     * @returns an instance
+     */
     async create(inputData) {
         const fields = [];
         const placeholders = [];
@@ -93,6 +103,12 @@ class Core {
         return row;
     }
 
+    /**
+     * Updates an instances
+     * @param {Object} id identifyer of the line to update
+     * @param {Object} inputData an object with keys matching the columns to fill
+     * @returns an instance
+     */
     async update({ id }, inputData) {
         const fieldsAndPlaceholders = [];
         let indexPlaceholder = 1;
@@ -123,6 +139,11 @@ class Core {
         return row;
     }
 
+     /**
+     * Deletes an instances
+     * @param {number} id identifyer of the line to delete
+     * @returns an instance
+     */
     async delete(id) {
         const result = await this.client.query(`DELETE FROM "${this.tableName}" WHERE id = $1`, [id]);
         return !!result.rowCount;

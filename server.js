@@ -3,7 +3,6 @@ const cors = require('cors');
 const express = require("express");
 const path = require("path");
 const authentificationTokenMiddleware = require('./app/services/authentification/authentificationToken.js');
-const adminMiddleware = require('./app/services/authentification/isAdmin.js');
 
 const app = express();
 app.use(express.static(path.join(__dirname, "uploads")));
@@ -13,25 +12,40 @@ app.use(express.json({
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
+// Routing
 const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, userRouter, cardRouter } = require("./app/routers/index");
 
+/*********************************************/
+/*****************  SWAGGER  *****************/
+/*********************************************/
+
+// we need to require swagger-ui-express's library
+const swaggerUi = require('swagger-ui-express');
+
+// we need fs in order to read swagger.yaml and parse from yaml library to convert the file in js object
+const yaml = require('yaml');
+const fs = require('fs');
+
+const swaggerDocument = yaml.parse(fs.readFileSync('./swagger.yaml', 'utf8'));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+/*********************************************/
+/**************  SWAGGER'S END  **************/
+/*********************************************/
+
+
 app.use(authentificationRouter);
-
 app.use("/me/collection", authentificationTokenMiddleware.isAuthenticated, collectionRouter);
-
 app.use(authentificationTokenMiddleware.isAuthenticated, proposalRouter);
-
 app.use("/tag", authentificationTokenMiddleware.isAuthenticated, tagRouter);
-
 app.use(authentificationTokenMiddleware.isAuthenticated, userRouter);
-
 app.use(authentificationTokenMiddleware.isAuthenticated, cardRouter);
 
-// error management
+// Error management
 const errorModule = require("./app/services/error/errorHandling");
 // 404 error
 app.use(errorModule._404);
-// overall error management
 app.use(errorModule.manage);
 
 const PORT = process.env.PORT ?? 3000;

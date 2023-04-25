@@ -3,9 +3,20 @@ const { User, Card, Tag } = require("../../models/index");
 const { userSchema, cardSchema, tagSchema } = require("./schema");
 const debug = require("debug")("validation");
 
-const validationModule = {
+/**
+ * @typedef {import('../services/error/APIError')} APIError;
+ */
 
-    async validateUserCreation(req, res, next) {
+const validationModule = {
+    /**
+   * Validates the provided User object in order to create it
+   * @param {object} req Express' request
+   * @param {object} _ Express' response
+   * @param {function} next Express' function executing the succeeding middleware
+   * @returns {void} - No content - Allowing to go to the next middleware
+   * @returns {APIError} error
+   */
+    async validateUserCreation(req, _, next) {
         // Testing email uniqueness
         try {
             const user = await User.findByEmail(req.body.email);
@@ -26,7 +37,15 @@ const validationModule = {
         }  
     },
 
-    async validateUserEdition(req, res, next) {
+    /**
+   * Validates the provided User object in order to modify it
+   * @param {object} req Express' request
+   * @param {object} _ Express' response
+   * @param {function} next Express' function executing the succeeding middleware
+   * @returns {void} - No content - Allowing to go to the next middleware
+   * @returns {APIError} error
+   */
+    async validateUserEdition(req, _, next) {
         const previousUserInfo = await User.findByPk(req.user.id);
 
         // We don't know yet how the password will be managed in the user edition form
@@ -55,7 +74,15 @@ const validationModule = {
         }  
     },
 
-    async validateCardCreation(req, res, next) {
+    /**
+   * Validates the provided Card object in order to create it
+   * @param {object} req Express' request
+   * @param {object} _ Express' response
+   * @param {function} next Express' function executing the succeeding middleware
+   * @returns {void} - No content - Allowing to go to the next middleware
+   * @returns {APIError} error
+   */
+    async validateCardCreation(req, _, next) {
 
         try {
             const card = await Card.findByTitle(req.body.title);
@@ -76,7 +103,15 @@ const validationModule = {
         }  
     },
 
-    async validateCardEdition(req, res, next) {
+    /**
+   * Validates the provided Card object in order to modify it
+   * @param {object} req Express' request
+   * @param {object} _ Express' response
+   * @param {function} next Express' function executing the succeeding middleware
+   * @returns {void} - No content - Allowing to go to the next middleware
+   * @returns {APIError} error
+   */
+    async validateCardEdition(req, _, next) {
         const previousCard= await Card.findByPkWithTags(req.params.id);
 
         // If the user is not changing any values then we send an error 400.
@@ -106,7 +141,15 @@ const validationModule = {
 
     },
     
-    async validateTagCreation(req, res, next) {
+    /**
+   * Validates the provided Tag object in order to create it
+   * @param {object} req Express' request
+   * @param {object} _ Express' response
+   * @param {function} next Express' function executing the succeeding middleware
+   * @returns {void} - No content - Allowing to go to the next middleware
+   * @returns {APIError} error
+   */
+    async validateTagCreation(req, _, next) {
 
         try {
             const tag = await Tag.findByName(req.body.name);
@@ -136,7 +179,15 @@ const validationModule = {
         }  
     },
 
-    async validateTagEdition(req, res, next) {
+     /**
+   * Validates the provided Tag object in order to modify it
+   * @param {object} req Express' request
+   * @param {object} _ Express' response
+   * @param {function} next Express' function executing the succeeding middleware
+   * @returns {void} - No content - Allowing to go to the next middleware
+   * @returns {APIError} error
+   */
+    async validateTagEdition(req, _, next) {
         const previousTag = await Tag.findByPk(req.params.id);
 
         // If the user is not changing any values then we send a error 400.

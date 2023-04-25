@@ -2,24 +2,40 @@ const Core = require('./Core');
 const client = require('../db/database');
 const debug = require('debug')("model:tag");
 
+/**
+ * A Tag is an object including a name and a color
+ * @typedef {Object} Tag
+ * @property {string} image - name
+ * @property {string} title - color
+ */
 class Tag extends Core {
     tableName = 'tag';
 
-    async findByName(id) {
+    /**
+     * Gets the Tag instance corresponding to a given name
+     * @param {string} name tag's name
+     * @returns {Tag} a Tag instance
+     */
+    async findByName(name) {
         const preparedQuery = {
             text : `SELECT * FROM tag
             WHERE name = $1`,
-            values: [id]
+            values: [name]
         }
         const result = await this.client.query(preparedQuery);
         return result.rows[0];
     };
 
-    async findByColor(id) {
+    /**
+     * Gets the Tag instance corresponding to a given color
+     * @param {number} id tag's color
+     * @returns {Tag} a Tag instance
+     */
+    async findByColor(color) {
         const preparedQuery = {
             text : `SELECT * FROM tag
             WHERE color = $1`,
-            values: [id]
+            values: [color]
         }
         const result = await this.client.query(preparedQuery);
         return result.rows[0];

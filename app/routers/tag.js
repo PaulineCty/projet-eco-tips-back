@@ -6,13 +6,46 @@ const adminMiddleware = require('../services/authentification/isAdmin.js');
 const { Router } = require("express");
 const tagRouter = Router();
 
-// Getting all tags
-tagRouter.get("/", tagController.getAll);
 
-tagRouter.post("/", adminMiddleware, validationModule.validateTagCreation, tagController.create);
+/**
+ * @typedef {import('../models/index').Tag} Tag;
+ * @typedef {import('../services/error/APIError')} APIError;
+ */
 
-tagRouter.patch("/:id(\\d+)", adminMiddleware, validationModule.validateTagEdition, tagController.edit);
+/**
+ * @route GET /tag
+ * @group Tag - Getting all existing tags
+ * @return {Tag[]} an array of Tag instances
+ * @returns {APIError} error
+ */
+tagRouter.get("/", tagController.getAllTags);
 
-tagRouter.delete("/:id(\\d+)", adminMiddleware, tagController.delete);
+/**
+ * @route POST /tag
+ * @group Tag - Creating a new tag
+ * @param {Tag} user.body.required - Tag Object
+ * @return {Tag} the created Tag instance
+ * @returns {APIError} error
+ */
+tagRouter.post("/", adminMiddleware, validationModule.validateTagCreation, tagController.createTag);
+
+/**
+ * @route PATCH /tag
+ * @group Tag - Editing a tag
+ * @param {number} id - The id of the tag to update
+ * @param {Tag} user.body.required - Tag Object
+ * @returns {void} - No Content (HTTP 204) response
+ * @returns {APIError} error
+ */
+tagRouter.patch("/:id(\\d+)", adminMiddleware, validationModule.validateTagEdition, tagController.editTag);
+
+/**
+ * @route DELETE /tag
+ * @group Tag - Deleting a tag
+ * @param {number} id - The id of the tag to delete
+ * @returns {void} - No Content (HTTP 204) response
+ * @returns {APIError} error
+ */
+tagRouter.delete("/:id(\\d+)", adminMiddleware, tagController.deleteTag);
 
 module.exports = tagRouter;
