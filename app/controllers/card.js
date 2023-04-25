@@ -237,15 +237,15 @@ const cardController = {
             const differenceInNew = tags.filter(tag => !previousTags.includes(tag));
             
             // We delete all tags that are available only before the card edition
-            if(differenceInPrevious) {
+            if(differenceInPrevious.length) {
                 await TagCard.deleteByTagCardIds(differenceInPrevious, parseInt(req.params.id));
             }
-            
+
             // We add all tags that are available only in the edition form
-            if(differenceInNew) {
+            if(differenceInNew.length) {
                 await TagCard.createByTagCardIds(differenceInNew, parseInt(req.params.id));
             }
-
+            
             const card = await Card.update({id:req.params.id}, {
                 image, 
                 title, 
@@ -258,7 +258,7 @@ const cardController = {
             if(!card) {
                 next(new APIError(`La carte n'a pas pu être mise à jour.`,400));
             } else {
-               res.status(204).json({}); 
+               res.status(204).json(); 
             }
             
         } catch (error) {
