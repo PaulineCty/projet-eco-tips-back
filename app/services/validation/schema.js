@@ -52,12 +52,12 @@ const cardSchema = Joi.object({
       'string.empty': `Le champ 'Description' ne peut pas être vide.`,
       'any.required': `Le champ 'Description' est manquant.`
     }),
-  environmentalrating: Joi.number().min(0).max(5).required().messages({
+  environmentalrating: Joi.number().min(0).max(5).required().prefs({ convert: false }).messages({
       'number.base' : `'Note environnementale' doit être un nombre.`,
       'any.empty': `Le champ 'Note environnementale' ne peut pas être vide.`,
       'any.required': `Le champ 'Note environnementale' est manquant.`
     }),
-  economicrating: Joi.number().min(0).max(5).required().messages({
+  economicrating: Joi.number().min(0).max(5).required().prefs({ convert: false }).messages({
     'number.base' : `'Note économique' doit être un nombre.`,
     'any.empty': `Le champ 'Note économique' ne peut pas être vide.`,
     'any.required': `Le champ 'Note économique' est manquant.`
@@ -67,7 +67,7 @@ const cardSchema = Joi.object({
       'any.empty': `Le champ 'Valeur' ne peut pas être vide.`,
       'any.required': `Le champ 'Valeur' est manquant.`
     }),
-  tags : Joi.array().items(Joi.number().integer()).required().messages({
+  tags : Joi.array().items(Joi.number().integer().prefs({ convert: false })).required().messages({
     'array.base' : `'Catégories' doit être un tableau.`,
     'any.empty': `Le champ 'Catégories' ne peut pas être vide.`,
     'any.required': `Le champ 'Catégories' est manquant.`

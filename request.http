@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQwUmR5Y1lKbi42ZjFXUmhOaXhmQ0tleE00ZFNwclJPYjFFZTN1YXNYRnJZek5LUmkxV2RJVyIsImJpcnRoZGF0ZSI6IjE5OTEtMDUtMDVUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA0LTIxVDEzOjU4OjEyLjI4OVoiLCJpYXQiOjE2ODI0MTgwMjEsImV4cCI6MTY4MjQxOTgyMX0.O2lsR-DS5PhYUy8FM2A8bFAc_bPE8RBQ1EWbfDpxbB8
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR2SWZnRU5DRzdOVDBNTmkyQTh2YzhldGh3YnNDR1ZJNTlDWFgzOW9XWHI3dVduVzFtd3NoLiIsImJpcnRoZGF0ZSI6IjE5OTEtMDUtMDVUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA0LTI1VDEwOjI4OjIzLjQwOVoiLCJpYXQiOjE2ODI0MzExNjQsImV4cCI6MTY4MjQzMjk2NH0.dFyFbWlG7CUCzBx05uflByDRWv7lMy8GzS-o4iCTJbE
 
 
 ###
@@ -31,7 +31,7 @@ POST http://localhost:3000/sign-in
 Content-Type: application/json
 
 {
-    "email":"jeanne.biance@gmail.com",
+    "email":"jean.biance@gmail.com",
     "password":"Azerty123!"
 }
 
@@ -80,9 +80,9 @@ Authorization: {{token}}
 
 {
     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-    "title":"titre9",
-    "description":"description",
-    "environmentalrating":3,
+    "title":"titre12",
+    "description":"description12",
+    "environmentalrating":1,
     "economicrating":3,
     "value": 50,
     "tags": []
@@ -168,17 +168,17 @@ Authorization: {{token}}
 ###
 
 GET http://localhost:3000/card
-Authorization: Bearer {{token}}
+Authorization: {{token}}
 
 
 ####
 
-PATCH http://localhost:3000/card/57
+PATCH http://localhost:3000/card/59
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "title": "titre7",
+    "title": "titre9mod",
     "description": "description2",
     "environmentalrating": 5,
     "economicrating": 3,
@@ -188,7 +188,7 @@ Authorization: {{token}}
 
 # {
 #     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-#     "title": "titre8_mod",
+#     "title": "titre9",
 #     "description": "description",
 #     "environmentalrating": 3,
 #     "economicrating": 3,
@@ -198,5 +198,5 @@ Authorization: {{token}}
 
 ####
 
-DELETE http://localhost:3000/card/53
+DELETE http://localhost:3000/card/58
 Authorization: {{token}}

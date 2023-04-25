@@ -93,6 +93,11 @@ const validationModule = {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
 
+        // Not allowing tags to be empty
+        if(!req.body.tags.length) {
+            next(new APIError('Merci de renseigner au moins une catégorie.', 400));
+        }
+
         // The goal here is to send to the front a detailed error
         const { error } = cardSchema.validate(req.body);
         if (error) {
@@ -116,9 +121,12 @@ const validationModule = {
 
         // If the user is not changing any values then we send an error 400.
         // Does not detect when identical because need specific verification for tags !
-        // if(previousCard.image === req.body.image && previousCard.title === req.body.title && previousCard.description === req.body.description && previousCard.environmental_rating === req.body.environmentalrating && previousCard.economic_rating === req.body.economicrating && previousCard.value === req.body.value && previousCard.tags == req.body.tags) {
-        //     next(new APIError('Aucune des valeurs n\'a été modifiées.', 400)); // Si on change autre chose que le titre
-        // };
+        if(previousCard.image === req.body.image && previousCard.title === req.body.title && previousCard.description === req.body.description && previousCard.environmental_rating === req.body.environmentalrating && previousCard.economic_rating === req.body.economicrating && previousCard.value === req.body.value) {
+            next(new APIError('Aucune des valeurs n\'a été modifiées.', 400)); // Si on change autre chose que le titre
+        };
+
+        // if()
+        // && previousCard.tags == req.body.tags
 
         try {
             const card = await Card.findByTitle(req.body.title);
@@ -128,6 +136,11 @@ const validationModule = {
             }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
+        }
+
+        // Not allowing tags to be empty
+        if(!req.body.tags.length) {
+            next(new APIError('Merci de renseigner au moins une catégorie.', 400));
         }
 
         // The goal here is to send to the front a detailed error
