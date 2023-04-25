@@ -1,15 +1,28 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQwUmR5Y1lKbi42ZjFXUmhOaXhmQ0tleE00ZFNwclJPYjFFZTN1YXNYRnJZek5LUmkxV2RJVyIsImJpcnRoZGF0ZSI6IjE5OTEtMDUtMDVUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTI6MDk6MDkuOTA5WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA0LTIxVDEzOjU4OjEyLjI4OVoiLCJpYXQiOjE2ODI0MTgwMjEsImV4cCI6MTY4MjQxOTgyMX0.O2lsR-DS5PhYUy8FM2A8bFAc_bPE8RBQ1EWbfDpxbB8
+# /*********************************************\ #
+# /*************  TOKEN  VARIABLE  *************\ #
+# /*********************************************\ #
 
+
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvdDRaTlZXYlQ2U1UwR3pHMi9TSEp1NThYMmVTNkNyZVFuMzNLMHBLbWRwS2hROHBzUVo2SyIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTM6MTg6NTguNTczWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjQyNjA4MiwiZXhwIjoxNjgyNDI3ODgyfQ.QrRSqya67btirkH7faoOqm2HNL0eemOjMAdo97h2HUg
 
 ###
 
+
+
+
+# /********************************************\ #
+# /************  AUTHENTIFICATION  ************\ #
+# /********************************************\ #
+
+
+# ACCOUNT CREATION
 POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
-    "firstname": "Jeanne",
+    "firstname": "Jean",
     "lastname": "Biance",
-    "email":"jeanne.biance@gmail.com",
+    "email":"jean.biance@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "05/05/1990"
@@ -17,6 +30,8 @@ Content-Type: application/json
 
 ###
 
+
+# USER LOGIN
 POST http://localhost:3000/sign-in
 Content-Type: application/json
 
@@ -27,111 +42,34 @@ Content-Type: application/json
 
 ###
 
+
+# ADMIN LOGIN
 POST http://localhost:3000/sign-in
 Content-Type: application/json
 
 {
-    "email":"jeanne.biance@gmail.com",
+    "email":"jean.biance@gmail.com",
     "password":"Azerty123!"
 }
 
 ###
 
-GET http://localhost:3000/me/collection
-Authorization: {{token}}
 
 
-###
 
-GET http://localhost:3000/me/collection/card
-Authorization: {{token}}
+# /********************************************\ #
+# /******************  USER  ******************\ #
+# /********************************************\ #
 
-###
 
-POST http://localhost:3000/me/collection/card
-Content-Type: application/json
-Authorization: {{token}}
-
-{
-    "cardId":6,
-    "expirationDate":"01-06-2023"
-}
-
-###
-
-PATCH http://localhost:3000/me/collection/card/5
-Authorization: {{token}}
-
-###
-
-DELETE http://localhost:3000/me/collection/card/6
-Authorization: {{token}}
-
-###
-
-GET http://localhost:3000/proposal
-Authorization: {{token}}
-
-###
-
-POST http://localhost:3000/me/proposal
-Content-Type: application/json
-Authorization: {{token}}
-
-{
-    "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-    "title":"titre9",
-    "description":"description",
-    "environmentalrating":3,
-    "economicrating":3,
-    "value": 50,
-    "tags": []
-}
-
-###
-
-PATCH http://localhost:3000/proposal/59
-Authorization: {{token}}
-
-###
-
-GET http://localhost:3000/tag
-Authorization: {{token}}
-
-####
-
-POST http://localhost:3000/tag
-Content-Type: application/json
-Authorization: {{token}}
-
-{
-    "name": "Truc",
-    "color":"#123123"
-}
-
-####
-
-PATCH http://localhost:3000/tag/21
-Content-Type: application/json
-Authorization: {{token}}
-
-{
-    "name": "Machin",
-    "color":"#94a3b7"
-}
-
-####
-
-DELETE http://localhost:3000/tag/21
-Authorization: {{token}}
-
-####
-
+# RETURNS USER'S DATA
 GET http://localhost:3000/me/user
 Authorization: {{token}}
 
 ###
 
+
+# UPDATES USER'S DATA
 PATCH http://localhost:3000/me/user
 Content-Type: application/json
 Authorization: {{token}}
@@ -147,43 +85,195 @@ Authorization: {{token}}
 
 ###
 
+
+# DELETES USER'S DATA
 DELETE http://localhost:3000/me/user
 Authorization: {{token}}
 
 ####
 
+
+# RETURNS ALL USERS' DATA (ADMIN ONLY)
 GET http://localhost:3000/user
 Authorization: {{token}}
 
 ###
 
+
+# SETS USER'S ROLE TO ADMIN (ADMIN ONLY)
 PATCH http://localhost:3000/user/6
 Authorization: {{token}}
 
 ####
 
+
+
+
+# /********************************************\ #
+# /***************  COLLECTION  ***************\ #
+# /********************************************\ #
+
+
+# RETURNS ALL THE USER'S CARDS 
+GET http://localhost:3000/me/collection
+Authorization: {{token}}
+
+###
+
+
+# RETURNS A RANDOM CARD
+GET http://localhost:3000/me/collection/card
+Authorization: {{token}}
+
+###
+
+
+# ADDS A RANDOM CARD
+POST http://localhost:3000/me/collection/card
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "cardId":10,
+    "expirationDate":"01-02-2023"
+}
+
+###
+
+
+# UPDATES USER_CARD STATE
+PATCH http://localhost:3000/me/collection/card/10
+Authorization: {{token}}
+
+###
+
+
+# DELETES USER_CARD
+DELETE http://localhost:3000/me/collection/card/10
+Authorization: {{token}}
+
+###
+
+
+
+
+# /********************************************\ #
+# /****************  PROPOSAL  ****************\ #
+# /********************************************\ #
+
+
+# ADDS A PROPOSED CARD
+POST http://localhost:3000/me/proposal
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
+    "title":"titre11",
+    "description":"description",
+    "environmentalrating":3,
+    "economicrating":3,
+    "value": 50,
+    "tags": []
+}
+
+###
+
+
+# RETURNS ALL PROPOSED CARDS (ADMIN ONLY)
+GET http://localhost:3000/proposal
+Authorization: {{token}}
+
+###
+
+
+# SETS PROPOSED CARDS ON FALSE (ADMIN ONLY)
+PATCH http://localhost:3000/proposal/54
+Authorization: {{token}}
+
+###
+
+
+
+
+# /*******************************************\ #
+# /******************  TAG  ******************\ #
+# /*******************************************\ #
+
+
+# RETURNS ALL TAGS
+GET http://localhost:3000/tag
+Authorization: {{token}}
+
+###
+
+
+# ADDS A TAG (ADMIN ONLY)
+POST http://localhost:3000/tag
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "name": "Truc",
+    "color":"#123123"
+}
+
+###
+
+
+# UPDATES A TAG (ADMIN ONLY)
+PATCH http://localhost:3000/tag/20
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "name": "Machin",
+    "color":"#94a3b7"
+}
+
+###
+
+
+# DELETES A TAG (ADMIN ONLY)
+DELETE http://localhost:3000/tag/20
+Authorization: {{token}}
+
+####
+
+
+
+
+# /********************************************\ #
+# /******************  CARD  ******************\ #
+# /********************************************\ #
+
+
+# RETURNS ALL CARDS CREATED BY THE USER
 GET http://localhost:3000/me/card
 Authorization: {{token}}
 
 ###
 
+
+# RETURNS ALL PROPOSED CARDS (ADMIN ONLY)
 GET http://localhost:3000/card
 Authorization: Bearer {{token}}
 
-
 ####
 
-PATCH http://localhost:3000/card/57
+
+# UPDATES A CARD (ADMIN ONLY)
+PATCH http://localhost:3000/card/58
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "title": "titre7",
+    "title": "titre8",
     "description": "description2",
     "environmentalrating": 5,
     "economicrating": 3,
     "value": 55,
-    "tags": [2,5,6]
+    "tags": [8]
 }
 
 # {
@@ -198,5 +288,7 @@ Authorization: {{token}}
 
 ####
 
+
+# DELETES A CARD (ADMIN ONLY)
 DELETE http://localhost:3000/card/53
 Authorization: {{token}}
