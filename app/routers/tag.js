@@ -7,12 +7,12 @@ const { Router } = require("express");
 const tagRouter = Router();
 
 // Getting all tags
-tagRouter.get("/", tagController.getAll);
+tagRouter.get("/", tagController.getAllTags);
 
-tagRouter.post("/", adminMiddleware, validationModule.validateTagCreation, tagController.create);
+tagRouter.post("/", adminMiddleware, validationModule.validateTagCreation, tagController.createTag);
 
-tagRouter.patch("/:id(\\d+)", adminMiddleware, validationModule.validateTagEdition, tagController.edit);
+tagRouter.patch("/:id(\\d+)", adminMiddleware, validationModule.validateTagEdition, tagController.editTag);
 
-tagRouter.delete("/:id(\\d+)", adminMiddleware, tagController.delete);
+tagRouter.delete("/:id(\\d+)", adminMiddleware, tagController.deleteTag);
 
 module.exports = tagRouter;

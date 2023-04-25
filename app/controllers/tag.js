@@ -3,7 +3,7 @@ const { Tag } = require("../models/index");
 const debug = require('debug')("controller:tag");
 
 const tagController = {
-    async getAll (_, res, next) {
+    async getAllTags (_, res, next) {
         try {
             const tags = await Tag.findAll();
             // debug(tags);
@@ -13,7 +13,7 @@ const tagController = {
         }        
     },
 
-    async create (req,res,next) {
+    async createTag (req,res,next) {
         const { name, color } = req.body;
         try {
             const tag = await Tag.create({ name, color });
@@ -24,7 +24,7 @@ const tagController = {
         }
     },
 
-    async edit (req,res,next) {
+    async editTag (req,res,next) {
         const { name, color } = req.body;
         try {
             const tag = await Tag.update( { id : req.params.id }, { name, color });
@@ -38,7 +38,7 @@ const tagController = {
         }
     },
 
-    async delete (req,res,next) {
+    async deleteTag (req,res,next) {
         try {
             // deleting a tag also deletes the lines associated with this tag in the tag_card table
             const tag = await Tag.delete(req.params.id);
