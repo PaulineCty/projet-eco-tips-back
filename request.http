@@ -174,7 +174,7 @@ Authorization: {{token}}
     "environmentalrating":3,
     "economicrating":3,
     "value": 50,
-    "tags": []
+    "tags": [1,2]
 }
 
 ###
@@ -257,7 +257,7 @@ Authorization: {{token}}
 
 # RETURNS ALL APPROVED CARDS (ADMIN ONLY)
 GET http://localhost:3000/card
-Authorization: Bearer {{token}}
+Authorization: {{token}}
 
 ####
 
@@ -278,12 +278,12 @@ Authorization: {{token}}
 
 # {
 #     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-#     "title": "titre8_mod",
-#     "description": "description",
-#     "environmentalrating": 3,
+#     "title": "titre9",
+#     "description": "description2",
+#     "environmentalrating": 5,
 #     "economicrating": 3,
-#     "value": 50,
-#     "tags": [5,6]
+#     "value": 55,
+#     "tags": [2]
 # }
 
 ####
