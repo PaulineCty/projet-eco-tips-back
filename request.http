@@ -114,7 +114,7 @@ Authorization: {{token}}
 # /********************************************\ #
 
 
-# RETURNS ALL THE USER'S CARDS 
+# RETURNS ALL THE CARDS IN USER'S COLLECTION
 GET http://localhost:3000/me/collection
 Authorization: {{token}}
 
@@ -128,7 +128,7 @@ Authorization: {{token}}
 ###
 
 
-# ADDS A RANDOM CARD
+# ADDS A CARD TO THE USER'S COLLECTION
 POST http://localhost:3000/me/collection/card
 Content-Type: application/json
 Authorization: {{token}}
@@ -141,7 +141,7 @@ Authorization: {{token}}
 ###
 
 
-# UPDATES USER_CARD STATE
+# UPDATES USER_CARD STATE TO TRUE
 PATCH http://localhost:3000/me/collection/card/10
 Authorization: {{token}}
 
@@ -255,7 +255,7 @@ Authorization: {{token}}
 ###
 
 
-# RETURNS ALL PROPOSED CARDS (ADMIN ONLY)
+# RETURNS ALL APPROVED CARDS (ADMIN ONLY)
 GET http://localhost:3000/card
 Authorization: Bearer {{token}}
 
