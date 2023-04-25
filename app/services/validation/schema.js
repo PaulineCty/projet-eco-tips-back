@@ -68,9 +68,9 @@ const cardSchema = Joi.object({
       'any.required': `Le champ 'Valeur' est manquant.`
     }),
   tags : Joi.array().items(Joi.number().integer()).required().messages({
-    'array.base' : `'Tags' doit être un tableau.`,
-    'any.empty': `Le champ 'Tags' ne peut pas être vide.`,
-    'any.required': `Le champ 'Tags' est manquant.`
+    'array.base' : `'Catégories' doit être un tableau.`,
+    'any.empty': `Le champ 'Catégories' ne peut pas être vide.`,
+    'any.required': `Le champ 'Catégories' est manquant.`
   })
 });
 

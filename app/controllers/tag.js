@@ -2,7 +2,20 @@ const APIError = require("../services/error/APIError");
 const { Tag } = require("../models/index");
 const debug = require('debug')("controller:tag");
 
+/**
+ * @typedef {import('../models/index').Tag} Tag;
+ * @typedef {import('../services/error/APIError')} APIError;
+ */
+
 const tagController = {
+    /**
+     * Gets all existing tags
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Tag[]} an array of Tag instances
+     * @returns {APIError} error
+     */
     async getAllTags (_, res, next) {
         try {
             const tags = await Tag.findAll();
@@ -13,6 +26,15 @@ const tagController = {
         }        
     },
 
+
+    /**
+     * Creates a tag
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Tag} a Tag instance
+     * @returns {APIError} error
+     */
     async createTag (req,res,next) {
         const { name, color } = req.body;
         try {
@@ -24,29 +46,50 @@ const tagController = {
         }
     },
 
+    /**
+     * Updates a tag
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
     async editTag (req,res,next) {
         const { name, color } = req.body;
         try {
             const tag = await Tag.update( { id : req.params.id }, { name, color });
             // debug(tag);
 
-            //do we send a "success" message here using .json() ?
-            //do we notice the user if no modification ?
-            res.status(204).json();
+            if(!tag) {
+                next(new APIError(`La catégorie n'a pas pu être créée.`,400));
+            } else {
+               res.status(204).json({}); 
+            }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
+
+    /**
+     * Deletes a tag
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
     async deleteTag (req,res,next) {
         try {
             // deleting a tag also deletes the lines associated with this tag in the tag_card table
             const tag = await Tag.delete(req.params.id);
             // debug(tag);
 
-            //do we send a "success" message here using .json() ?
-            //do we notice the user if no modification ?
-            res.status(204).json();
+            if(!tag) {
+                next(new APIError(`La catégorie n'a pas pu être supprimée.`,400));
+            } else {
+               res.status(204).json({}); 
+            }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }

@@ -3,13 +3,13 @@ const debug = require("debug")("error");
 
 const errorModule = {
     /**
-     * Method managing client response
-     * @param {*} err 
-     * @param {*} req 
-     * @param {*} res 
-     * @param {*} _ 
+     * Manages the errors
+     * @param {*} err Express' error
+     * @param {object} _ Express' request
+     * @param {object} res Express' response
+     * @param {function} __ Express' function executing the succeeding middleware
      */
-    async manage(err, req, res, _) {
+    async manage(err, _, res, __) {
         // if(!err.message) {
         //     switch (err.code) {
         //         case 400:
@@ -34,10 +34,10 @@ const errorModule = {
     },
 
     /**
-     * Method managing 404 error
-     * @param {*} _ 
-     * @param {*} __ 
-     * @param {*} next
+     * Manages the 404 error
+     * @param {object} _ Express' request
+     * @param {object} __ Express' response
+     * @param {function} next Express' function executing the succeeding middleware
      */
     _404(_, __, next) {
         next(new APIError('Page introuvable', 404));

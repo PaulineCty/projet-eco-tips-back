@@ -5,14 +5,20 @@ const authentificationToken = require('../services/authentification/authentifica
 const debug = require('debug')("controller:user");
 const bcrypt = require('bcrypt');
 
+/**
+ * @typedef {import('../models/index').User} User;
+ * @typedef {import('../services/error/APIError')} APIError;
+ */
+
 const userController = {
 
     /**
-     * Create a new user in the user's table
-     * @param {object} req Express's request
-     * @param {object} res Express's response
-     * @param {function} next - Express.js middleware next function
-     * @return {object} return an object with jwt's access token and user's firstname
+     * Creates a new user in the User's table
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {object} return an object with jwt's access token, user's firstname and user's role_id
+     * @returns {APIError} error
      */
     async signUp(req,res,next) {
         const {firstname, lastname, email, password, birthdate} = req.body;
@@ -23,15 +29,9 @@ const userController = {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Creating the new user in the user table, only standard users can be created this way (no admin)
-        // And generating a token 
         try {
-            const newUser = await User.create({firstname, lastname, email, password: hashedPassword, birthdate});
-
-            const accessToken = authentificationToken.generateAccessToken(newUser);
-            res.json({ 
-                accessToken, 
-                firstname : newUser.firstname 
-            });
+            await User.create({firstname, lastname, email, password: hashedPassword, birthdate});
+            res.status(200).json();
         } catch (error) {
             next(new APIError("Erreur lors de l'inscription", 500));
         }
@@ -39,11 +39,12 @@ const userController = {
     },
 
     /**
-     * Verify a user by his email in the user's table
-     * @param {object} req Express's request
-     * @param {object} res Express's response
-     * @param {function} next - Express.js middleware next function
-     * @return {object} return an object with jwt's access token and user's firstname
+     * Verifies a user's connexion form using their email and password
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {object} return an object with jwt's access token, user's firstname and user's role_id
+     * @returns {APIError} error
      */
     async signIn (req,res,next) {
         const { email, password } = req.body;
@@ -64,7 +65,8 @@ const userController = {
                 const accessToken = authentificationToken.generateAccessToken(user);
                 res.json({ 
                     accessToken, 
-                    firstname : user.firstname
+                    firstname : user.firstname,
+                    role_id : user.role_id
                 });
             }
 
@@ -73,11 +75,19 @@ const userController = {
         }
 
      },
-
+    
+    /**
+     * Gets a user's information
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {User} a User instance
+     * @returns {APIError} error
+     */
     async getProfile (req, res, next) {
         try {
             // here we are not returning the password for security reasons
-            const user = await User.findByPkWithRole(req.user.id);
+            const user = await User.findByPk(req.user.id);
             // debug(user);
             res.json(user);
         } catch (error) {
@@ -85,6 +95,14 @@ const userController = {
         }  
     },
 
+    /**
+     * Updates a user's information
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {object} parts of a User instance hiding any password related information
+     * @returns {APIError} error
+     */
     async updateProfile (req, res, next) {
 
         // Try to create a coalesce SQL request in order to update one to many data 
@@ -113,21 +131,39 @@ const userController = {
         }
     },
 
+    /**
+     * Deletes a user
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
     async deleteProfile (req, res, next) {
         try {
             // deleting a user also deletes the lines associated with this user in the user_card table
             const user = await User.delete(req.user.id);
             // debug(tag);
 
-            //do we send a "success" message here using .json() ?
-            //do we notice the user if no modification ?
-            res.status(204).json();
+            if(!user) {
+                next(new APIError(`Le profil n'a pas été supprimé.`,400));
+            } else {
+                res.status(204).json();
+            }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
-    async getAllUsers (req, res, next) {
+    /**
+     * Gets all existing users with their role
+     * @param {object} _ Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {User[]} an array of User instances
+     * @returns {APIError} error
+     */
+    async getAllUsers (_, res, next) {
         try {
             // here we are not returning the password for security reasons
             const users = await User.findAllWithRole();
@@ -139,16 +175,23 @@ const userController = {
         } 
     },
 
+    /**
+     * Updates a specific user's role to the administrator role
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
     async updateUserAsAdmin (req, res, next) {
         try {
             const user = await User.setUserAsAdmin(req.params.id);
-            // debug(user);
-            //do we send a "success" message here using .json() ?
-            //do we notice the user if no modification ?
-            // if(user) {
-            //     res.status(204).json();
-            // }
-            res.status(204).json();
+ 
+            if(!user) {
+                next(new APIError(`Le profil n'a pas mis à jour.`,400));
+            } else {
+                res.status(204).json();
+            }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         } 

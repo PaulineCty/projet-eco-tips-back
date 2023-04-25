@@ -2,25 +2,24 @@ const Core = require('./Core');
 const client = require('../db/database');
 const debug = require('debug')("model:card");
 
+/**
+ * A Card is an object including an image, a title, a description, an environmental_rating, an economic_rating, a value and a user_id
+ * @typedef {Object} Card
+ * @property {string} image - image
+ * @property {string} title - title
+ * @property {string} description - description
+ * @property {number} environmental_rating - environmental_rating
+ * @property {number} economic_rating - economic_rating
+ * @property {number} value - value
+ * @property {number} user_id - user_id
+ */
 class Card extends Core {
     tableName = 'card';
 
     /**
-     * A card is an object including an image, a title, a description, an environmental_rating, an economic_rating, a value and an user_id
-     * @typedef {Object} Card
-     * @property {string} image - image
-     * @property {string} title - title
-     * @property {string} description - description
-     * @property {integer} environmental_rating - environmental_rating
-     * @property {integer} economic_rating - economic_rating
-     * @property {integer} value - value
-     * @property {integer} user_id - user_id
-     */
-
-    /**
-     * Get an instance of all the cards belonging to a user in the database by their id
-     * @param {integer} id instance's id
-     * @returns an instance
+     * Gets all Card instances belonging to a user's collection
+     * @param {number} id user's id
+     * @returns {Card[]} an array of Card instances
      */
     async findUserCollection(id) {
         const preparedQuery = {
@@ -54,6 +53,11 @@ class Card extends Core {
         return result.rows;
     };
 
+    /**
+     * Gets a Card instance corresponding to a given title
+     * @param {string} title card's title
+     * @returns {Card} a Card instance
+     */
     async findByTitle(title) {
         const preparedQuery = {
             text : `SELECT * FROM card
@@ -65,9 +69,9 @@ class Card extends Core {
     };
 
     /**
-     * Get an instance of a random card, not owned by the user, in the database by their ID
-     * @param {integer} id instance's id
-     * @returns an instance
+     * Gets a random Card instance not already owned by a given user
+     * @param {number} id user's id
+     * @returns {Card} a Card instance
      */
     async findOneRandomCard(id) {
         const preparedQuery = {
@@ -105,6 +109,10 @@ class Card extends Core {
         return result.rows[0];
     };
 
+    /**
+     * Gets all Card instances that are not approved yet
+     * @returns {Card[]} an array of Card instances
+     */
     async findAllProposals() {
         const preparedQuery = {
             text : `
@@ -133,6 +141,11 @@ class Card extends Core {
         return result.rows;
     };
 
+    /**
+     * Sets a given Card instance to an approved state
+     * @param {number} id card's id
+     * @returns {integer} number of updated rows
+     */
     async setProposalCardToFalse(id) {
       const preparedQuery = {
           text : `
@@ -145,6 +158,11 @@ class Card extends Core {
       return result.rowCount;
     };
 
+    /**
+     * Gets all Card instances created by a given user
+     * @param {number} id user's id
+     * @returns {Card[]} an array of Card instances
+     */
     async findByUser(id) {
         const preparedQuery = {
             text : `SELECT 
@@ -173,8 +191,12 @@ class Card extends Core {
         const result = await this.client.query(preparedQuery);
         return result.rows;
     };
-
-    async findAllNotProposals() {  // ou changer pour findAllProposedCards et findAllNotProposedCards
+    
+    /**
+     * Gets all approved Card instances 
+     * @returns {Card[]} an array of Card instances
+     */
+    async findAllNotProposals() {
         const preparedQuery = {
             text : `
             SELECT 
@@ -202,6 +224,11 @@ class Card extends Core {
         return result.rows;
     };
 
+    /**
+     * Gets a specific Card instance with its tags
+     * @param {number} id card's id
+     * @returns {Card} a Card instance
+     */
     async findByPkWithTags(id) {
         const preparedQuery = {
             text : `SELECT 
