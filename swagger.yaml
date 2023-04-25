@@ -218,8 +218,8 @@ paths:
     post:
       tags:
         - collection
-      summary: Add a random card
-      description: Add a random card to teh user's deck
+      summary: Adds a random card
+      description: Adds a random card to teh user's deck
       operationId: addUserCard
       responses:
         '200':
@@ -411,7 +411,7 @@ paths:
     get:
       tags:
         - card
-      summary: Returns all proposed cards cards (admin only)
+      summary: Returns all proposed cards (admin only)
       description: Returns all not proposed cards
       operationId: getAllNotProposalCard
       responses:
