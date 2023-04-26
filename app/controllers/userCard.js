@@ -52,11 +52,10 @@ const userCardController = {
             } else {
                 const card = await Card.findByPk(req.body.cardId);
                 const user = await User.findByPk(req.user.id);
-                const newEcocoinsAmount = user.ecocoins - card.value;
 
                 // If and only if the user has enough ecocoins, then we add the card to their collection
                 if(user.ecocoins >= card.value) {
-                    await User.update({ id : req.user.id }, { ecocoins : newEcocoinsAmount });
+                    await User.update({ id : req.user.id }, { ecocoins : user.ecocoins - card.value });
                     const userCard = await UserCard.create({user_id : req.user.id, card_id : req.body.cardId, expiration_date : req.body.expirationDate});
                     // debug(cards);
                     res.json(userCard);
