@@ -23,7 +23,7 @@ CREATE TABLE "user"
     "email" email NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
     "birthdate" DATE NOT NULL,
-    "ecocoins" posint NOT NULL DEFAULT 0,
+    "ecocoins" posint NOT NULL DEFAULT 50,
     "score" posint NOT NULL DEFAULT 0,
     "role_id" INTEGER DEFAULT 2 REFERENCES role(id) ON DELETE CASCADE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
