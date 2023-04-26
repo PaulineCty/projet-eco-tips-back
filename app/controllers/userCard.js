@@ -1,5 +1,5 @@
 const APIError = require("../services/error/APIError");
-const { UserCard } = require("../models/index");
+const { Card, UserCard, User } = require("../models/index");
 const debug = require('debug')("controller:usercard");
 
 /**
@@ -43,11 +43,21 @@ const userCardController = {
             const userCard = await UserCard.findUserCardByIds(req.user.id, req.body.cardId);
 
             if(userCard) {
-                next(new APIError(`Cette carte est déjà dans votre collection.`,400))
+                next(new APIError(`Cette carte est déjà dans votre collection.`,400));
             } else {
-                const userCard = await UserCard.create({user_id : req.user.id, card_id : req.body.cardId, expiration_date : req.body.expirationDate});
-                // debug(cards);
-                res.json(userCard);
+                const card = await Card.findByPk(req.body.cardId);
+                const user = await User.findByPk(req.user.id);
+                const newEcocoinsAmount = user.ecocoins - card.value;
+
+                // If and only if the user has enough ecocoins, then we add the card to their collection
+                if(user.ecocoins >= card.value) {
+                    await User.update({ id : req.user.id }, { ecocoins : newEcocoinsAmount });
+                    const userCard = await UserCard.create({user_id : req.user.id, card_id : req.body.cardId, expiration_date : req.body.expirationDate});
+                    // debug(cards);
+                    res.json(userCard);
+                } else {
+                    next(new APIError(`Vous n'avez pas suffisamment d'ecocoins pour acheter cette carte.`,400));
+                }
             }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
