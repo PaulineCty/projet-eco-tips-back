@@ -86,6 +86,22 @@ class User extends Core {
         }
         const result = await this.client.query(preparedQuery);
         return result.rowCount;
+    };
+
+    /**
+     * Gets the 5 best user's order by score
+     * @returns {User[]} an array of User instances
+     */
+    async getUsersByScore () {
+        const preparedQuery = {
+            text : `SELECT 
+            CONCAT(u.firstname, ' ',u.lastname) AS "utilisateur", 
+            u.score 
+            FROM "user" u
+            ORDER BY u.score DESC LIMIT 5;`,
+        };
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
     }
 };
 

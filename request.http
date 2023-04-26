@@ -3,7 +3,7 @@
 # /*********************************************\ #
 
 
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvdDRaTlZXYlQ2U1UwR3pHMi9TSEp1NThYMmVTNkNyZVFuMzNLMHBLbWRwS2hROHBzUVo2SyIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTM6MTg6NTguNTczWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjQyNjA4MiwiZXhwIjoxNjgyNDI3ODgyfQ.QrRSqya67btirkH7faoOqm2HNL0eemOjMAdo97h2HUg
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvdDRaTlZXYlQ2U1UwR3pHMi9TSEp1NThYMmVTNkNyZVFuMzNLMHBLbWRwS2hROHBzUVo2SyIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTM6MTg6NTguNTczWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjQzODMyMCwiZXhwIjoxNjgyNDQwMTIwfQ.15cvGgk1l_CH3eWtqRtNzlAQTmx9Shn-0o28ioDF56U
 
 ###
 
@@ -80,7 +80,7 @@ Authorization: {{token}}
     "email": "jean.biance@gmail.com",
     "password": "Azerty123!",
     "confirmpassword": "Azerty123!",
-    "birthdate": "06/05/1991"
+    "birthdate": "06/05/1990"
 }
 
 ###
@@ -169,7 +169,7 @@ Authorization: {{token}}
 
 {
     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-    "title":"titre11",
+    "title":"titre12",
     "description":"description",
     "environmentalrating":3,
     "economicrating":3,
@@ -188,7 +188,7 @@ Authorization: {{token}}
 
 
 # SETS PROPOSED CARDS ON FALSE (ADMIN ONLY)
-PATCH http://localhost:3000/proposal/54
+PATCH http://localhost:3000/proposal/55
 Authorization: {{token}}
 
 ###
@@ -291,4 +291,14 @@ Authorization: {{token}}
 
 # DELETES A CARD (ADMIN ONLY)
 DELETE http://localhost:3000/card/53
+Authorization: {{token}}
+
+
+# /*********************************************\ #
+# /*****************  RANKING  *****************\ #
+# /*********************************************\ #
+
+
+# RETURNS THE LATEST CREATED CARD VALIDATED BY ADMIN
+GET http://localhost:3000/ranking
 Authorization: {{token}}

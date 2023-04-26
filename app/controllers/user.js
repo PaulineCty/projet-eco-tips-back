@@ -195,6 +195,24 @@ const userController = {
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         } 
+    },
+
+    /**
+     * Gets the 5 best user's order by score
+     * @param {object} _ Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {User[]} an array of User instances
+     * @returns {APIError} error
+     */
+    async getRanking (req, res, next) {
+        try {
+            const users = await User.getUsersByScore();
+            // debug(users);
+            res.json(users);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        } 
     }
 };   
 

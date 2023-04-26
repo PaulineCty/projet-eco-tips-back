@@ -252,6 +252,30 @@ class Card extends Core {
         const result = await this.client.query(preparedQuery);
         return result.rows[0];
     };
+
+    /**
+     * Gets the latest created and validated card
+     * @returns {Card} a Card instance
+     */
+    async getLatestCard() {
+        const preparedQuery = {
+            text : `SELECT 
+            c.id, 
+            c.image, 
+            c.title, 
+            c.description, 
+            c.environmental_rating, 
+            c.economic_rating, 
+            c.value, 
+            CONCAT(u.firstname, ' ',u.lastname) AS "author" 
+            FROM card c
+            JOIN "user" u ON u.id = c.user_id
+            WHERE proposal = false
+            ORDER BY c.created_at DESC LIMIT 1;`
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rows[0];
+    }
 };
 
 module.exports = new Card(client);

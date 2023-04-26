@@ -46,4 +46,12 @@ cardRouter.patch("/card/:id(\\d+)", adminMiddleware, validationModule.validateCa
  */
 cardRouter.delete("/card/:id(\\d+)", adminMiddleware, cardController.deleteCard);
 
+/**
+ * @route GET /card/latest
+ * @group Card - Gets the latest created and validated card
+ * @returns {Card} a Card instance
+ * @returns {APIError} error
+ */
+cardRouter.get("/card/latest", cardController.getLatestCard);
+
 module.exports = cardRouter;

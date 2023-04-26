@@ -4,7 +4,7 @@
   "description": "Dev version",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "dev": "DEBUG=controller:card,controller:user,model:card,router:collection,database nodemon server.js",
     "start": "pm2 start server.js",
     "stop": "pm2 stop server.js"
@@ -23,6 +23,7 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
+    "chai": "^4.3.7",
     "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.0.3",
@@ -30,8 +31,13 @@
     "fs": "^0.0.1-security",
     "joi": "^17.9.1",
     "jsonwebtoken": "^9.0.0",
+    "mocha": "^10.2.0",
     "pg": "^8.10.0",
     "swagger-ui-express": "^4.6.2",
     "yaml": "^2.2.1"
+  },
+  "devDependencies": {
+    "hest": "^1.0.5",
+    "supertest": "^6.3.3"
   }
 }
