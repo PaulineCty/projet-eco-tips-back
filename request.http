@@ -1,14 +1,9 @@
 # /*********************************************\ #
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
-
-
 @token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRLUktwLkhoaThNNzhoekdOZktMcmYuVUFuaFVZT1lSTVJyUDk1UmRLS0tKdVFHV0ZRNTJDSyIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTI2VDEzOjE1OjQwLjU4MloiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODI1MTQ5OTksImV4cCI6MTY4MjUxNjc5OX0.eRl4pXiCXDZu4ZV8mg0poebgW4YovASyh8030FEFMPk
 
 ###
-
-
-
 
 # /********************************************\ #
 # /************  AUTHENTIFICATION  ************\ #
@@ -151,9 +146,6 @@ Authorization: {{token}}
 
 ###
 
-
-
-
 # /********************************************\ #
 # /****************  PROPOSAL  ****************\ #
 # /********************************************\ #
@@ -166,7 +158,7 @@ Authorization: {{token}}
 
 {
     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-    "title":"titre12",
+    "title":"titre",
     "description":"description",
     "environmentalrating":3,
     "economicrating":3,
@@ -189,9 +181,6 @@ PATCH http://localhost:3000/proposal/63
 Authorization: {{token}}
 
 ###
-
-
-
 
 # /*******************************************\ #
 # /******************  TAG  ******************\ #
@@ -238,8 +227,6 @@ Authorization: {{token}}
 ####
 
 
-
-
 # /********************************************\ #
 # /******************  CARD  ******************\ #
 # /********************************************\ #
@@ -247,6 +234,12 @@ Authorization: {{token}}
 
 # RETURNS ALL CARDS CREATED BY THE USER
 GET http://localhost:3000/me/card
+Authorization: {{token}}
+
+###
+
+# RETURNS THE LATEST CARD CREATED AND VALIDATED BY AN ADMIN
+GET http://localhost:3000/card/latest
 Authorization: {{token}}
 
 ###
@@ -265,7 +258,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "title": "titre8",
+    "title": "titre",
     "description": "description2",
     "environmentalrating": 5,
     "economicrating": 3,
@@ -275,7 +268,7 @@ Authorization: {{token}}
 
 # {
 #     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-#     "title": "titre9",
+#     "title": "titre",
 #     "description": "description2",
 #     "environmentalrating": 5,
 #     "economicrating": 3,
@@ -288,4 +281,23 @@ Authorization: {{token}}
 
 # DELETES A CARD (ADMIN ONLY)
 DELETE http://localhost:3000/card/63
+
+Authorization: {{token}}
+
+###
+
+# /*********************************************\ #
+# /*****************  RANKING  *****************\ #
+# /*********************************************\ #
+
+
+# RETURNS THE 5 TOP 5 USERS WITH THE HIGHEST SCORES
+GET http://localhost:3000/ranking/score
+Authorization: {{token}}
+
+###
+
+
+# RETURNS THE TOP 5 USERS WITH THE HIGHEST CARD CREATION AMOUNT
+GET http://localhost:3000/ranking/creation
 Authorization: {{token}}
