@@ -22,7 +22,6 @@
   "homepage": "https://github.com/O-clock-Ohm/projet-03-eco-tips-back#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "body-parser": "^1.20.2",
     "chai": "^4.3.7",
     "cors": "^2.8.5",
     "debug": "^4.3.4",

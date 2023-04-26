@@ -267,10 +267,18 @@ class Card extends Core {
             c.environmental_rating, 
             c.economic_rating, 
             c.value, 
-            CONCAT(u.firstname, ' ',u.lastname) AS "author" 
+            CONCAT(u.firstname, ' ',u.lastname) AS "author",
+            ARRAY_AGG (
+                json_build_object('name', t.name, 'color', t.color)
+                ORDER BY
+                    t.name ASC
+            ) FILTER (WHERE t.name IS NOT NULL) tags 
             FROM card c
+            LEFT JOIN tag_card tc ON tc.card_id = c.id
+            LEFT JOIN tag t ON t.id = tc.tag_id
             JOIN "user" u ON u.id = c.user_id
             WHERE proposal = false
+            GROUP BY c.id, c.image, c.title, c.description, c.environmental_rating, c.economic_rating, c.value, u.firstname, u.lastname
             ORDER BY c.created_at DESC LIMIT 1;`
         }
         const result = await this.client.query(preparedQuery);

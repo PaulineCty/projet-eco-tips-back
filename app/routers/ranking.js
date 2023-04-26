@@ -10,11 +10,19 @@ const rankingRouter = Router();
  */
 
 /**
- * @route GET /ranking
- * @group User - Gets the 5 best user's order by score
+ * @route GET /ranking/score
+ * @group User - Gets the 5 best user's ordered by score
  * @returns {User[]} an array of User instances
  * @returns {APIError} error
  */
-rankingRouter.get("/", userController.getRanking);
+rankingRouter.get("/score", userController.getRankingScore);
+
+/**
+ * @route GET /ranking/creation
+ * @group User - Gets the 5 best user's ordered by card creation
+ * @returns {User[]} an array of User instances
+ * @returns {APIError} error
+ */
+// rankingRouter.get("/creation", userController.getRanking);
 
 module.exports = rankingRouter;

@@ -205,7 +205,7 @@ const userController = {
      * @return {User[]} an array of User instances
      * @returns {APIError} error
      */
-    async getRanking (req, res, next) {
+    async getRankingScore (req, res, next) {
         try {
             const users = await User.getUsersByScore();
             // debug(users);
