@@ -102,6 +102,25 @@ class User extends Core {
         };
         const result = await this.client.query(preparedQuery);
         return result.rows;
+    };
+
+    /**
+     * Gets the top 5 users with the highest card creation amount
+     * @returns {User[]} an array of User instances
+     */
+    async getUsersByProposedCards () {
+        const preparedQuery = {
+            text: `SELECT 
+            COUNT(user_id) AS "nombre de carte(s) crée(s)", 
+            CONCAT(u.firstname, ' ',u.lastname) AS "utilisateur" 
+            FROM card c
+            JOIN "user" u ON u.id = c.user_id
+            WHERE CONCAT(u.firstname, ' ',u.lastname) NOT LIKE '%admin admin%'
+            GROUP BY c.user_id, utilisateur
+            ORDER BY "nombre de carte(s) crée(s)" DESC LIMIT 5;`
+        };
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
     }
 };
 
