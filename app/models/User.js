@@ -94,9 +94,9 @@ class User extends Core {
      */
     async getUsersByScore () {
         const preparedQuery = {
-            text : `SELECT 
-            CONCAT(u.firstname, ' ',u.lastname) AS "utilisateur", 
-            u.score 
+            text : `SELECT
+            CONCAT(u.firstname, ' ',u.lastname) AS "user",
+            u.score
             FROM "user" u
             ORDER BY u.score DESC LIMIT 5;`,
         };
@@ -111,13 +111,13 @@ class User extends Core {
     async getUsersByProposedCards () {
         const preparedQuery = {
             text: `SELECT 
-            COUNT(user_id) AS "nombre de carte(s) crée(s)", 
-            CONCAT(u.firstname, ' ',u.lastname) AS "utilisateur" 
+			CONCAT(u.firstname, ' ',u.lastname) AS "user" ,
+            COUNT(user_id) AS "cards_created"
             FROM card c
             JOIN "user" u ON u.id = c.user_id
             WHERE CONCAT(u.firstname, ' ',u.lastname) NOT LIKE '%admin admin%'
-            GROUP BY c.user_id, utilisateur
-            ORDER BY "nombre de carte(s) crée(s)" DESC LIMIT 5;`
+            GROUP BY "user"
+            ORDER BY cards_created DESC LIMIT 5;`
         };
         const result = await this.client.query(preparedQuery);
         return result.rows;
