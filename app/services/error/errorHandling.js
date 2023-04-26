@@ -29,7 +29,7 @@ const errorModule = {
         //             break;
         //     }
         // } else {
-            res.status(err.code).json({ message : err.message });
+            return res.status(err.code).json({ message : err.message });
         // }
     },
 

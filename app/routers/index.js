@@ -4,6 +4,7 @@ const proposalRouter = require("./proposal.js");
 const tagRouter = require("./tag.js");
 const cardRouter = require("./card.js");
 const userRouter = require("./user.js");
+const rankingRouter = require("./ranking.js");
 
 module.exports = {
     collectionRouter,
@@ -11,5 +12,6 @@ module.exports = {
     proposalRouter,
     tagRouter,
     cardRouter,
-    userRouter
+    userRouter,
+    rankingRouter
 };

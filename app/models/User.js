@@ -86,6 +86,41 @@ class User extends Core {
         }
         const result = await this.client.query(preparedQuery);
         return result.rowCount;
+    };
+
+    /**
+     * Gets the 5 best user's order by score
+     * @returns {User[]} an array of User instances
+     */
+    async getUsersByScore () {
+        const preparedQuery = {
+            text : `SELECT
+            CONCAT(u.firstname, ' ',u.lastname) AS "user",
+            u.score
+            FROM "user" u
+            ORDER BY u.score DESC LIMIT 5;`,
+        };
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
+    };
+
+    /**
+     * Gets the top 5 users with the highest card creation amount
+     * @returns {User[]} an array of User instances
+     */
+    async getUsersByProposedCards () {
+        const preparedQuery = {
+            text: `SELECT 
+			CONCAT(u.firstname, ' ',u.lastname) AS "user" ,
+            COUNT(user_id) AS "cards_created"
+            FROM card c
+            JOIN "user" u ON u.id = c.user_id
+            WHERE CONCAT(u.firstname, ' ',u.lastname) NOT LIKE '%admin admin%'
+            GROUP BY "user"
+            ORDER BY cards_created DESC LIMIT 5;`
+        };
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
     }
 };
 

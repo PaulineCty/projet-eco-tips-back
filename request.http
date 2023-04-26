@@ -1,14 +1,9 @@
 # /*********************************************\ #
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
-
-
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvdDRaTlZXYlQ2U1UwR3pHMi9TSEp1NThYMmVTNkNyZVFuMzNLMHBLbWRwS2hROHBzUVo2SyIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjowLCJzY29yZSI6MCwicm9sZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjBUMTM6MTg6NTguNTczWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjQyNjA4MiwiZXhwIjoxNjgyNDI3ODgyfQ.QrRSqya67btirkH7faoOqm2HNL0eemOjMAdo97h2HUg
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRLUktwLkhoaThNNzhoekdOZktMcmYuVUFuaFVZT1lSTVJyUDk1UmRLS0tKdVFHV0ZRNTJDSyIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTI2VDEzOjE1OjQwLjU4MloiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODI1MTQ5OTksImV4cCI6MTY4MjUxNjc5OX0.eRl4pXiCXDZu4ZV8mg0poebgW4YovASyh8030FEFMPk
 
 ###
-
-
-
 
 # /********************************************\ #
 # /************  AUTHENTIFICATION  ************\ #
@@ -20,9 +15,9 @@ POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
-    "firstname": "Jean",
-    "lastname": "Biance",
-    "email":"jean.biance@gmail.com",
+    "firstname": "Laura",
+    "lastname": "Teur",
+    "email":"Laura.Teur@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "05/05/1990"
@@ -86,14 +81,14 @@ Authorization: {{token}}
 ###
 
 
-# DELETES USER'S DATA
+# DELETES USER
 DELETE http://localhost:3000/me/user
 Authorization: {{token}}
 
 ####
 
 
-# RETURNS ALL USERS' DATA (ADMIN ONLY)
+# RETURNS ALL USERS (ADMIN ONLY)
 GET http://localhost:3000/user
 Authorization: {{token}}
 
@@ -104,15 +99,12 @@ Authorization: {{token}}
 PATCH http://localhost:3000/user/6
 Authorization: {{token}}
 
-####
-
-
-
 
 # /********************************************\ #
 # /***************  COLLECTION  ***************\ #
 # /********************************************\ #
 
+###
 
 # RETURNS ALL THE CARDS IN USER'S COLLECTION
 GET http://localhost:3000/me/collection
@@ -134,8 +126,8 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "cardId":10,
-    "expirationDate":"01-02-2023"
+    "cardId":49,
+    "expirationDate":"01-01-2023"
 }
 
 ###
@@ -154,9 +146,6 @@ Authorization: {{token}}
 
 ###
 
-
-
-
 # /********************************************\ #
 # /****************  PROPOSAL  ****************\ #
 # /********************************************\ #
@@ -169,7 +158,7 @@ Authorization: {{token}}
 
 {
     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-    "title":"titre11",
+    "title":"titre",
     "description":"description",
     "environmentalrating":3,
     "economicrating":3,
@@ -188,13 +177,10 @@ Authorization: {{token}}
 
 
 # SETS PROPOSED CARDS ON FALSE (ADMIN ONLY)
-PATCH http://localhost:3000/proposal/54
+PATCH http://localhost:3000/proposal/63
 Authorization: {{token}}
 
 ###
-
-
-
 
 # /*******************************************\ #
 # /******************  TAG  ******************\ #
@@ -222,7 +208,7 @@ Authorization: {{token}}
 
 
 # UPDATES A TAG (ADMIN ONLY)
-PATCH http://localhost:3000/tag/20
+PATCH http://localhost:3000/tag/22
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -235,12 +221,10 @@ Authorization: {{token}}
 
 
 # DELETES A TAG (ADMIN ONLY)
-DELETE http://localhost:3000/tag/20
+DELETE http://localhost:3000/tag/22
 Authorization: {{token}}
 
 ####
-
-
 
 
 # /********************************************\ #
@@ -254,6 +238,12 @@ Authorization: {{token}}
 
 ###
 
+# RETURNS THE LATEST CARD CREATED AND VALIDATED BY AN ADMIN
+GET http://localhost:3000/card/latest
+Authorization: {{token}}
+
+###
+
 
 # RETURNS ALL APPROVED CARDS (ADMIN ONLY)
 GET http://localhost:3000/card
@@ -263,12 +253,12 @@ Authorization: {{token}}
 
 
 # UPDATES A CARD (ADMIN ONLY)
-PATCH http://localhost:3000/card/58
+PATCH http://localhost:3000/card/63
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "title": "titre8",
+    "title": "titre",
     "description": "description2",
     "environmentalrating": 5,
     "economicrating": 3,
@@ -278,7 +268,7 @@ Authorization: {{token}}
 
 # {
 #     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
-#     "title": "titre9",
+#     "title": "titre",
 #     "description": "description2",
 #     "environmentalrating": 5,
 #     "economicrating": 3,
@@ -290,5 +280,24 @@ Authorization: {{token}}
 
 
 # DELETES A CARD (ADMIN ONLY)
-DELETE http://localhost:3000/card/53
+DELETE http://localhost:3000/card/63
+
+Authorization: {{token}}
+
+###
+
+# /*********************************************\ #
+# /*****************  RANKING  *****************\ #
+# /*********************************************\ #
+
+
+# RETURNS THE 5 TOP 5 USERS WITH THE HIGHEST SCORES
+GET http://localhost:3000/ranking/score
+Authorization: {{token}}
+
+###
+
+
+# RETURNS THE TOP 5 USERS WITH THE HIGHEST CARD CREATION AMOUNT
+GET http://localhost:3000/ranking/creation
 Authorization: {{token}}

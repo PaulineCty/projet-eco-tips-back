@@ -5,6 +5,7 @@ const { Card, TagCard } = require("../models/index");
 const debug = require('debug')("controller:card");
 const getImagePath = require('../services/images/imageService');
 const { log } = require("console");
+const { getLatestCard } = require("../models/Card");
 
 /**
  * @typedef {import('../models/index').Card} Card;
@@ -283,6 +284,24 @@ const cardController = {
             } else {
                res.status(204).json({}); 
             }
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    },
+
+    /**
+     * Gets the latest created and validated card
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Card} a Card instance
+     * @returns {APIError} error
+     */
+    async getLatestCard (req, res, next) {
+        try {
+            const card = await Card.getLatestCard();
+            // debug(card);
+            res.json(card);
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
