@@ -131,7 +131,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "cardId":32,
+    "cardId":49,
     "expirationDate":"01-01-2023"
 }
 

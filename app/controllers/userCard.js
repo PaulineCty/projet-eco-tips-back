@@ -17,11 +17,16 @@ const userCardController = {
      */
     async updateUserCardState (req, res, next) {
         try {
-            const card = await UserCard.updateUserCardState(req.user.id, req.params.cardId);
+            const updatedCard = await UserCard.updateUserCardState(req.user.id, req.params.cardId);
 
-            if(!card) {
+            if(!updatedCard) {
                 next(new APIError(`Cette carte ne peut pas être validée pour le moment.`,400));
             } else {
+                const card = await Card.findByPk(req.params.cardId);
+                const user = await User.findByPk(req.user.id);
+
+                // Adding the card value to the user's ecocoins and score
+                await User.update({ id : req.user.id }, { ecocoins : (user.ecocoins + card.value), score : (user.score + card.value) });
                 res.status(204).json();
             }
 
