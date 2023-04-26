@@ -300,7 +300,7 @@ const cardController = {
     async getLatestCard (req, res, next) {
         try {
             const card = await Card.getLatestCard();
-            debug(card);
+            // debug(card);
             res.json(card);
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));

@@ -1,6 +1,7 @@
 const { cardController } = require("../controllers/index.js");
 const debug = require('debug')("router:card");
 const validationModule = require("../services/validation/validate");
+const authentificationTokenMiddleware = require('../services/authentification/authentificationToken.js');
 const adminMiddleware = require('../services/authentification/isAdmin.js');
 
 const { Router } = require("express");
@@ -17,7 +18,7 @@ const cardRouter = Router();
  * @returns {Card[]} an array of Card instances
  * @returns {APIError} error
  */
-cardRouter.get('/me/card', cardController.getAllUsersCards);
+cardRouter.get('/me/card', authentificationTokenMiddleware.isAuthenticated, cardController.getAllUsersCards);
 
 /**
  * @route GET /card
@@ -25,7 +26,7 @@ cardRouter.get('/me/card', cardController.getAllUsersCards);
  * @returns {Card[]} an array of Card instances
  * @returns {APIError} error
  */
-cardRouter.get("/card", adminMiddleware, cardController.getAllNotProposalCard);
+cardRouter.get("/card", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, cardController.getAllNotProposalCard);
 
 /**
  * @route PATCH /card/:id
@@ -35,7 +36,7 @@ cardRouter.get("/card", adminMiddleware, cardController.getAllNotProposalCard);
  * @returns {void} - No Content (HTTP 204) response
  * @returns {APIError} error
  */
-cardRouter.patch("/card/:id(\\d+)", adminMiddleware, validationModule.validateCardEdition, cardController.updateCard);
+cardRouter.patch("/card/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, validationModule.validateCardEdition, cardController.updateCard);
 
 /**
  * @route DELETE /card/:id
@@ -44,7 +45,7 @@ cardRouter.patch("/card/:id(\\d+)", adminMiddleware, validationModule.validateCa
  * @returns {void} - No Content (HTTP 204) response
  * @returns {APIError} error
  */
-cardRouter.delete("/card/:id(\\d+)", adminMiddleware, cardController.deleteCard);
+cardRouter.delete("/card/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, cardController.deleteCard);
 
 /**
  * @route GET /card/latest

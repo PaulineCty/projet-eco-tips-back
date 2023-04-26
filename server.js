@@ -40,7 +40,7 @@ app.use("/me/collection", authentificationTokenMiddleware.isAuthenticated, colle
 app.use(authentificationTokenMiddleware.isAuthenticated, proposalRouter);
 app.use("/tag", authentificationTokenMiddleware.isAuthenticated, tagRouter);
 app.use(authentificationTokenMiddleware.isAuthenticated, userRouter);
-app.use(authentificationTokenMiddleware.isAuthenticated, cardRouter);
+app.use(cardRouter);
 app.use("/ranking", authentificationTokenMiddleware.isAuthenticated, rankingRouter);
 
 // Error management
