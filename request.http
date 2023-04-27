@@ -1,7 +1,7 @@
 # /*********************************************\ #
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkT2lrUDVTM25udE05RVFoZEgvc3dwZVJkUXk4S3BvcVk3YTguMG52aDc2cnlMQ2VJWUdFQzIiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yN1QwNzo1OTo0NS44MTNaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNTg0NTcyLCJleHAiOjE2ODI1ODYzNzJ9.2KE4WSOE8cgthFPzLCRIlFJrrljhBqcZZ-UpNI2ZMfc
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRUMExKSnp6clR2aXhwbDU5cjdtUDJPL3E5RXBvWi9mWWV5eGIvQnIxWi5zaTE1MG1WelkwMiIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTI3VDA3OjU5OjI4LjIxOVoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODI1OTc4NjMsImV4cCI6MTY4MjU5OTY2M30.GIyM2c7ECUtzMPM1W8WaLKEqvASqLow9aPzg-6E64ls
 
 ###
 
@@ -240,7 +240,6 @@ Authorization: {{token}}
 
 # RETURNS THE LATEST CARD CREATED AND VALIDATED BY AN ADMIN
 GET http://localhost:3000/card/latest
-Authorization: {{token}}
 
 ###
 
@@ -281,7 +280,6 @@ Authorization: {{token}}
 
 # DELETES A CARD (ADMIN ONLY)
 DELETE http://localhost:3000/card/63
-
 Authorization: {{token}}
 
 ###
@@ -331,4 +329,31 @@ Authorization: {{token}}
 
 # RETURNS ALL PROPOSED ACHIEVEMENTS (ADMIN ONLY)
 GET http://localhost:3000/achievement/proposal
+Authorization: {{token}}
+
+###
+
+
+# SETS PROPOSED ACHIEVEMENT ON FALSE (ADMIN ONLY)
+PATCH http://localhost:3000/achievement/proposal/1
+Authorization: {{token}}
+
+###
+
+
+# RETURNS ALL APPROVED ACHIEVEMENT (ADMIN ONLY)
+GET http://localhost:3000/achievement
+Authorization: {{token}}
+
+###
+
+
+# RETURNS A RANDOM ACHIEVEMENT
+GET http://localhost:3000/achievement/random
+
+###
+
+
+# DELETES AN ACHIEVEMENT (ADMIN ONLY)
+DELETE http://localhost:3000/achievement/3
 Authorization: {{token}}

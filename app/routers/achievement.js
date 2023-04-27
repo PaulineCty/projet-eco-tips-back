@@ -41,4 +41,21 @@ achievementRouter.patch("/achievement/proposal/:id(\\d+)", authentificationToken
  */
 achievementRouter.get("/achievement", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.getAllNotProposalAchievement);
 
+/**
+ * @route GET /achievement/random
+ * @group Achievement - Getting one random achievement
+ * @returns {Achievement} a Achievement instance
+ * @returns {APIError} error
+ */
+achievementRouter.get("/achievement/random", achievementController.getOneRandomAchievement);
+
+/**
+ * @route DELETE /achievement/:id
+ * @group Achievement - Deleting an achievement
+ * @param {number} id - The id of the achievement to delete
+ * @returns {void} - No Content (HTTP 204) response
+ * @returns {APIError} error
+ */
+achievementRouter.delete("/achievement/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.deleteAchievement);
+
 module.exports = achievementRouter;

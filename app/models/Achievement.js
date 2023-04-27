@@ -82,6 +82,26 @@ class Achievement extends Core {
         const result = await this.client.query(preparedQuery);
         return result.rows;
     };
+
+    /**
+     * Gets a random Achievement instance
+     * @returns {Achievement} a Achievement instance
+     */
+    async findOneRandomAchievement() {
+        const preparedQuery = {
+            text: `SELECT 
+            a.title, 
+            a.image, 
+            a.description, 
+            CONCAT(u.firstname, ' ', u.lastname) 
+            FROM achievement a
+            JOIN "user" u ON u.id = a.user_id
+            ORDER BY RANDOM()
+			LIMIT 1;`
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rows[0];
+    }
 };
 
 module.exports = new Achievement(client);

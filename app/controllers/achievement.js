@@ -81,7 +81,7 @@ const achievementController = {
             const updatedAchievement = await Achievement.setProposalAchievementToFalse(req.params.id);
 
             if(!updatedAchievement) {
-                next(new APIError(`La carte n'a pas pu être validée.`,400));
+                next(new APIError(`La réalisation n'a pas pu être validée.`,400));
             } else {
                 res.status(204).json();
             }
@@ -112,6 +112,50 @@ const achievementController = {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
+
+    /**
+     * Gets a random achievement
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Achievement} a Achievement instance
+     * @returns {APIError} error
+     */
+    async getOneRandomAchievement (req, res, next) {
+        try {
+            const achievement = await Achievement.findOneRandomAchievement();
+
+            // adding the path to the image name
+            achievement.image = getAchievementImagePath(achievement.image);
+
+            res.json(achievement);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+
+    },
+
+    /**
+     * Deletes an achievement
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
+    async deleteAchievement (req,res,next) {
+        try {
+            const achievement = await Achievement.delete(req.params.id);
+
+            if(!achievement) {
+                next(new APIError(`La réalisation n'a pas pu être supprimée.`,400));
+            } else {
+                res.status(204).json({}); 
+            }
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    }
 }
 
 
