@@ -4,8 +4,6 @@ const APIError = require("../services/error/APIError");
 const { Card, TagCard } = require("../models/index");
 const debug = require('debug')("controller:card");
 const getImagePath = require('../services/images/imageService');
-const { log } = require("console");
-const { getLatestCard } = require("../models/Card");
 
 /**
  * @typedef {import('../models/index').Card} Card;
