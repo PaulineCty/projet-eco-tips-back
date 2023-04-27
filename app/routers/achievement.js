@@ -33,5 +33,12 @@ achievementRouter.get("/achievement/proposal", authentificationTokenMiddleware.i
  */
 achievementRouter.patch("/achievement/proposal/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.updateProposalAchievementToFalse);
 
+/**
+ * @route GET /achievement
+ * @group Achievement - Getting all approved achievements
+ * @returns {Achievement[]} an array of Achievement instances
+ * @returns {APIError} error
+ */
+achievementRouter.get("/achievement", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.getAllNotProposalAchievement);
 
 module.exports = achievementRouter;

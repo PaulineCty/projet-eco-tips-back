@@ -89,6 +89,29 @@ const achievementController = {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
+
+    /**
+     * Gets all approved achievements
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {Achievement[]} an array of Achievement instances
+     * @returns {APIError} error
+     */
+    async getAllNotProposalAchievement (req, res, next) {
+        try {
+            const achievements = await Achievement.findAllNotProposals();
+
+            // adding the path to the image names
+            achievements.forEach(achievement => {
+                achievement.image = getAchievementImagePath(achievement.image);
+            });
+
+            res.json(achievements);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    },
 }
 
 

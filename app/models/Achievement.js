@@ -52,17 +52,36 @@ class Achievement extends Core {
      * @param {number} id achievement's id
      * @returns {integer} number of updated rows
      */
-        async setProposalAchievementToFalse(id) {
-            const preparedQuery = {
-                text : `
-                UPDATE achievement
-                SET proposal = false
-                WHERE id = $1`,
-                values : [id]
-            }
-            const result = await this.client.query(preparedQuery);
-            return result.rowCount;
+    async setProposalAchievementToFalse(id) {
+        const preparedQuery = {
+            text : `
+            UPDATE achievement
+            SET proposal = false
+            WHERE id = $1`,
+            values : [id]
+        }
+        const result = await this.client.query(preparedQuery);
+        return result.rowCount;
+    };
+
+    /**
+     * Gets all approved Achievement instances 
+     * @returns {Achievement[]} an array of Achievement instances
+     */
+    async findAllNotProposals() {
+        const preparedQuery = {
+            text: `SELECT 
+            a.title, 
+            a.image, 
+            a.description, 
+            CONCAT(u.firstname, ' ', u.lastname) 
+            FROM achievement a
+            JOIN "user" u ON u.id = a.user_id
+            WHERE a.proposal = false;`
         };
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
+    };
 };
 
 module.exports = new Achievement(client);
