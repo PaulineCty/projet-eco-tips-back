@@ -28,4 +28,12 @@ authentificationRouter.post("/sign-in", userController.signIn);
  */
 authentificationRouter.post("/sign-up", validationModule.validateUserCreation, userController.signUp);
 
+/**
+ * @route POST /refreshtoken
+ * @group User - Refreshing the token after expiration
+ * @returns {object} 200 - Jwt's access token, user's firstname an user's role_id
+ * @returns {APIError} error
+ */
+authentificationRouter.post('/refreshtoken', userController.refreshAccess);
+
 module.exports = authentificationRouter;

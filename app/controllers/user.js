@@ -3,6 +3,7 @@ const APIError = require("../services/error/APIError");
 const authentificationToken = require('../services/authentification/authentificationToken');
 
 const debug = require('debug')("controller:user");
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 /**
@@ -63,10 +64,15 @@ const userController = {
 
                 // Generating a token and redirecting to the home page
                 const accessToken = authentificationToken.generateAccessToken(user);
+                const refreshToken = authentificationToken.generateRefreshToken(user);
+
                 res.json({ 
-                    accessToken, 
+                    accessToken,
+                    refreshToken, 
                     firstname : user.firstname,
-                    role_id : user.role_id
+                    role_id : user.role_id,
+                    score : user.score,
+                    ecocoins : user.ecocoins
                 });
             }
 
@@ -75,6 +81,43 @@ const userController = {
         }
 
      },
+
+     /**
+     * Sends out a new token when the initial one has expired
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {object} return an object with jwt's access token, user's firstname and user's role_id
+     * @returns {APIError} error
+     */
+    async refreshAccess (req, res, next) {
+        const authHeader = req.headers.authorization;
+        //authHeader's authorization format is "Bearer token" hence the .split(' ')[1]
+        const token = authHeader && authHeader.split(' ')[1];
+   
+        if (!token) return next(new APIError('Veuillez vous authentifier pour accéder à cette page.', 401));
+        
+        jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
+            if (err) {
+                next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
+            }
+
+            // Checking if the user still exists
+            const userCheck = await User.findByEmail(user.email);
+
+            if(!userCheck) {
+                next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
+            } 
+           
+            delete user.iat;
+            delete user.exp;
+        
+            const refreshedToken = authentificationToken.generateAccessToken(user);
+            res.json({
+                accessToken: refreshedToken,
+            });
+        });
+      },
     
     /**
      * Gets a user's information
