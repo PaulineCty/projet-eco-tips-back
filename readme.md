@@ -15,7 +15,7 @@ Eco Tips est une application web qui permet, de manière ludique, à ses utilisa
 
 ### Créer le fichier .env
 
-1. Créer un fichier .env en reprenant les variables d'environnement se trouvant dans .env.example. Pour la variable `ACCESS_TOKEN_SECRET` générer une chaîne de caractère de la manière de votre choix.
+1. Créer un fichier .env en reprenant les variables d'environnement se trouvant dans .env.example. Pour les variables `ACCESS_TOKEN_SECRET` et `REFRESH_TOKEN_SECRET` générer une chaîne de caractère de la manière de votre choix.
 
 ### Installer les dépendances puis lancer le script
 
