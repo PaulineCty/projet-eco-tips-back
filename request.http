@@ -240,7 +240,6 @@ Authorization: {{token}}
 
 # RETURNS THE LATEST CARD CREATED AND VALIDATED BY AN ADMIN
 GET http://localhost:3000/card/latest
-Authorization: {{token}}
 
 ###
 

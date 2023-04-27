@@ -30,6 +30,7 @@ const cardController = {
             cards.forEach(card => {
                 card.image = getImagePath(card.image);
             });
+
             // debug(cards);
             res.json(cards);
         } catch (error) {
@@ -120,6 +121,7 @@ const cardController = {
             cards.forEach(card => {
                 card.image = getImagePath(card.image);
             });
+
             // debug(card);
             res.json(cards);
         } catch (error) {
@@ -167,6 +169,7 @@ const cardController = {
             cards.forEach(card => {
                 card.image = getImagePath(card.image);
             });
+
             // debug(cards);
             res.json(cards);
         } catch (error) {
@@ -184,10 +187,15 @@ const cardController = {
      */
     async getAllNotProposalCard (req, res, next) {
         try {
-            const card = await Card.findAllNotProposals();
+            const cards = await Card.findAllNotProposals();
+
+            // adding the path to the image names
+            cards.forEach(card => {
+                card.image = getImagePath(card.image);
+            });
 
             // debug(card);
-            res.json(card);
+            res.json(cards);
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
@@ -300,6 +308,10 @@ const cardController = {
     async getLatestCard (req, res, next) {
         try {
             const card = await Card.getLatestCard();
+
+            // adding the path to the image name
+            card.image = getImagePath(card.image);
+
             // debug(card);
             res.json(card);
         } catch (error) {

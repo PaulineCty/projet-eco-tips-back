@@ -36,11 +36,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 app.use(authentificationRouter);
+app.use(cardRouter);
 app.use("/me/collection", authentificationTokenMiddleware.isAuthenticated, collectionRouter);
 app.use(authentificationTokenMiddleware.isAuthenticated, proposalRouter);
 app.use("/tag", authentificationTokenMiddleware.isAuthenticated, tagRouter);
 app.use(authentificationTokenMiddleware.isAuthenticated, userRouter);
-app.use(cardRouter);
 app.use("/ranking", authentificationTokenMiddleware.isAuthenticated, rankingRouter);
 
 // Error management

@@ -17,6 +17,16 @@ const authentificationToken = {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1800s' });
   },
 
+    /**
+   * Creates a JWT access token
+   * @param {User} user.body.required - User Object
+   * @returns {string} JWT access token
+   */
+    generateRefreshToken(user) {
+      // expires in 30 minutes
+      return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1800s' });
+    },
+
   /**
    * Middleware allowing only logged users to continue
    * @param {object} req Express' request
