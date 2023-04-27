@@ -26,7 +26,7 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = getImagePath(card.image);
+                card.image = getImagePath.getCardImagePath(card.image);
             });
             // debug(cards);
             res.json(cards);
@@ -55,7 +55,7 @@ const cardController = {
             //Removing all punctuation from the card title in order to use it as the image file name
             const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}= \-_`~()']/g, '').split(' ').join('_').toLowerCase();
             // Converting the base64 into an actual image
-            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
+            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/cards/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
 
             const card = await Card.create({
                 image: `${imageTitle}.${extension[1]}`,
@@ -92,7 +92,7 @@ const cardController = {
             const card = await Card.findOneRandomCard(req.user.id);
 
             // adding the path to the image name
-            card.image = getImagePath(card.image);
+            card.image = getImagePath.getCardImagePath(card.image);
 
             // debug(card);
             res.json(card);
@@ -116,7 +116,7 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = getImagePath(card.image);
+                card.image = getImagePath.getCardImagePath(card.image);
             });
             // debug(card);
             res.json(cards);
@@ -163,7 +163,7 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = getImagePath(card.image);
+                card.image = getImagePath.getCardImagePath(card.image);
             });
             // debug(cards);
             res.json(cards);
@@ -182,10 +182,15 @@ const cardController = {
      */
     async getAllNotProposalCard (req, res, next) {
         try {
-            const card = await Card.findAllNotProposals();
+            const cards = await Card.findAllNotProposals();
 
-            // debug(card);
-            res.json(card);
+            // adding the path to the image names
+            cards.forEach(card => {
+                card.image = getImagePath.getCardImagePath(card.image);
+            });
+
+            // debug(cards);
+            res.json(cards);
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
@@ -215,7 +220,7 @@ const cardController = {
             //Removing all punctuation from the card title in order to use it as the image file name
             const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}= \-_`~()']/g, '').split(' ').join('_').toLowerCase();
             // Converting the base64 into an actual image
-            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
+            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/cards/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
 
             // new image column value
             image = `${imageTitle}.${extension[1]}`;
@@ -298,6 +303,11 @@ const cardController = {
     async getLatestCard (req, res, next) {
         try {
             const card = await Card.getLatestCard();
+
+            // adding the path to the image names
+
+            card.image = getImagePath.getCardImagePath(card.image);
+
             // debug(card);
             res.json(card);
         } catch (error) {

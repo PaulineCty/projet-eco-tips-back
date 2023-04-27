@@ -251,7 +251,7 @@ const validationModule = {
         try {
             const achievement = await Achievement.findByTitle(req.body.title);
             if(achievement) {
-                next(new APIError('Une réalisation ayant le même titre existe déjà.', 400));
+                next(new APIError('Un accomplissement ayant le même titre existe déjà.', 400));
             }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));

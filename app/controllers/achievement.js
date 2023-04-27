@@ -3,7 +3,7 @@ const path = require('path');
 const APIError = require("../services/error/APIError");
 const { Achievement } = require("../models/index");
 const debug = require('debug')("controller:achievement");
-const getAchievementImagePath = require('../services/images/achievementImageService');
+const getImagePath = require('../services/images/imageService');
 
 const achievementController = {
 
@@ -31,7 +31,7 @@ const achievementController = {
             //Removing all punctuation from the card title in order to use it as the image file name
             const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}= \-_`~()']/g, '').split(' ').join('_').toLowerCase();
             // Converting the base64 into an actual image
-            fs.writeFileSync(path.resolve(__dirname,`../../uploads/achievementImages/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
+            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/achievements/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
 
             const achievement = await Achievement.create({
                 title,
@@ -59,7 +59,7 @@ const achievementController = {
 
             // adding the path to the image names
             achievements.forEach(achievement => {
-                achievement.image = getAchievementImagePath(achievement.image);
+                achievement.image = getImagePath.getAchievementImagePath(achievement.image);
             });
 
             res.json(achievements);
@@ -81,7 +81,7 @@ const achievementController = {
             const updatedAchievement = await Achievement.setProposalAchievementToFalse(req.params.id);
 
             if(!updatedAchievement) {
-                next(new APIError(`La réalisation n'a pas pu être validée.`,400));
+                next(new APIError(`L'accomplissement n'a pas pu être validée.`,400));
             } else {
                 res.status(204).json();
             }
@@ -104,7 +104,7 @@ const achievementController = {
 
             // adding the path to the image names
             achievements.forEach(achievement => {
-                achievement.image = getAchievementImagePath(achievement.image);
+                achievement.image = getImagePath.getAchievementImagePath(achievement.image);
             });
 
             res.json(achievements);
@@ -126,7 +126,7 @@ const achievementController = {
             const achievement = await Achievement.findOneRandomAchievement();
 
             // adding the path to the image name
-            achievement.image = getAchievementImagePath(achievement.image);
+            achievement.image = getImagePath.getAchievementImagePath(achievement.image);
 
             res.json(achievement);
         } catch (error) {
@@ -148,7 +148,7 @@ const achievementController = {
             const achievement = await Achievement.delete(req.params.id);
 
             if(!achievement) {
-                next(new APIError(`La réalisation n'a pas pu être supprimée.`,400));
+                next(new APIError(`L'accomplissement n'a pas pu être supprimée.`,400));
             } else {
                 res.status(204).json({}); 
             }
