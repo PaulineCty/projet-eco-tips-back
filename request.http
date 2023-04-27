@@ -1,7 +1,9 @@
 # /*********************************************\ #
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRLUktwLkhoaThNNzhoekdOZktMcmYuVUFuaFVZT1lSTVJyUDk1UmRLS0tKdVFHV0ZRNTJDSyIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTI2VDEzOjE1OjQwLjU4MloiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODI1MTQ5OTksImV4cCI6MTY4MjUxNjc5OX0.eRl4pXiCXDZu4ZV8mg0poebgW4YovASyh8030FEFMPk
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkM2pHeFhTVWEyWkU5SXplcEE3M201dWlXdzViTXBLenhlVGlWRU1Gd3dSL1BrL0VXQWZJanUiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yN1QxNDowMzoyMC42MDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNjA0MjAzLCJleHAiOjE2ODI2MDYwMDN9.7fXqk7Erii7IFgGV-gXcTZb3oOI9xL-NuGM1mQtDZFM
+
+@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkM2pHeFhTVWEyWkU5SXplcEE3M201dWlXdzViTXBLenhlVGlWRU1Gd3dSL1BrL0VXQWZJanUiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yN1QxNDowMzoyMC42MDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNjA0MjAzLCJleHAiOjE2ODI2NDAyMDN9.2s4s9ZGYpCNHxiHOy_YfipCDy7H2A40suhCv5FhGFvg
 
 ###
 
@@ -17,7 +19,7 @@ Content-Type: application/json
 {
     "firstname": "Laura",
     "lastname": "Teur",
-    "email":"Laura.Teur@gmail.com",
+    "email":"laura.teur@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "05/05/1990"
@@ -49,8 +51,11 @@ Content-Type: application/json
 
 ###
 
+# REFRESHING ACCESS TOKEN
+POST http://localhost:3000/refreshtoken
+Authorization: {{refreshToken}}
 
-
+###
 
 # /********************************************\ #
 # /******************  USER  ******************\ #
@@ -240,7 +245,6 @@ Authorization: {{token}}
 
 # RETURNS THE LATEST CARD CREATED AND VALIDATED BY AN ADMIN
 GET http://localhost:3000/card/latest
-Authorization: {{token}}
 
 ###
 

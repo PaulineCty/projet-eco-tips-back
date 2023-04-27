@@ -7,7 +7,7 @@ VALUES
 -- user table
 INSERT INTO "user"(firstname, lastname, email, password, birthdate, role_id)
 VALUES 
-('admin', 'admin', 'admin.admin@gmail.com', 'password', '2023-04-14', 1);
+('eco', 'tips', 'eco.tips@gmail.com', 'password', '2023-04-14', 1);
 
 INSERT INTO "user"(firstname, lastname, email, password, birthdate)
 VALUES 
