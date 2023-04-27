@@ -45,7 +45,24 @@ class Achievement extends Core {
         };
         const result = await this.client.query(preparedQuery);
         return result.rows;
-    }
+    };
+
+    /**
+     * Sets a given Achievement instance to an approved state
+     * @param {number} id achievement's id
+     * @returns {integer} number of updated rows
+     */
+        async setProposalAchievementToFalse(id) {
+            const preparedQuery = {
+                text : `
+                UPDATE achievement
+                SET proposal = false
+                WHERE id = $1`,
+                values : [id]
+            }
+            const result = await this.client.query(preparedQuery);
+            return result.rowCount;
+        };
 };
 
 module.exports = new Achievement(client);

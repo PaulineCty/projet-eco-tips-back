@@ -22,7 +22,16 @@ achievementRouter.post("/me/achievement", authentificationTokenMiddleware.isAuth
  * @return {Achievement[]} an array of Achievement instances
  * @returns {APIError} error
  */
-achievementRouter.get("/achievement/proposal", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.getAllProposalAchievement)
+achievementRouter.get("/achievement/proposal", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.getAllProposalAchievement);
+
+/**
+ * @route PATCH /achievement/proposal/:id
+ * @group Achievement - Updating a achievement to an approved state
+ * @param {number} id - The id of the achievement to update
+ * @returns {void} - No Content (HTTP 204) response
+ * @returns {APIError} error
+ */
+achievementRouter.patch("/achievement/proposal/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.updateProposalAchievementToFalse);
 
 
 module.exports = achievementRouter;

@@ -61,8 +61,30 @@ const achievementController = {
             achievements.forEach(achievement => {
                 achievement.image = getAchievementImagePath(achievement.image);
             });
-            
+
             res.json(achievements);
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+    },
+
+    /**
+     * Updates a achievement to an approved state
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
+    async updateProposalAchievementToFalse (req, res, next) {
+        try {
+            const updatedAchievement = await Achievement.setProposalAchievementToFalse(req.params.id);
+
+            if(!updatedAchievement) {
+                next(new APIError(`La carte n'a pas pu être validée.`,400));
+            } else {
+                res.status(204).json();
+            }
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
