@@ -3,7 +3,7 @@ const APIError = require("../services/error/APIError");
 const authentificationToken = require('../services/authentification/authentificationToken');
 
 const debug = require('debug')("controller:user");
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 /**
@@ -90,34 +90,34 @@ const userController = {
      * @return {object} return an object with jwt's access token, user's firstname and user's role_id
      * @returns {APIError} error
      */
-    async refreshAccess (req, res, next) {
-        const authHeader = req.headers.authorization;
-        //authHeader's authorization format is "Bearer token" hence the .split(' ')[1]
-        const token = authHeader && authHeader.split(' ')[1];
+    // async refreshAccess (req, res, next) {
+    //     const authHeader = req.headers.authorization;
+    //     //authHeader's authorization format is "Bearer token" hence the .split(' ')[1]
+    //     const token = authHeader && authHeader.split(' ')[1];
    
-        if (!token) return next(new APIError('Veuillez vous authentifier pour accéder à cette page.', 401));
+    //     if (!token) return next(new APIError('Veuillez vous authentifier pour accéder à cette page.', 401));
         
-        jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
-            if (err) {
-                next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
-            }
+    //     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
+    //         if (err) {
+    //             next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
+    //         }
 
-            // Checking if the user still exists
-            const userCheck = await User.findByEmail(user.email);
+    //         // Checking if the user still exists
+    //         const userCheck = await User.findByEmail(user.email);
 
-            if(!userCheck) {
-                next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
-            } 
+    //         if(!userCheck) {
+    //             next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
+    //         } 
            
-            delete user.iat;
-            delete user.exp;
+    //         delete user.iat;
+    //         delete user.exp;
         
-            const refreshedToken = authentificationToken.generateAccessToken(user);
-            res.json({
-                accessToken: refreshedToken,
-            });
-        });
-      },
+    //         const refreshedToken = authentificationToken.generateAccessToken(user);
+    //         res.json({
+    //             accessToken: refreshedToken,
+    //         });
+    //     });
+    //   },
     
     /**
      * Gets a user's information
