@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // Routing
-const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, userRouter, cardRouter, rankingRouter } = require("./app/routers/index");
+const { collectionRouter, authentificationRouter, proposalRouter, tagRouter, userRouter, cardRouter, rankingRouter, achievementRouter } = require("./app/routers/index");
 
 /*********************************************/
 /*****************  SWAGGER  *****************/
@@ -42,6 +42,7 @@ app.use("/tag", authentificationTokenMiddleware.isAuthenticated, tagRouter);
 app.use(authentificationTokenMiddleware.isAuthenticated, userRouter);
 app.use(cardRouter);
 app.use("/ranking", authentificationTokenMiddleware.isAuthenticated, rankingRouter);
+app.use(achievementRouter);
 
 // Error management
 const errorModule = require("./app/services/error/errorHandling");

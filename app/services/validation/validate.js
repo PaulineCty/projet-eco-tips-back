@@ -1,6 +1,6 @@
 const APIError = require("../error/APIError");
-const { User, Card, Tag } = require("../../models/index");
-const { userSchema, cardSchema, tagSchema } = require("./schema");
+const { User, Card, Tag, Achievement } = require("../../models/index");
+const { userSchema, cardSchema, tagSchema, achievementSchema } = require("./schema");
 const debug = require("debug")("validation");
 
 /**
@@ -236,7 +236,36 @@ const validationModule = {
         else {
             next();
         }  
-    }
+    },
+
+    /**
+   * Validates the provided Achievement object in order to create it
+   * @param {object} req Express' request
+   * @param {object} _ Express' response
+   * @param {function} next Express' function executing the succeeding middleware
+   * @returns {void} - No content - Allowing to go to the next middleware
+   * @returns {APIError} error
+   */
+    async validateAchievementCreation(req, _, next) {
+
+        try {
+            const achievement = await Achievement.findByTitle(req.body.title);
+            if(achievement) {
+                next(new APIError('Une réalisation ayant le même titre existe déjà.', 400));
+            }
+        } catch (error) {
+            next(new APIError(`Erreur interne : ${error}`,500));
+        }
+
+        // The goal here is to send to the front a detailed error
+        const { error } = achievementSchema.validate(req.body);
+        if (error) {
+            next(new APIError(error.message, 400));
+        }
+        else {
+            next();
+        }  
+    },
 };
 
 module.exports = validationModule;
