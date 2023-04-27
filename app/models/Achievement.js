@@ -27,6 +27,25 @@ class Achievement extends Core {
         const result = await this.client.query(preparedQuery);
         return result.rows[0];
     };
+
+    /**
+     * Gets all Achievement instances that are not approved yet
+     * @returns {Achievement[]} an array of Achievement instances
+     */
+    async findAllProposals() {
+        const preparedQuery = {
+            text: `SELECT 
+            a.title, 
+            a.image, 
+            a.description, 
+            CONCAT(u.firstname, ' ', u.lastname) 
+            FROM achievement a
+            JOIN "user" u ON u.id = a.user_id
+            WHERE a.proposal = true;`
+        };
+        const result = await this.client.query(preparedQuery);
+        return result.rows;
+    }
 };
 
 module.exports = new Achievement(client);
