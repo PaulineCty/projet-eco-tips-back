@@ -28,6 +28,7 @@ const cardController = {
             cards.forEach(card => {
                 card.image = getImagePath.getCardImagePath(card.image);
             });
+
             // debug(cards);
             res.json(cards);
         } catch (error) {
@@ -118,6 +119,7 @@ const cardController = {
             cards.forEach(card => {
                 card.image = getImagePath.getCardImagePath(card.image);
             });
+
             // debug(card);
             res.json(cards);
         } catch (error) {
@@ -165,6 +167,7 @@ const cardController = {
             cards.forEach(card => {
                 card.image = getImagePath.getCardImagePath(card.image);
             });
+
             // debug(cards);
             res.json(cards);
         } catch (error) {
@@ -303,8 +306,8 @@ const cardController = {
             const card = await Card.getLatestCard();
 
             // adding the path to the image names
-
             card.image = getImagePath.getCardImagePath(card.image);
+
 
             // debug(card);
             res.json(card);

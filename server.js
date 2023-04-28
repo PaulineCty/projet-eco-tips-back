@@ -34,7 +34,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 /**************  SWAGGER'S END  **************/
 /*********************************************/
 
-
 app.use(authentificationRouter);
 app.use(cardRouter);
 app.use(achievementRouter);

@@ -1,7 +1,10 @@
 # /*********************************************\ #
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRUMExKSnp6clR2aXhwbDU5cjdtUDJPL3E5RXBvWi9mWWV5eGIvQnIxWi5zaTE1MG1WelkwMiIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTI3VDA3OjU5OjI4LjIxOVoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODI2NzU2MTEsImV4cCI6MTY4MjY3NzQxMX0.C-Z6SThptx5xO8EHuH3nA9KzRk48Tss5vk_sD4mbKS4
+
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkM2pHeFhTVWEyWkU5SXplcEE3M201dWlXdzViTXBLenhlVGlWRU1Gd3dSL1BrL0VXQWZJanUiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yN1QxNDowMzoyMC42MDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNjA0MjAzLCJleHAiOjE2ODI2MDYwMDN9.7fXqk7Erii7IFgGV-gXcTZb3oOI9xL-NuGM1mQtDZFM
+
+@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkM2pHeFhTVWEyWkU5SXplcEE3M201dWlXdzViTXBLenhlVGlWRU1Gd3dSL1BrL0VXQWZJanUiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yN1QxNDowMzoyMC42MDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNjA0MjAzLCJleHAiOjE2ODI2NDAyMDN9.2s4s9ZGYpCNHxiHOy_YfipCDy7H2A40suhCv5FhGFvg
 
 ###
 
@@ -49,8 +52,11 @@ Content-Type: application/json
 
 ###
 
+# REFRESHING ACCESS TOKEN
+POST http://localhost:3000/refreshtoken
+Authorization: {{refreshToken}}
 
-
+###
 
 # /********************************************\ #
 # /******************  USER  ******************\ #
