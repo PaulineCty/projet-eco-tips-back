@@ -207,13 +207,11 @@ const cardController = {
     async updateCard (req, res, next) {
         const { title, description, environmentalrating, economicrating, value, tags } = req.body;
 
-        // We don't know yet how the front will work so for now we assume that req.body.image will be null if there is no image change
-        // Careful with validation because at the moment req.body.image is not required, let's see what we can do about this later
         const previousCard = await Card.findByPk(req.params.id);
         let image;
         if(req.body.image) {
             //removing the previous image
-            fs.unlinkSync(`uploads/images/${previousCard.image}`);
+            fs.unlinkSync(`uploads/images/cards/${previousCard.image}`);
 
             const fileParts = req.body.image.split(';base64,');
             const extension = fileParts[0].split('/');

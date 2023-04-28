@@ -35,10 +35,11 @@ class Achievement extends Core {
     async findAllProposals() {
         const preparedQuery = {
             text: `SELECT 
+            a.id,
             a.title, 
             a.image, 
             a.description, 
-            CONCAT(u.firstname, ' ', u.lastname) 
+            CONCAT(u.firstname, ' ', u.lastname) author
             FROM achievement a
             JOIN "user" u ON u.id = a.user_id
             WHERE a.proposal = true;`
@@ -71,10 +72,11 @@ class Achievement extends Core {
     async findAllNotProposals() {
         const preparedQuery = {
             text: `SELECT 
+            a.id,
             a.title, 
             a.image, 
             a.description, 
-            CONCAT(u.firstname, ' ', u.lastname) 
+            CONCAT(u.firstname, ' ', u.lastname) author
             FROM achievement a
             JOIN "user" u ON u.id = a.user_id
             WHERE a.proposal = false;`
@@ -90,12 +92,14 @@ class Achievement extends Core {
     async findOneRandomAchievement() {
         const preparedQuery = {
             text: `SELECT 
+            a.id,
             a.title, 
             a.image, 
             a.description, 
-            CONCAT(u.firstname, ' ', u.lastname) 
+            CONCAT(u.firstname, ' ', u.lastname) author
             FROM achievement a
             JOIN "user" u ON u.id = a.user_id
+            WHERE a.proposal = false
             ORDER BY RANDOM()
 			LIMIT 1;`
         }

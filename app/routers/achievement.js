@@ -58,4 +58,14 @@ achievementRouter.get("/achievement/random", achievementController.getOneRandomA
  */
 achievementRouter.delete("/achievement/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.deleteAchievement);
 
+/**
+ * @route PATCH /achievement/:id
+ * @group Achievement - Updating a achievement
+ * @param {number} id - The id of the achievement to update
+ * @param {Achievement} user.body.required - Achievement Object
+ * @returns {void} - No Content (HTTP 204) response
+ * @returns {APIError} error
+ */
+achievementRouter.patch("/achievement/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, validationModule.validateAchievementEdition, achievementController.updateAchievement);
+
 module.exports = achievementRouter;

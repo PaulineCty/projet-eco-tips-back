@@ -1,7 +1,7 @@
 # /*********************************************\ #
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRUMExKSnp6clR2aXhwbDU5cjdtUDJPL3E5RXBvWi9mWWV5eGIvQnIxWi5zaTE1MG1WelkwMiIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTI3VDA3OjU5OjI4LjIxOVoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODI1OTc4NjMsImV4cCI6MTY4MjU5OTY2M30.GIyM2c7ECUtzMPM1W8WaLKEqvASqLow9aPzg-6E64ls
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRUMExKSnp6clR2aXhwbDU5cjdtUDJPL3E5RXBvWi9mWWV5eGIvQnIxWi5zaTE1MG1WelkwMiIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA0LTI3VDA3OjU5OjI4LjIxOVoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODI2NzU2MTEsImV4cCI6MTY4MjY3NzQxMX0.C-Z6SThptx5xO8EHuH3nA9KzRk48Tss5vk_sD4mbKS4
 
 ###
 
@@ -252,7 +252,7 @@ Authorization: {{token}}
 
 
 # UPDATES A CARD (ADMIN ONLY)
-PATCH http://localhost:3000/card/63
+PATCH http://localhost:3000/card/45
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -319,7 +319,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "title": "Test2",
+    "title": "Test3",
     "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
     "description": "description"
 }
@@ -357,3 +357,22 @@ GET http://localhost:3000/achievement/random
 # DELETES AN ACHIEVEMENT (ADMIN ONLY)
 DELETE http://localhost:3000/achievement/3
 Authorization: {{token}}
+
+###
+
+
+# UPDATES AN ACHIEVEMENT (ADMIN ONLY)
+PATCH http://localhost:3000/achievement/1
+Content-Type: application/json
+Authorization: {{token}}
+
+# {
+#     "title": "titre",
+#     "description": "description2"
+# }
+
+{
+    "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
+    "title": "titre",
+    "description": "description2"
+}

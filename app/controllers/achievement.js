@@ -17,7 +17,7 @@ const achievementController = {
      * @param {object} req Express' request
      * @param {object} res Express' response
      * @param {function} next Express' function executing the succeeding middleware
-     * @return {Achievement} the created Card instance
+     * @return {Achievement} the created Achievement instance
      * @returns {APIError} error
      */
     async addAchievement (req, res, next) {
@@ -28,7 +28,7 @@ const achievementController = {
             const fileParts = image.split(';base64,');
             const extension = fileParts[0].split('/');
 
-            //Removing all punctuation from the card title in order to use it as the image file name
+            //Removing all punctuation from the achievement title in order to use it as the image file name
             const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}= \-_`~()']/g, '').split(' ').join('_').toLowerCase();
             // Converting the base64 into an actual image
             fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/achievements/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
@@ -155,7 +155,51 @@ const achievementController = {
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
         }
-    }
+    },
+
+        /**
+     * Updates a achievement
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @returns {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
+        async updateAchievement (req,res,next) {
+            const { title, description } = req.body;
+
+            const previousAchievement = await Achievement.findByPk(req.params.id);
+            let image;
+            if(req.body.image) {
+                //removing the previous image
+                fs.unlinkSync(`uploads/images/achievements/${previousAchievement.image}`);
+
+                const fileParts = req.body.image.split(';base64,');
+                const extension = fileParts[0].split('/');
+                //Removing all punctuation from the achievement title in order to use it as the image file name
+                const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}= \-_`~()']/g, '').split(' ').join('_').toLowerCase();
+                // Converting the base64 into an actual image
+                fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/achievements/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
+
+                // new image column value
+                image = `${imageTitle}.${extension[1]}`;
+            } else {
+                image = previousAchievement.image;
+            }
+            
+            try {
+                const achievement = await Achievement.update( { id : req.params.id }, { title, image, description });
+                debug(achievement);
+    
+                if(!achievement) {
+                    next(new APIError(`L'accomplissement n'a pas pu être créé.`,400));
+                } else {
+                   res.status(204).json({}); 
+                }
+            } catch (error) {
+                next(new APIError(`Erreur interne : ${error}`,500));
+            }
+        },
 }
 
 
