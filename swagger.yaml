@@ -26,10 +26,10 @@ tags:
     description: Operations to manage the cards' tags
   - name: card
     description: Operations to manage the cards
+  - name: ranking
+    description: Operations to display different rankings
   - name: achievement
-    description: Add and share your achievements
-  - name: community
-    description: Keep an eye on other users score
+    description: Operations to manage users' achievements
 paths:
   /sign-in:
     post:
@@ -452,6 +452,185 @@ paths:
           description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
       security:
         - Jwt: []
+  /ranking/score:
+    get:
+      tags:
+        - ranking
+      summary: Returns the 5 best users ordered by score
+      description: Returns the 5 best users ordered by score
+      operationId: getRankingScore
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    user:
+                      type: string
+                      description: user's firstname and last name
+                      example: John Doe
+                    score:
+                      type: integer
+                      example: 60
+                minItems: 5
+                maxItems: 5
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /ranking/creation:
+    get:
+      tags:
+        - ranking
+      summary: Returns the 5 best users ordered by their card creation
+      description: Returns the 5 best users ordered by their card creation
+      operationId: getRankingCreation
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    user:
+                      type: string
+                      description: user's firstname and last name
+                      example: John Doe
+                    cards_created:
+                      type: integer
+                      example: 3
+                minItems: 5
+                maxItems: 5
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /me/achievement:
+    post:
+      tags:
+        - achievement
+      summary: Adds an achievement
+      description: Adds a achievement
+      operationId: addAchievement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Achievement'
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Achievement'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /achievement/proposal:
+    get:
+      tags:
+        - achievement
+      summary: Returns all submitted achievements (admin only)
+      description: Returns all submitted achievements (proposal = true)
+      operationId: getAllProposalAchievement
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Achievement'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /achievement/proposal/{id}:
+    patch:
+      tags:
+        - achievement
+      summary: Updates an achievement to an approved state (admin only)
+      description: Updates an achievement to an approved state (proposal = false)
+      operationId: updateProposalAchievementToFalse
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /achievement:
+    get:
+      tags:
+        - achievement
+      summary: Returns all approved achievements (admin only)
+      description: Returns all approved achievements (proposal = false)
+      operationId: getAllNotProposalAchievement
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Achievement'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /achievement/{id}:
+    patch:
+      tags:
+        - achievement
+      summary: Updates an achievement (admin only)
+      description: Updates an achievement
+      operationId: updateAchievement
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+    delete:
+      tags:
+        - achievement
+      summary: Deletes a achievement (admin only)
+      description: Deletes a achievement 
+      operationId: deleteAchievement
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
+  /achievement/random:
+    get:
+      tags:
+        - achievement
+      summary: Returns one random approved achievement
+      description: Returns one random approved achievement (proposal = false)
+      operationId: getOneRandomAchievement
+      responses:
+        '200':
+          description: Successful operation
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Achievement'
+        '401':
+          description: Veuillez vous authentifier pour accéder à cette page/Vous n'êtes pas autorisé à accéder à cette page.
+      security:
+        - Jwt: []
 components:
   schemas:
     Sign-in:
@@ -581,3 +760,14 @@ components:
           example: "#123123"
       xml:
         name: tag
+    Achievement:
+      type: object
+      properties:
+        title:
+          type: string
+        image:
+          type: string
+          example: data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII
+        description:
+          type: string
+        
