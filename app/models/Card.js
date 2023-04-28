@@ -172,7 +172,8 @@ class Card extends Core {
             c.description, 
             c.environmental_rating, 
             c.economic_rating, 
-            c.value, 
+            c.value,
+            c.proposal,
             CONCAT(u.firstname, ' ',u.lastname) AS "author",
             ARRAY_AGG (
                 json_build_object('name', t.name, 'color', t.color)

@@ -63,8 +63,9 @@ CREATE TABLE achievement
 (
     "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "title" TEXT NOT NULL UNIQUE, 
-    "picture" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "proposal" BOOLEAN NOT NULL DEFAULT TRUE,
     "user_id" INTEGER REFERENCES "user"(id) ON DELETE CASCADE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMPTZ

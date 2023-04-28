@@ -37,6 +37,7 @@ class User extends Core {
     async findAllWithRole() {
         const preparedQuery = {
             text : `SELECT 
+                    u.id,
                     u.firstname,
                     u.lastname,
                     u.email,
@@ -59,6 +60,7 @@ class User extends Core {
     async findByPk(id) {
         const preparedQuery = {
             text : `SELECT 
+                    u.id,
                     u.firstname,
                     u.lastname,
                     u.email,
@@ -95,6 +97,7 @@ class User extends Core {
     async getUsersByScore () {
         const preparedQuery = {
             text : `SELECT
+            u.id,
             CONCAT(u.firstname, ' ',u.lastname) AS "user",
             u.score
             FROM "user" u
@@ -110,13 +113,14 @@ class User extends Core {
      */
     async getUsersByProposedCards () {
         const preparedQuery = {
-            text: `SELECT 
+            text: `SELECT
+            u.id,
 			CONCAT(u.firstname, ' ',u.lastname) AS "user" ,
             COUNT(user_id) AS "cards_created"
             FROM card c
             JOIN "user" u ON u.id = c.user_id
             WHERE CONCAT(u.firstname, ' ',u.lastname) NOT LIKE '%admin admin%'
-            GROUP BY "user"
+            GROUP BY "user", u.id
             ORDER BY cards_created DESC LIMIT 5;`
         };
         const result = await this.client.query(preparedQuery);

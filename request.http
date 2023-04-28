@@ -1,6 +1,7 @@
 # /*********************************************\ #
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
+
 @token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkM2pHeFhTVWEyWkU5SXplcEE3M201dWlXdzViTXBLenhlVGlWRU1Gd3dSL1BrL0VXQWZJanUiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yN1QxNDowMzoyMC42MDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNjA0MjAzLCJleHAiOjE2ODI2MDYwMDN9.7fXqk7Erii7IFgGV-gXcTZb3oOI9xL-NuGM1mQtDZFM
 
 @refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkM2pHeFhTVWEyWkU5SXplcEE3M201dWlXdzViTXBLenhlVGlWRU1Gd3dSL1BrL0VXQWZJanUiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yN1QxNDowMzoyMC42MDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNjA0MjAzLCJleHAiOjE2ODI2NDAyMDN9.2s4s9ZGYpCNHxiHOy_YfipCDy7H2A40suhCv5FhGFvg
@@ -182,7 +183,7 @@ Authorization: {{token}}
 
 
 # SETS PROPOSED CARDS ON FALSE (ADMIN ONLY)
-PATCH http://localhost:3000/proposal/63
+PATCH http://localhost:3000/proposal/51
 Authorization: {{token}}
 
 ###
@@ -257,7 +258,7 @@ Authorization: {{token}}
 
 
 # UPDATES A CARD (ADMIN ONLY)
-PATCH http://localhost:3000/card/63
+PATCH http://localhost:3000/card/45
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -285,10 +286,12 @@ Authorization: {{token}}
 
 # DELETES A CARD (ADMIN ONLY)
 DELETE http://localhost:3000/card/63
-
 Authorization: {{token}}
 
 ###
+
+
+
 
 # /*********************************************\ #
 # /*****************  RANKING  *****************\ #
@@ -305,3 +308,77 @@ Authorization: {{token}}
 # RETURNS THE TOP 5 USERS WITH THE HIGHEST CARD CREATION AMOUNT
 GET http://localhost:3000/ranking/creation
 Authorization: {{token}}
+
+###
+
+
+
+
+# /*********************************************\ #
+# /***************  ACHIEVEMENT  ***************\ #
+# /*********************************************\ #
+
+
+# ADDS AN ACHIEVEMENT
+POST http://localhost:3000/me/achievement
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "title": "Test3",
+    "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
+    "description": "description"
+}
+
+###
+
+
+# RETURNS ALL PROPOSED ACHIEVEMENTS (ADMIN ONLY)
+GET http://localhost:3000/achievement/proposal
+Authorization: {{token}}
+
+###
+
+
+# SETS PROPOSED ACHIEVEMENT ON FALSE (ADMIN ONLY)
+PATCH http://localhost:3000/achievement/proposal/1
+Authorization: {{token}}
+
+###
+
+
+# RETURNS ALL APPROVED ACHIEVEMENT (ADMIN ONLY)
+GET http://localhost:3000/achievement
+Authorization: {{token}}
+
+###
+
+
+# RETURNS A RANDOM ACHIEVEMENT
+GET http://localhost:3000/achievement/random
+
+###
+
+
+# DELETES AN ACHIEVEMENT (ADMIN ONLY)
+DELETE http://localhost:3000/achievement/3
+Authorization: {{token}}
+
+###
+
+
+# UPDATES AN ACHIEVEMENT (ADMIN ONLY)
+PATCH http://localhost:3000/achievement/1
+Content-Type: application/json
+Authorization: {{token}}
+
+# {
+#     "title": "titre",
+#     "description": "description2"
+# }
+
+{
+    "image": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
+    "title": "titre",
+    "description": "description2"
+}
