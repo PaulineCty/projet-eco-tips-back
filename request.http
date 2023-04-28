@@ -2,9 +2,9 @@
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
 
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZpcnN0bmFtZSI6IkplYW4iLCJsYXN0bmFtZSI6IkJpYW5jZSIsImVtYWlsIjoiamVhbi5iaWFuY2VAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkVENWRVpUUi5MTk5TU0NIL1Rld0Z6ZVBObFhxVXExVlp4dWRzQkkyL2dUdHlOSXBSZXJwMWEiLCJiaXJ0aGRhdGUiOiIxOTkxLTA1LTA1VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoxLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yOFQxNDo1Mjo0MC45MzdaIiwidXBkYXRlZF9hdCI6IjIwMjMtMDQtMjhUMTQ6NTY6MDAuNjkwWiIsImlhdCI6MTY4MjY5Mzc4OCwiZXhwIjoxNjgyNjk1NTg4fQ.zypg6y-JS-82k1Ew0LqDRJymzLBjvdN6h7FXJ1sWIFA
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImZpcnN0bmFtZSI6IkFtYXIiLCJsYXN0bmFtZSI6IkRpIiwiZW1haWwiOiJhbWFyLmRpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHl4d0E3N3BmeVFtL3BGbkQweG1ncnVQTktjUmtOd1hIM0g0aVNqZzY5anVkZHcvMUx4TG9DIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjUwLCJzY29yZSI6MCwicm9sZV9pZCI6MiwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjhUMTU6MTA6MzcuOTY1WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjY5NDY0MiwiZXhwIjoxNjgyNjk2NDQyfQ.XtwbtAM5hxNo4-B6VuuZD0coql1dQUmhF5A4_Qjgun4
 
-@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZpcnN0bmFtZSI6IkplYW4iLCJsYXN0bmFtZSI6IkJpYW5jZSIsImVtYWlsIjoiamVhbi5iaWFuY2VAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMzFCQTlSajJja0VuNUpKbmVCWmRDTzZSTFk2RlQ5YUI5RU1SZXhobkNQRUpSNVFibi4zcHkiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yOFQxNDo1Mjo0MC45MzdaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNjkzNjAxLCJleHAiOjE2ODI3Mjk2MDF9.NTb21nFVSbYSo-IA7v2RB32c6Y05EzA_1bfxhY4iCsY
+@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImZpcnN0bmFtZSI6IkFtYXIiLCJsYXN0bmFtZSI6IkRpIiwiZW1haWwiOiJhbWFyLmRpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHl4d0E3N3BmeVFtL3BGbkQweG1ncnVQTktjUmtOd1hIM0g0aVNqZzY5anVkZHcvMUx4TG9DIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjUwLCJzY29yZSI6MCwicm9sZV9pZCI6MiwiY3JlYXRlZF9hdCI6IjIwMjMtMDQtMjhUMTU6MTA6MzcuOTY1WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MjY5NDY0MiwiZXhwIjoxNjgyNzMwNjQyfQ.cZebNuns2_sDrfcOQeZ3OMg-S7yFsukZi3TScr0SS-Q
 ###
 
 # /********************************************\ #
@@ -17,9 +17,9 @@ POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
-    "firstname": "Jean",
-    "lastname": "Biance",
-    "email":"jean.biance@gmail.com",
+    "firstname": "Amar",
+    "lastname": "Di",
+    "email":"amar.di@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "05/05/1990"

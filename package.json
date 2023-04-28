@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "dev": "DEBUG=controller:card,controller:user,model:card,router:collection,database nodemon server.js",
+    "dev": "DEBUG=error,controller:card,controller:user,model:card,router:collection,database nodemon server.js",
     "start": "pm2 start server.js",
     "stop": "pm2 stop server.js"
   },
