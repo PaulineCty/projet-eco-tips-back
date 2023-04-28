@@ -4,8 +4,6 @@ const APIError = require("../services/error/APIError");
 const { Card, TagCard } = require("../models/index");
 const debug = require('debug')("controller:card");
 const getImagePath = require('../services/images/imageService');
-const { log } = require("console");
-const { getLatestCard } = require("../models/Card");
 
 /**
  * @typedef {import('../models/index').Card} Card;
@@ -28,7 +26,7 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = getImagePath(card.image);
+                card.image = getImagePath.getCardImagePath(card.image);
             });
 
             // debug(cards);
@@ -58,7 +56,7 @@ const cardController = {
             //Removing all punctuation from the card title in order to use it as the image file name
             const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}= \-_`~()']/g, '').split(' ').join('_').toLowerCase();
             // Converting the base64 into an actual image
-            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
+            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/cards/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
 
             const card = await Card.create({
                 image: `${imageTitle}.${extension[1]}`,
@@ -95,7 +93,7 @@ const cardController = {
             const card = await Card.findOneRandomCard(req.user.id);
 
             // adding the path to the image name
-            card.image = getImagePath(card.image);
+            card.image = getImagePath.getCardImagePath(card.image);
 
             // debug(card);
             res.json(card);
@@ -119,7 +117,7 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = getImagePath(card.image);
+                card.image = getImagePath.getCardImagePath(card.image);
             });
 
             // debug(card);
@@ -167,7 +165,7 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = getImagePath(card.image);
+                card.image = getImagePath.getCardImagePath(card.image);
             });
 
             // debug(cards);
@@ -191,10 +189,10 @@ const cardController = {
 
             // adding the path to the image names
             cards.forEach(card => {
-                card.image = getImagePath(card.image);
+                card.image = getImagePath.getCardImagePath(card.image);
             });
 
-            // debug(card);
+            // debug(cards);
             res.json(cards);
         } catch (error) {
             next(new APIError(`Erreur interne : ${error}`,500));
@@ -212,20 +210,18 @@ const cardController = {
     async updateCard (req, res, next) {
         const { title, description, environmentalrating, economicrating, value, tags } = req.body;
 
-        // We don't know yet how the front will work so for now we assume that req.body.image will be null if there is no image change
-        // Careful with validation because at the moment req.body.image is not required, let's see what we can do about this later
         const previousCard = await Card.findByPk(req.params.id);
         let image;
         if(req.body.image) {
             //removing the previous image
-            fs.unlinkSync(`uploads/images/${previousCard.image}`);
+            fs.unlinkSync(`uploads/images/cards/${previousCard.image}`);
 
             const fileParts = req.body.image.split(';base64,');
             const extension = fileParts[0].split('/');
             //Removing all punctuation from the card title in order to use it as the image file name
             const imageTitle = title.replace(/[.,\/#!$%\^&\*;:{}= \-_`~()']/g, '').split(' ').join('_').toLowerCase();
             // Converting the base64 into an actual image
-            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
+            fs.writeFileSync(path.resolve(__dirname,`../../uploads/images/cards/${imageTitle}.${extension[1]}`), fileParts[1], "base64");
 
             // new image column value
             image = `${imageTitle}.${extension[1]}`;
@@ -309,8 +305,9 @@ const cardController = {
         try {
             const card = await Card.getLatestCard();
 
-            // adding the path to the image name
-            card.image = getImagePath(card.image);
+            // adding the path to the image names
+            card.image = getImagePath.getCardImagePath(card.image);
+
 
             // debug(card);
             res.json(card);

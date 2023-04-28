@@ -87,8 +87,27 @@ const tagSchema = Joi.object({
     }),
 });
 
+const achievementSchema = Joi.object({
+  title: Joi.string().required().messages({
+    'string.base' : `'Titre' doit être une chaîne de caractère.`,
+    'string.empty': `Le champ 'Titre' ne peut pas être vide.`,
+    'any.required': `Le champ 'Titre' est manquant.`
+  }),
+  image: Joi.string().messages({
+      'string.empty': `Image manquante.`,
+      'any.required': `Image manquante.`
+    }),
+  description: Joi.string().required().messages({
+      'string.base' : `'Description' doit être une chaîne de caractère.`,
+      'string.empty': `Le champ 'Description' ne peut pas être vide.`,
+      'any.required': `Le champ 'Description' est manquant.`
+    }),
+});
+
+
 module.exports = {
     userSchema,
     cardSchema,
-    tagSchema
+    tagSchema,
+    achievementSchema
 };

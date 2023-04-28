@@ -4,6 +4,7 @@ const Tag = require("./Tag.js");
 const TagCard = require("./TagCard.js");
 const User = require("./User.js");
 const UserCard = require("./UserCard.js");
+const Achievement = require("./Achievement.js");
 
 module.exports = {
     Card,
@@ -11,5 +12,6 @@ module.exports = {
     Tag,
     TagCard,
     User,
-    UserCard
+    UserCard,
+    Achievement
 };
