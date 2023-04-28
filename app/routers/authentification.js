@@ -34,6 +34,6 @@ authentificationRouter.post("/sign-up", validationModule.validateUserCreation, u
  * @returns {object} 200 - Jwt's access token, user's firstname an user's role_id
  * @returns {APIError} error
  */
-// authentificationRouter.post('/refreshtoken', userController.refreshAccess);
+authentificationRouter.post('/refreshtoken', userController.refreshAccess);
 
 module.exports = authentificationRouter;
