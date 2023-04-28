@@ -101,6 +101,7 @@ class User extends Core {
             CONCAT(u.firstname, ' ',u.lastname) AS "user",
             u.score
             FROM "user" u
+			WHERE u.id > 1
             ORDER BY u.score DESC LIMIT 5;`,
         };
         const result = await this.client.query(preparedQuery);
@@ -119,7 +120,7 @@ class User extends Core {
             COUNT(user_id) AS "cards_created"
             FROM card c
             JOIN "user" u ON u.id = c.user_id
-            WHERE CONCAT(u.firstname, ' ',u.lastname) NOT LIKE '%admin admin%'
+            WHERE u.id > 1
             GROUP BY "user", u.id
             ORDER BY cards_created DESC LIMIT 5;`
         };

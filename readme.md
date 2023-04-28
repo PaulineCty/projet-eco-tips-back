@@ -70,9 +70,9 @@ Eco Tips est une application web qui permet, de manière ludique, à ses utilisa
 6. Utiliser la commande pour importer les données avec `psql -U ecotips -d ecotips -f data/import_data.sql -h localhost`.
 7. Créer deux utilisateurs (email : 'laura.teur@gmail.com' et 'jean.biance@gmail.com', mdp : Azerty123!) en se connectant au serveur et en utilisant la route /sign-up avec Insomnia par exemple ou directement depuis l'IHM côté front. Pour cela réaliser l'étape 11 et connecter vous au serveur (voir étape 2 du prochain chapitre). Une fois les utilisateurs créés, reprendre à l'étape 7.
 8. Utiliser la commande `psql -U ecotips -d ecotips -h localhost`.
-9. Ajouter des cartes au premier utilisateur créé avec `INSERT INTO user_card ( user_id, card_id, expiration_date) VALUES (3,1,'2023-05-25'), (3,25,'2023-03-05'), (3,48,'2023-02-05'), (3,10,'2023-01-01');`.
-10. Passer une des cartes en statut fini avec `UPDATE user_card SET state = true WHERE user_id =3 AND card_id = 25;`.
-11. Passer le deuxième utilisateur créé en administrateur avec `UPDATE "user" SET role_id=1 WHERE id=4;`. Quitter avec Ctrl+D.
+9. Ajouter des cartes au premier utilisateur créé avec `INSERT INTO user_card ( user_id, card_id, expiration_date) VALUES (2,1,'2023-05-25'), (2,25,'2023-03-05'), (2,48,'2023-02-05'), (2,10,'2023-01-01');`.
+10. Passer une des cartes en statut fini avec `UPDATE user_card SET state = true WHERE user_id = 2 AND card_id = 25;`.
+11. Passer le deuxième utilisateur créé en administrateur avec `UPDATE "user" SET role_id=1 WHERE id=3;`. Quitter avec Ctrl+D.
 12. Lancer le serveur avec `npm run start`.
 13. Votre BDD est maintenant prête.
 14. Pour arrêter le serveur utiliser `npm run stop`.
