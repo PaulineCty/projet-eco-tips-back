@@ -60,7 +60,7 @@ achievementRouter.delete("/achievement/:id(\\d+)", authentificationTokenMiddlewa
 
 /**
  * @route PATCH /achievement/:id
- * @group Achievement - Updating a achievement
+ * @group Achievement - Updating an achievement
  * @param {number} id - The id of the achievement to update
  * @param {Achievement} user.body.required - Achievement Object
  * @returns {void} - No Content (HTTP 204) response
