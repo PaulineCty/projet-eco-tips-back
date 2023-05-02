@@ -126,7 +126,10 @@ const achievementController = {
             const achievement = await Achievement.findOneRandomAchievement();
 
             // adding the path to the image name
-            achievement.image = getImagePath.getAchievementImagePath(achievement.image);
+            if(achievement) {
+                achievement.image = getImagePath.getAchievementImagePath(achievement.image);  
+              }
+
 
             res.json(achievement);
         } catch (error) {

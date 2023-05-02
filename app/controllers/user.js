@@ -3,7 +3,7 @@ const APIError = require("../services/error/APIError");
 const authentificationToken = require('../services/authentification/authentificationToken');
 
 const debug = require('debug')("controller:user");
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 /**
@@ -34,7 +34,7 @@ const userController = {
             await User.create({firstname, lastname, email, password: hashedPassword, birthdate});
             res.status(200).json();
         } catch (error) {
-            next(new APIError("Erreur lors de l'inscription", 500));
+            return next(new APIError("Erreur lors de l'inscription", 500));
         }
         
     },
@@ -54,30 +54,28 @@ const userController = {
             // Checking if an account exists with this email
             const user = await User.findByEmail(email);
             if(!user) {
-                next(new APIError('Couple login/mot de passe est incorrect.', 401));
-            } else {
-                // Checking if the password is matching
-                const hasMatchingPassword = await bcrypt.compare(password, user.password);
-                if(!hasMatchingPassword) {
-                    next(new APIError('Couple login/mot de passe est incorrect.', 401));
-                }
-
-                // Generating a token and redirecting to the home page
-                const accessToken = authentificationToken.generateAccessToken(user);
-                const refreshToken = authentificationToken.generateRefreshToken(user);
-
-                res.json({ 
-                    accessToken,
-                    refreshToken, 
-                    firstname : user.firstname,
-                    role_id : user.role_id,
-                    score : user.score,
-                    ecocoins : user.ecocoins
-                });
+                return next(new APIError('Couple login/mot de passe est incorrect.', 401));
+            }
+            // Checking if the password is matching
+            const hasMatchingPassword = await bcrypt.compare(password, user.password);
+            if(!hasMatchingPassword) {
+                return next(new APIError('Couple login/mot de passe est incorrect.', 401));
             }
 
+            // Generating a token and redirecting to the home page
+            const accessToken = authentificationToken.generateAccessToken(user);
+            const refreshToken = authentificationToken.generateRefreshToken(user);
+
+            res.json({ 
+                accessToken,
+                refreshToken, 
+                firstname : user.firstname,
+                role_id : user.role_id,
+                score : user.score,
+                ecocoins : user.ecocoins
+            });
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
      },
@@ -90,34 +88,33 @@ const userController = {
      * @return {object} return an object with jwt's access token, user's firstname and user's role_id
      * @returns {APIError} error
      */
-    // async refreshAccess (req, res, next) {
-    //     const authHeader = req.headers.authorization;
-    //     //authHeader's authorization format is "Bearer token" hence the .split(' ')[1]
-    //     const token = authHeader && authHeader.split(' ')[1];
+    async refreshAccess (req, res, next) {
+        const authHeader = req.headers.authorization;
+        //authHeader's authorization format is "Bearer token" hence the .split(' ')[1]
+        const token = authHeader && authHeader.split(' ')[1];
    
-    //     if (!token) return next(new APIError('Veuillez vous authentifier pour accéder à cette page.', 401));
+        if (!token) return next(new APIError('Veuillez vous authentifier pour accéder à cette page.', 401));
         
-    //     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
-    //         if (err) {
-    //             next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
-    //         }
+        jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
+            if (err) {
+                return next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
+            } 
+            // Checking if the user still exists
+            const userCheck = await User.findByEmail(user.email);
+            
+            if(!userCheck) {
+                return next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
+            } 
 
-    //         // Checking if the user still exists
-    //         const userCheck = await User.findByEmail(user.email);
+            delete user.iat;
+            delete user.exp;
 
-    //         if(!userCheck) {
-    //             next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
-    //         } 
-           
-    //         delete user.iat;
-    //         delete user.exp;
-        
-    //         const refreshedToken = authentificationToken.generateAccessToken(user);
-    //         res.json({
-    //             accessToken: refreshedToken,
-    //         });
-    //     });
-    //   },
+            const refreshedToken = authentificationToken.generateAccessToken(user);
+            res.json({
+                accessToken: refreshedToken,
+            });
+        });
+      },
     
     /**
      * Gets a user's information
@@ -134,7 +131,7 @@ const userController = {
             // debug(user);
             res.json(user);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }  
     },
 
@@ -170,7 +167,7 @@ const userController = {
                 birthdate : updatedUser.birthdate
             });
         } catch (error) {
-            next(new APIError("Erreur lors de la modification du profil", 500));
+            return next(new APIError("Erreur lors de la modification du profil", 500));
         }
     },
 
@@ -189,12 +186,12 @@ const userController = {
             // debug(tag);
 
             if(!user) {
-                next(new APIError(`Le profil n'a pas été supprimé.`,400));
+                return next(new APIError(`Le profil n'a pas été supprimé.`,400));
             } else {
                 res.status(204).json();
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
@@ -214,7 +211,7 @@ const userController = {
 
             res.json(users);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         } 
     },
 
@@ -231,12 +228,12 @@ const userController = {
             const user = await User.setUserAsAdmin(req.params.id);
  
             if(!user) {
-                next(new APIError(`Le profil n'a pas mis à jour.`,400));
+                return next(new APIError(`Le profil n'a pas mis à jour.`,400));
             } else {
                 res.status(204).json();
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         } 
     },
 
@@ -254,7 +251,7 @@ const userController = {
             // debug(users);
             res.json(users);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         } 
     },
 
@@ -272,7 +269,7 @@ const userController = {
             // debug(users);
             res.json(users);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
     }
 };   
