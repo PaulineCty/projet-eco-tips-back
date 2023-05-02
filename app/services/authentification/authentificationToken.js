@@ -44,7 +44,7 @@ const authentificationToken = {
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
       if (err) {
-        next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
+        return next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
       }
       req.user = user;
       next();
