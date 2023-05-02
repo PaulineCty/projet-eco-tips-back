@@ -10,8 +10,8 @@ const errorModule = {
      * @param {function} __ Express' function executing the succeeding middleware
      */
     async manage(err, _, res, __) {
-            debug(err);
-            return res.status(err.code).json({ message : err.message});
+        debug(err);
+        return res.status(err.code).json({ message : err.message});
     },
 
     /**
