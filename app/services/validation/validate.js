@@ -286,7 +286,7 @@ const validationModule = {
         try {
             const achievement = await Achievement.findByTitle(req.body.title);
 
-            if(achievement && achievement.title !== Achievement.title) {
+            if(achievement && achievement.title !== previousAchievement.title) {
                 next(new APIError('Un accomplissement ayant le même titre existe déjà.', 400));
             }
         } catch (error) {

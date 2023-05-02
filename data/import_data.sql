@@ -9,10 +9,6 @@ INSERT INTO "user"(firstname, lastname, email, password, birthdate, role_id)
 VALUES 
 ('eco', 'tips', 'eco.tips@gmail.com', 'password', '2023-04-14', 1);
 
-INSERT INTO "user"(firstname, lastname, email, password, birthdate)
-VALUES 
-('Beth', 'Rave', 'bethrave@gmail.com', 'password', '2000-04-13');
-
 
 -- card table
 INSERT INTO card(image, title, description, environmental_rating, economic_rating, value, proposal, created_at, user_id)

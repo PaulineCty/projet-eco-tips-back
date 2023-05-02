@@ -2,10 +2,9 @@
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
 
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkM2pHeFhTVWEyWkU5SXplcEE3M201dWlXdzViTXBLenhlVGlWRU1Gd3dSL1BrL0VXQWZJanUiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yN1QxNDowMzoyMC42MDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNjA0MjAzLCJleHAiOjE2ODI2MDYwMDN9.7fXqk7Erii7IFgGV-gXcTZb3oOI9xL-NuGM1mQtDZFM
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkFtYXIiLCJsYXN0bmFtZSI6IkRpIiwiZW1haWwiOiJhbWFyLmRpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDFpN01JQTBoR0xrSUw1NGxsWDN5cS5wcDNKSVlOOENLTUNiZlVENksyS1djamltZUJSeE1HIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjUwLCJzY29yZSI6MCwicm9sZV9pZCI6MiwiY3JlYXRlZF9hdCI6IjIwMjMtMDUtMDJUMTE6Mjk6NTkuMDU5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MzAyNzAwMCwiZXhwIjoxNjgzMDI4ODAwfQ.q8DAOR-0Obr_OzgR3HTVQifHlSmYB8LxVx5z7s0GjBk
 
-@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3RuYW1lIjoiTGF1cmEiLCJsYXN0bmFtZSI6IlRldXIiLCJlbWFpbCI6ImxhdXJhLnRldXJAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkM2pHeFhTVWEyWkU5SXplcEE3M201dWlXdzViTXBLenhlVGlWRU1Gd3dSL1BrL0VXQWZJanUiLCJiaXJ0aGRhdGUiOiIxOTkwLTA1LTA0VDIyOjAwOjAwLjAwMFoiLCJlY29jb2lucyI6NTAsInNjb3JlIjowLCJyb2xlX2lkIjoyLCJjcmVhdGVkX2F0IjoiMjAyMy0wNC0yN1QxNDowMzoyMC42MDZaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjgyNjA0MjAzLCJleHAiOjE2ODI2NDAyMDN9.2s4s9ZGYpCNHxiHOy_YfipCDy7H2A40suhCv5FhGFvg
-
+@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImZpcnN0bmFtZSI6IkFtYXIiLCJsYXN0bmFtZSI6IkRpIiwiZW1haWwiOiJhbWFyLmRpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDlpSFlWMzVTNXZXVkx6YzNZMldEWi5KLy96L3F1V3NNbnMudi5KcEs3R0VjQ2lZT3Z1TGFtIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjUwLCJzY29yZSI6MCwicm9sZV9pZCI6MiwiY3JlYXRlZF9hdCI6IjIwMjMtMDUtMDJUMTE6MjA6NDguNDMzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MzAyNjQ1MiwiZXhwIjoxNjgzMDYyNDUyfQ.-ZImGhMIKB_UB1AhXfycs0D9_uYy6a_aVpK2B2O0eQ4
 ###
 
 # /********************************************\ #
@@ -18,9 +17,9 @@ POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
-    "firstname": "Laura",
-    "lastname": "Teur",
-    "email":"laura.teur@gmail.com",
+    "firstname": "Amar",
+    "lastname": "Di",
+    "email":"amar.di@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "05/05/1990"
@@ -34,7 +33,7 @@ POST http://localhost:3000/sign-in
 Content-Type: application/json
 
 {
-    "email":"laura.teur@gmail.com",
+    "email":"amar.di@gmail.com",
     "password":"Azerty123!"
 }
 
@@ -132,7 +131,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "cardId":49,
+    "cardId":14,
     "expirationDate":"01-01-2023"
 }
 
@@ -140,7 +139,7 @@ Authorization: {{token}}
 
 
 # UPDATES USER_CARD STATE TO TRUE
-PATCH http://localhost:3000/me/collection/card/10
+PATCH http://localhost:3000/me/collection/card/14
 Authorization: {{token}}
 
 ###
