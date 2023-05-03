@@ -109,7 +109,7 @@ paths:
     patch:
       tags:
         - user
-      summary: Updates user's data
+      summary: Updates user's data (password not included)
       description: Updates one to many user's data
       operationId: updateProfile
       requestBody:
@@ -117,7 +117,66 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Sign-up'
+              type: object
+              properties:
+                firstname:
+                  type: string
+                  description: user's firstname
+                  example: John
+                lastname:
+                  type: string
+                  description: user's lastname
+                  example: Doe
+                email:
+                  type: string
+                  description: user's email
+                  pattern: '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$'
+                  example: john.doe@example.com
+                birthdate:
+                  type: string
+                  description: user's date of birth
+                  example: 1970-01-01
+      responses:
+        '204':
+          description: Successful operation
+        '401':
+          description: Invalid identifiers/Inputs must not be empty
+      security:
+        - Jwt: []
+    delete:
+      tags:
+        - user
+      summary: Deletes user's data 
+      description: Deletes user from the app
+      operationId: deleteProfile
+      responses:
+        '204':
+          description: Successful operation
+      security:
+        - Jwt: []
+  /me/user/password:
+    patch:
+      tags:
+        - user
+      summary: Updates user's password
+      description: Updates user's password
+      operationId: updatePassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: user's new password
+                  pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+                  example: Azertyuiop*4
+                confirmpassword:
+                  type: string
+                  description: new password confirmation
+                  example: Azertyuiop*4
       responses:
         '204':
           description: Successful operation
@@ -131,22 +190,10 @@ paths:
                     message:
                       type: string
                       example: 
+                        - "Merci de renseigner un mot de passe différent du précédent."
                         - "Couple login/mot de passe est incorrect."
                         - "Format du mot de passe incorrect : 8 caractères minimum comprenant au minimum 1 chiffre, 1 lettre miniscule, 1 lettre majuscule et 1 caractère spécial."
                         - "Le champ 'nom du champ' ne peut pas être vide."
-      security:
-        - Jwt: []
-    delete:
-      tags:
-        - user
-      summary: Deletes user's data
-      description: Deletes user from the app
-      operationId: deleteProfile
-      responses:
-        '204':
-          description: Successful operation
-      security:
-        - Jwt: []
   /user:
     get:
       tags:
