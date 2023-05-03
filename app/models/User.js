@@ -57,7 +57,7 @@ class User extends Core {
      * @param {number} id user's id
      * @returns {User} a User instance
      */
-    async findByPk(id) {
+    async findByPkWoPassword(id) {
         const preparedQuery = {
             text : `SELECT 
                     u.id,

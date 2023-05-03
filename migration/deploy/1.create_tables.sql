@@ -30,7 +30,7 @@ CREATE TABLE "user"
     "updated_at" TIMESTAMPTZ
 );
 
-CREATE INDEX email_idx ON "user" USING hash(email);
+CREATE INDEX email_user_idx ON "user" USING hash(email);
 
 CREATE TABLE card
 (
@@ -49,6 +49,8 @@ CREATE TABLE card
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMPTZ
 );
+
+CREATE INDEX proposal_card_idx ON "card" USING hash(proposal);
 
 CREATE TABLE tag
 (
@@ -81,6 +83,9 @@ CREATE TABLE user_card
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMPTZ
 );
+
+CREATE INDEX user_id_user_card_idx ON "user_card" USING hash(user_id);
+CREATE INDEX card_id_user_card_idx ON "user_card" USING hash(card_id);
 
 CREATE TABLE tag_card
 (
