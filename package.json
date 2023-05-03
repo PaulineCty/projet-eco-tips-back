@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cypress open",
     "dev": "DEBUG=controller:card,controller:user,model:card,router:collection,database nodemon server.js",
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "pm2_start": "pm2 start server.js",
     "pm2_stop": "pm2 stop server.js"
   },
