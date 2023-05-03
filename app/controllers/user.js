@@ -127,7 +127,7 @@ const userController = {
     async getProfile (req, res, next) {
         try {
             // here we are not returning the password for security reasons
-            const user = await User.findByPk(req.user.id);
+            const user = await User.findByPkWoPassword(req.user.id);
             // debug(user);
             res.json(user);
         } catch (error) {
@@ -144,22 +144,11 @@ const userController = {
      * @returns {APIError} error
      */
     async updateProfile (req, res, next) {
-
-        // Try to create a coalesce SQL request in order to update one to many data 
-        // and setup a new validateschema specific profile modification
-        const {firstname, lastname, email, password, birthdate} = req.body;
-
-        let hashedPassword;
-        if (password && password.trim().length > 0) {
-            const saltRounds = 10;
-            const salt = await bcrypt.genSalt(saltRounds);
-            hashedPassword = await bcrypt.hash(password, salt);
-        }
+        const {firstname, lastname, email, birthdate} = req.body;
 
         try {
-            const updatedUser = await User.update({id: req.user.id},{firstname, lastname, email, password: hashedPassword, birthdate});
+            const updatedUser = await User.update({id: req.user.id},{firstname, lastname, email, birthdate});
 
-            // Ask to front what information they need
             res.json({ 
                 firstname : updatedUser.firstname,
                 lastname : updatedUser.lastname,
@@ -168,6 +157,30 @@ const userController = {
             });
         } catch (error) {
             return next(new APIError("Erreur lors de la modification du profil", 500));
+        }
+    },
+
+    /**
+     * Updates a user's password
+     * @param {object} req Express' request
+     * @param {object} res Express' response
+     * @param {function} next Express' function executing the succeeding middleware
+     * @return {void} - No Content (HTTP 204) response
+     * @returns {APIError} error
+     */
+    async updatePassword (req, res, next) {
+
+        // Password encrypting
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+        try {
+            await User.update({id: req.user.id},{password: hashedPassword});
+
+            res.status(204).json();
+        } catch (error) {
+            return next(new APIError("Erreur lors de la modification du mot de passe", 500));
         }
     },
 

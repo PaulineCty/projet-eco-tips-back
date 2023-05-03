@@ -23,10 +23,13 @@ const updatedUser = {
   "firstname": "John",
   "lastname": "Doedoe",
   "email": "john.doe@gmail.com",
-  "password": "Azerty123!",
-  "confirmpassword": "Azerty123!",
   "birthdate": "05/05/1990"
 };
+
+const updatedPassword = {
+  "password": "Azerty12345!",
+  "confirmpassword": "Azerty12345!"
+}
 
 const achievement = {
   "title": "TestCypress",
@@ -42,6 +45,11 @@ const newCard = {
   "economicrating":3,
   "value": 20,
   "tags": [1,2]
+};
+
+const updatedSignIn = {
+    "email":"john.doe@gmail.com",
+    "password":"Azerty12345!"
 };
 
 const updatedNewCard = {
@@ -163,10 +171,27 @@ describe('API Automation Test', ()=> {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
-      }).as('updateUserProfile');
+      }).as('updateProfile');
 
-      cy.get('@updateUserProfile').then( response => {
+      cy.get('@updateProfile').then( response => {
         expect(response.status).to.eq(200);
+      });
+    });
+
+
+    it('Updates the user\'s password', () => {
+    
+      cy.request({
+        method: "PATCH",
+        url: `${endPoint}/me/user/password`,
+        body: updatedPassword,
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }).as('updatePassword');
+
+      cy.get('@updatePassword').then( response => {
+        expect(response.status).to.eq(204);
       });
     });
 
@@ -410,7 +435,7 @@ describe('API Automation Test', ()=> {
       cy.request({
         method: "POST",
         url: `${endPoint}/sign-in`,
-        body: signIn
+        body: updatedSignIn
       }).as('postUserLog');
 
       cy.get('@postUserLog').then( response => {

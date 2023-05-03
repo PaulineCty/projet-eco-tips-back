@@ -37,6 +37,39 @@ const userSchema = Joi.object({
       })
 });
 
+const userEditionSchema = Joi.object({
+  firstname: Joi.string().pattern(nameFormat).required().messages({
+      'string.pattern.base': `Caractère(s) non autorisé(s) dans le champ 'Prénom'.`,
+      'string.empty': `Le champ 'Prénom' ne peut pas être vide.`,
+      'any.required': `Le champ 'Prénom' est manquant.`
+    }),
+  lastname: Joi.string().pattern(nameFormat).required().messages({
+      'string.pattern.base': `Caractère(s) non autorisé(s) dans le champ 'Nom'.`,
+      'string.empty': `Le champ 'Nom' ne peut pas être vide.`,
+      'any.required': `Le champ 'Nom' est manquant.`
+    }),
+  email: Joi.string().pattern(emailFormat).required().messages({
+      'string.pattern.base': `Caractère(s) non autorisé(s) dans le champ 'Email' ou format non valide.`,
+      'string.empty': `Le champ 'Email' ne peut pas être vide.`,
+      'any.required': `Le champ 'Email' est manquant.`
+    }),
+  birthdate: Joi.date().max('now').required().messages({
+      'date.base' : `'Date de naissance' doit être une date.`,
+      'date.format': `Format du champ 'Date de naissance' incorrect.`,
+      'any.empty': `Le champ 'Date de naissance' ne peut pas être vide.`,
+      'any.required': `Le champ 'Date de naissance' est manquant.`
+    })
+});
+
+const userEditionPasswordSchema = Joi.object({
+  password: Joi.string().pattern(passwordFormat).required().messages({
+    'string.pattern.base': `Format du mot de passe incorrect : 8 caractères minimum comprenant au minimum 1 chiffre, 1 lettre miniscule, 1 lettre majuscule et 1 caractère spécial.'.`,
+    'string.empty': `Le champ 'Mot de passe' ne peut pas être vide.`,
+    'any.required': `Le champ 'Mot de passe' est manquant.`
+  }),
+  confirmpassword: Joi.string().required().valid(Joi.ref('password')).messages({'any.only': `Les deux mots de passe doivent être identiques.`})
+});
+
 const cardSchema = Joi.object({
   image: Joi.string().messages({
       'string.empty': `Image manquante.`,
@@ -107,6 +140,8 @@ const achievementSchema = Joi.object({
 
 module.exports = {
     userSchema,
+    userEditionSchema,
+    userEditionPasswordSchema,
     cardSchema,
     tagSchema,
     achievementSchema
