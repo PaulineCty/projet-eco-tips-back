@@ -2,7 +2,7 @@
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
 
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0bmFtZSI6IkFtYXIiLCJsYXN0bmFtZSI6IkRpIiwiZW1haWwiOiJhbWFyLmRpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDFpN01JQTBoR0xrSUw1NGxsWDN5cS5wcDNKSVlOOENLTUNiZlVENksyS1djamltZUJSeE1HIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjUwLCJzY29yZSI6MCwicm9sZV9pZCI6MiwiY3JlYXRlZF9hdCI6IjIwMjMtMDUtMDJUMTE6Mjk6NTkuMDU5WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MzAyNzAwMCwiZXhwIjoxNjgzMDI4ODAwfQ.q8DAOR-0Obr_OzgR3HTVQifHlSmYB8LxVx5z7s0GjBk
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRRNmhLRTR1Nk9VVXZGNnlHUG44TTAuYXRFSk8wdnd6cWdIRlI3TVFGczdXMm5DaWxmWXZMeSIsImJpcnRoZGF0ZSI6IjE5OTAtMDUtMDRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA1LTAzVDExOjMxOjU5LjIyMVoiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE2ODMxMTUyNTUsImV4cCI6MTY4MzExNzA1NX0.bhWKEnYR4T9vvrwL2_dJv4-R228ap0Lp-Nti7cjXDnQ
 
 @refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImZpcnN0bmFtZSI6IkFtYXIiLCJsYXN0bmFtZSI6IkRpIiwiZW1haWwiOiJhbWFyLmRpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDlpSFlWMzVTNXZXVkx6YzNZMldEWi5KLy96L3F1V3NNbnMudi5KcEs3R0VjQ2lZT3Z1TGFtIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjUwLCJzY29yZSI6MCwicm9sZV9pZCI6MiwiY3JlYXRlZF9hdCI6IjIwMjMtMDUtMDJUMTE6MjA6NDguNDMzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MzAyNjQ1MiwiZXhwIjoxNjgzMDYyNDUyfQ.-ZImGhMIKB_UB1AhXfycs0D9_uYy6a_aVpK2B2O0eQ4
 ###
@@ -17,9 +17,9 @@ POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
-    "firstname": "Amar",
-    "lastname": "Di",
-    "email":"amar.di@gmail.com",
+    "firstname": "Jean",
+    "lastname": "Biance",
+    "email":"jean.biance@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "05/05/1990"
@@ -68,7 +68,6 @@ Authorization: {{token}}
 
 ###
 
-
 # UPDATES USER'S DATA
 PATCH http://localhost:3000/me/user
 Content-Type: application/json
@@ -78,13 +77,22 @@ Authorization: {{token}}
     "firstname": "Jean",
     "lastname": "Biance",
     "email": "jean.biance@gmail.com",
-    "password": "Azerty123!",
-    "confirmpassword": "Azerty123!",
     "birthdate": "06/05/1991"
 }
 
 ###
 
+# UPDATES USER'S PASSWORD
+PATCH http://localhost:3000/me/user/password
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "password": "Azerty123!",
+    "confirmpassword": "Azerty123!"
+}
+
+###
 
 # DELETES USER
 DELETE http://localhost:3000/me/user

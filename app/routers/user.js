@@ -21,12 +21,21 @@ profileRouter.get("/me/user", userController.getProfile);
 
 /**
  * @route PATCH /me/user
- * @group User - Editing a user's information
+ * @group User - Editing a user's information (password not included)
  * @param {User} user.body.required - User Object
  * @return {object} parts of a User instance hiding any password related information
  * @returns {APIError} error
  */
 profileRouter.patch("/me/user", validationModule.validateUserEdition, userController.updateProfile);
+
+/**
+ * @route PATCH /me/user/password
+ * @group User - Editing a user's password
+ * @param {User} user.body.required - User Object
+ * @return {void} - No Content (HTTP 204) response
+ * @returns {APIError} error
+ */
+profileRouter.patch("/me/user/password", validationModule.validateUserPasswordEdition, userController.updatePassword);
 
 /**
  * @route DELETE /me/user

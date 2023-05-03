@@ -1,6 +1,7 @@
 const APIError = require("../error/APIError");
 const { User, Card, Tag, Achievement } = require("../../models/index");
-const { userSchema, cardSchema, tagSchema, achievementSchema } = require("./schema");
+const { userSchema, userEditionSchema, userEditionPasswordSchema, cardSchema, tagSchema, achievementSchema } = require("./schema");
+const bcrypt = require('bcrypt');
 const debug = require("debug")("validation");
 
 /**
@@ -38,7 +39,7 @@ const validationModule = {
     },
 
     /**
-   * Validates the provided User object in order to modify it
+   * Validates the provided object in order to modify the user's information
    * @param {object} req Express' request
    * @param {object} _ Express' response
    * @param {function} next Express' function executing the succeeding middleware
@@ -48,10 +49,9 @@ const validationModule = {
     async validateUserEdition(req, _, next) {
         const previousUserInfo = await User.findByPk(req.user.id);
 
-        // We don't know yet how the password will be managed in the user edition form
-        // if(previousUserInfo.firstname === req.body.firstname && previousUserInfo.lastname === req.body.lastname && previousUserInfo.email === req.body.email && previousUserInfo.birthday === req.body.birthday ) {
-        //     next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
-        // }
+        if(previousUserInfo.firstname === req.body.firstname && previousUserInfo.lastname === req.body.lastname && previousUserInfo.email === req.body.email && previousUserInfo.birthday === req.body.birthday ) {
+            next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
+        }
 
         // Checking if the new User email is not already taken since it has to be unique
         try {
@@ -65,9 +65,36 @@ const validationModule = {
         }
 
         // The goal here is to send to the front a detailed error
-        const { error } = userSchema.validate(req.body);
+        const { error } = userEditionSchema.validate(req.body);
         if (error) {
             next(new APIError(error.message, 400));
+        }
+        else {
+            next();
+        }  
+    },
+
+     /**
+   * Validates the provided object in order to modify the user's password
+   * @param {object} req Express' request
+   * @param {object} _ Express' response
+   * @param {function} next Express' function executing the succeeding middleware
+   * @returns {void} - No content - Allowing to go to the next middleware
+   * @returns {APIError} error
+   */
+    async validateUserPasswordEdition(req, _, next) {
+        const previousUserInfo = await User.findByPk(req.user.id);
+
+        // Checking if the password has changed
+        const hasSamePassword = await bcrypt.compare(req.body.password, previousUserInfo.password);
+        if(hasSamePassword) {
+            return next(new APIError('Merci de renseigner un mot de passe différent du précédent.', 400));
+        }
+
+        // The goal here is to send to the front a detailed error
+        const { error } = userEditionPasswordSchema.validate(req.body);
+        if (error) {
+            return next(new APIError(error.message, 400));
         }
         else {
             next();

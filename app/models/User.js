@@ -57,7 +57,7 @@ class User extends Core {
      * @param {number} id user's id
      * @returns {User} a User instance
      */
-    async findByPk(id) {
+    async findByPkWoPassword(id) {
         const preparedQuery = {
             text : `SELECT 
                     u.id,
@@ -120,7 +120,7 @@ class User extends Core {
             COUNT(user_id) AS "cards_created"
             FROM card c
             JOIN "user" u ON u.id = c.user_id
-            WHERE u.id > 1
+            WHERE u.id > 1 AND c.proposal = false
             GROUP BY "user", u.id
             ORDER BY cards_created DESC LIMIT 5;`
         };
