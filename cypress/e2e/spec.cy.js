@@ -47,6 +47,11 @@ const newCard = {
   "tags": [1,2]
 };
 
+const updatedSignIn = {
+    "email":"john.doe@gmail.com",
+    "password":"Azerty12345!"
+};
+
 const updatedNewCard = {
   "title": "Cypress",
   "description": "description2",
@@ -430,7 +435,7 @@ describe('API Automation Test', ()=> {
       cy.request({
         method: "POST",
         url: `${endPoint}/sign-in`,
-        body: signIn
+        body: updatedSignIn
       }).as('postUserLog');
 
       cy.get('@postUserLog').then( response => {
