@@ -21,8 +21,8 @@ Eco Tips est une application web qui permet, de manière ludique, à ses utilisa
 
 1. Installer les dépendances avec la commande `npm install` ou `npm i`.
 2. Installer `nodemon` avec `npm install -g nodemon` et `pm2` avec `npm install pm2 -g` si ce n'est pas déjà fait.
-3. Lancer le serveur avec `npm run start`.
-4. Pour arrêter le serveur utiliser `npm run stop`.
+3. Lancer le serveur avec `npm run pm2_start`.
+4. Pour arrêter le serveur utiliser `npm run pm2_stop`.
 
 ## Déployer le projet sur une VM Cloud o'Clock
 
