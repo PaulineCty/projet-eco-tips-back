@@ -13,6 +13,8 @@ Eco Tips est une application web qui permet, de manière ludique, à ses utilisa
 4. Utiliser la commande `psql -U ecotips -d ecotips -f migration/deploy/1.create_tables.sql -h localhost`.
 5. Puis utiliser la commande `psql -U ecotips -d ecotips -f data/import_data.sql -h localhost`.
 
+Toute la documentation de l'api est disponible sur la route `/api-docs`.
+
 ### Créer le fichier .env
 
 1. Créer un fichier .env en reprenant les variables d'environnement se trouvant dans .env.example. Pour les variables `ACCESS_TOKEN_SECRET` et `REFRESH_TOKEN_SECRET` générer une chaîne de caractère de la manière de votre choix.
@@ -21,8 +23,8 @@ Eco Tips est une application web qui permet, de manière ludique, à ses utilisa
 
 1. Installer les dépendances avec la commande `npm install` ou `npm i`.
 2. Installer `nodemon` avec `npm install -g nodemon` et `pm2` avec `npm install pm2 -g` si ce n'est pas déjà fait.
-3. Lancer le serveur avec `npm run start`.
-4. Pour arrêter le serveur utiliser `npm run stop`.
+3. Lancer le serveur avec `npm run pm2_start`.
+4. Pour arrêter le serveur utiliser `npm run pm2_stop`.
 
 ## Déployer le projet sur une VM Cloud o'Clock
 
@@ -73,9 +75,9 @@ Eco Tips est une application web qui permet, de manière ludique, à ses utilisa
 9. Ajouter des cartes au premier utilisateur créé avec `INSERT INTO user_card ( user_id, card_id, expiration_date) VALUES (2,1,'2023-05-25'), (2,25,'2023-03-05'), (2,48,'2023-02-05'), (2,10,'2023-01-01');`.
 10. Passer une des cartes en statut fini avec `UPDATE user_card SET state = true WHERE user_id = 2 AND card_id = 25;`.
 11. Passer le deuxième utilisateur créé en administrateur avec `UPDATE "user" SET role_id=1 WHERE id=3;`. Quitter avec Ctrl+D.
-12. Lancer le serveur avec `npm run start`.
+12. Lancer le serveur avec `npm run pm2_start`.
 13. Votre BDD est maintenant prête.
-14. Pour arrêter le serveur utiliser `npm run stop`.
+14. Pour arrêter le serveur utiliser `npm run pm2_stop`.
 
 ### Rendre sa VM Cloud publique pour accéder à son adresse HTTP depuis l'exterieur
 
@@ -87,5 +89,5 @@ Eco Tips est une application web qui permet, de manière ludique, à ses utilisa
 1. Se rendre sur [https://kourou.oclock.io/ressources/vm-cloud/](). Ouvrir un terminal et y copier la clé SSH renseignée sur le lien précédent (si il y a une demande, dire `yes`).
 2. Se rendre dans le dossier du dépôt du projet avec `cd <mon_depot>`.
 3. Si besoin, récupérer la dernière version avec `git pull origin main` (S'assurer d'être sur la branch 'main' juste avant avec `git branch`). Puis installer les packages avec `npm i`.
-4. Lancer le serveur avec `npm run start`.
-5. Pour arrêter le serveur utiliser `npm run stop`.
+4. Lancer le serveur avec `npm run pm2_start`.
+5. Pour arrêter le serveur utiliser `npm run pm2_stop`.

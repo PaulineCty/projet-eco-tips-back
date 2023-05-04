@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "cypress open",
-    "dev": "DEBUG=controller:card,controller:user,model:card,router:collection,database nodemon server.js",
+    "dev": "DEBUG=controller:achievement,controller:card,controller:usercard,controller:user,controller:tag,model:achievement,model:card,model:tag,model:usercard,router:achievement,router:user,router:authentification,router:card,router:collection,router:proposal,router:tag,router:ranking,validation nodemon server.js",
     "start": "node server.js",
     "pm2_start": "pm2 start server.js",
     "pm2_stop": "pm2 stop server.js"

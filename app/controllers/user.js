@@ -18,7 +18,7 @@ const userController = {
      * @param {object} req Express' request
      * @param {object} res Express' response
      * @param {function} next Express' function executing the succeeding middleware
-     * @return {object} return an object with jwt's access token, user's firstname and user's role_id
+     * @returns {void} - No Content (HTTP 200) response
      * @returns {APIError} error
      */
     async signUp(req,res,next) {
@@ -44,7 +44,7 @@ const userController = {
      * @param {object} req Express' request
      * @param {object} res Express' response
      * @param {function} next Express' function executing the succeeding middleware
-     * @return {object} return an object with jwt's access token, user's firstname and user's role_id
+     * @return {object} return an object with jwt's access token, user's firstname, role_id, ecocoins and score
      * @returns {APIError} error
      */
     async signIn (req,res,next) {
@@ -85,7 +85,7 @@ const userController = {
      * @param {object} req Express' request
      * @param {object} res Express' response
      * @param {function} next Express' function executing the succeeding middleware
-     * @return {object} return an object with jwt's access token, user's firstname and user's role_id
+     * @return {object} return an object with a jwt's access token
      * @returns {APIError} error
      */
     async refreshAccess (req, res, next) {
@@ -128,7 +128,10 @@ const userController = {
         try {
             // here we are not returning the password for security reasons
             const user = await User.findByPkWoPassword(req.user.id);
-            // debug(user);
+
+            //converting the birthdate
+            user.birthdate = new Intl.DateTimeFormat('default', { timeZoneName: 'short'}).format(new Date(user.birthdate));
+
             res.json(user);
         } catch (error) {
             return next(new APIError(`Erreur interne : ${error}`,500));
@@ -147,13 +150,16 @@ const userController = {
         const {firstname, lastname, email, birthdate} = req.body;
 
         try {
-            const updatedUser = await User.update({id: req.user.id},{firstname, lastname, email, birthdate});
+            const updatedUser = await User.update({id: req.user.id},{firstname, lastname, email, birthdate : new Date(birthdate)});
+
+            //converting the birthdate
+            const birthdateWithOffset = new Intl.DateTimeFormat('default', { timeZoneName: 'short'}).format(new Date(updatedUser.birthdate));
 
             res.json({ 
                 firstname : updatedUser.firstname,
                 lastname : updatedUser.lastname,
                 email : updatedUser.email,
-                birthdate : updatedUser.birthdate
+                birthdate : birthdateWithOffset
             });
         } catch (error) {
             return next(new APIError("Erreur lors de la modification du profil", 500));
@@ -196,7 +202,6 @@ const userController = {
         try {
             // deleting a user also deletes the lines associated with this user in the user_card table
             const user = await User.delete(req.user.id);
-            // debug(tag);
 
             if(!user) {
                 return next(new APIError(`Le profil n'a pas été supprimé.`,400));
@@ -220,7 +225,6 @@ const userController = {
         try {
             // here we are not returning the password for security reasons
             const users = await User.findAllWithRole();
-            // debug(users);
 
             res.json(users);
         } catch (error) {
@@ -251,7 +255,7 @@ const userController = {
     },
 
     /**
-     * Gets the 5 best user's order by score
+     * Gets the 5 best user's ordered by score
      * @param {object} _ Express' request
      * @param {object} res Express' response
      * @param {function} next Express' function executing the succeeding middleware
@@ -261,7 +265,7 @@ const userController = {
     async getRankingScore (req, res, next) {
         try {
             const users = await User.getUsersByScore();
-            // debug(users);
+
             res.json(users);
         } catch (error) {
             return next(new APIError(`Erreur interne : ${error}`,500));
@@ -279,7 +283,7 @@ const userController = {
     async getRankingCreation (req, res, next) {
         try {
             const users = await User.getUsersByProposedCards();
-            // debug(users);
+
             res.json(users);
         } catch (error) {
             return next(new APIError(`Erreur interne : ${error}`,500));

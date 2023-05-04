@@ -22,16 +22,16 @@ const validationModule = {
         try {
             const user = await User.findByEmail(req.body.email);
             if(user) {
-                next(new APIError('Cet email est déjà pris.', 400));
+                return next(new APIError('Cet email est déjà pris.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         // The goal here is to send to the front a detailed error
         const { error } = userSchema.validate(req.body);
         if (error) {
-            next(new APIError(error.message, 400));
+            return next(new APIError(error.message, 400));
         }
         else {
             next();
@@ -49,8 +49,8 @@ const validationModule = {
     async validateUserEdition(req, _, next) {
         const previousUserInfo = await User.findByPk(req.user.id);
 
-        if(previousUserInfo.firstname === req.body.firstname && previousUserInfo.lastname === req.body.lastname && previousUserInfo.email === req.body.email && previousUserInfo.birthday === req.body.birthday ) {
-            next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
+        if(previousUserInfo.firstname === req.body.firstname && previousUserInfo.lastname === req.body.lastname && previousUserInfo.email === req.body.email && new Intl.DateTimeFormat('default', { timeZoneName: 'short'}).format(new Date(previousUserInfo.birthdate)) === new Intl.DateTimeFormat('default', { timeZoneName: 'short'}).format(new Date(req.body.birthdate))) {
+            return next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
         }
 
         // Checking if the new User email is not already taken since it has to be unique
@@ -61,13 +61,13 @@ const validationModule = {
                 next(new APIError('Cet email est déjà pris.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         // The goal here is to send to the front a detailed error
         const { error } = userEditionSchema.validate(req.body);
         if (error) {
-            next(new APIError(error.message, 400));
+            return next(new APIError(error.message, 400));
         }
         else {
             next();
@@ -114,21 +114,21 @@ const validationModule = {
         try {
             const card = await Card.findByTitle(req.body.title);
             if(card) {
-                next(new APIError('Une carte ayant le même titre existe déjà.', 400));
+                return next(new APIError('Une carte ayant le même titre existe déjà.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         // Not allowing tags to be empty
         if(!req.body.tags.length) {
-            next(new APIError('Merci de renseigner au moins une catégorie.', 400));
+            return next(new APIError('Merci de renseigner au moins une catégorie.', 400));
         }
 
         // The goal here is to send to the front a detailed error
         const { error } = cardSchema.validate(req.body);
         if (error) {
-            next(new APIError(error.message, 400));
+            return next(new APIError(error.message, 400));
         }
         else {
             next();
@@ -150,28 +150,28 @@ const validationModule = {
 
         // If the user is not changing any values then we send an error 400.
         if(!req.body.image && previousCard.title === req.body.title && previousCard.description === req.body.description && previousCard.environmental_rating === req.body.environmentalrating && previousCard.economic_rating === req.body.economicrating && previousCard.value === req.body.value && !differenceInPrevious.length && !differenceInNew.length) {
-            next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
+            return next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
         };
 
         try {
             const card = await Card.findByTitle(req.body.title);
 
             if(card && card.title !== previousCard.title) {
-                next(new APIError('Une carte ayant le même titre existe déjà.', 400));
+                return next(new APIError('Une carte ayant le même titre existe déjà.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         // Not allowing tags to be empty
         if(!req.body.tags.length) {
-            next(new APIError('Merci de renseigner au moins une catégorie.', 400));
+            return next(new APIError('Merci de renseigner au moins une catégorie.', 400));
         }
 
         // The goal here is to send to the front a detailed error
         const { error } = cardSchema.validate(req.body);
         if (error) {
-            next(new APIError(error.message, 400));
+            return next(new APIError(error.message, 400));
         }
         else {
             next();
@@ -192,25 +192,25 @@ const validationModule = {
         try {
             const tag = await Tag.findByName(req.body.name);
             if(tag) {
-                next(new APIError('Un tag ayant le même nom existe déjà.', 400));
+                return next(new APIError('Un tag ayant le même nom existe déjà.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         try {
             const tag = await Tag.findByColor(req.body.color);
             if(tag) {
-                next(new APIError('Un tag ayant la même couleur existe déjà.', 400));
+                return next(new APIError('Un tag ayant la même couleur existe déjà.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         // The goal here is to send to the front a detailed error
         const { error } = tagSchema.validate(req.body);
         if (error) {
-            next(new APIError(error.message, 400));
+            return next(new APIError(error.message, 400));
         }
         else {
             next();
@@ -230,7 +230,7 @@ const validationModule = {
 
         // If the user is not changing any values then we send a error 400.
         if(previousTag.name === req.body.name && previousTag.color === req.body.color) {
-            next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
+            return next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
         }
 
         // Checking if the new Tag name is not already taken since it has to be unique
@@ -238,10 +238,10 @@ const validationModule = {
             const tag = await Tag.findByName(req.body.name);
 
             if(tag && tag.name !== previousTag.name) {
-                next(new APIError('Un tag ayant le même nom existe déjà.', 400));
+                return next(new APIError('Un tag ayant le même nom existe déjà.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         // Checking if the new Tag color is not already taken since it has to be unique
@@ -249,16 +249,16 @@ const validationModule = {
             const tag = await Tag.findByColor(req.body.color);
 
             if(tag && tag.color !== previousTag.color) {
-                next(new APIError('Un tag ayant la même couleur existe déjà.', 400));
+                return next(new APIError('Un tag ayant la même couleur existe déjà.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         // The goal here is to send to the front a detailed error
         const { error } = tagSchema.validate(req.body);
         if (error) {
-            next(new APIError(error.message, 400));
+            return next(new APIError(error.message, 400));
         }
         else {
             next();
@@ -278,16 +278,16 @@ const validationModule = {
         try {
             const achievement = await Achievement.findByTitle(req.body.title);
             if(achievement) {
-                next(new APIError('Un accomplissement ayant le même titre existe déjà.', 400));
+                return next(new APIError('Un accomplissement ayant le même titre existe déjà.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         // The goal here is to send to the front a detailed error
         const { error } = achievementSchema.validate(req.body);
         if (error) {
-            next(new APIError(error.message, 400));
+            return next(new APIError(error.message, 400));
         }
         else {
             next();
@@ -307,23 +307,23 @@ const validationModule = {
 
         // If the user is not changing any values then we send an error 400.
         if(!req.body.image && previousAchievement.title === req.body.title && previousAchievement.description === req.body.description) {
-            next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
+            return next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
         };
 
         try {
             const achievement = await Achievement.findByTitle(req.body.title);
 
             if(achievement && achievement.title !== previousAchievement.title) {
-                next(new APIError('Un accomplissement ayant le même titre existe déjà.', 400));
+                return next(new APIError('Un accomplissement ayant le même titre existe déjà.', 400));
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
         // The goal here is to send to the front a detailed error
         const { error } = achievementSchema.validate(req.body);
         if (error) {
-            next(new APIError(error.message, 400));
+            return next(new APIError(error.message, 400));
         }
         else {
             next();

@@ -6,7 +6,7 @@ const signUp = {
     "email":"john.doe@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
-    "birthdate": "05/05/1990"
+    "birthdate": "1990-05-05"
 };
 
 const signIn = {
@@ -21,9 +21,9 @@ const adminSignIn = {
 
 const updatedUser = {
   "firstname": "John",
-  "lastname": "Doedoe",
+  "lastname": "Doe",
   "email": "john.doe@gmail.com",
-  "birthdate": "05/05/1990"
+  "birthdate": "1990-05-06"
 };
 
 const updatedPassword = {
@@ -144,7 +144,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Gets the user\'s profil informations', () => {
+    it('Gets the user\'s profile information', () => {
 
       cy.request({
         method: "GET",
@@ -162,7 +162,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Updates the user\'s profil informations', () => {
+    it('Updates the user\'s profile information', () => {
     
       cy.request({
         method: "PATCH",
@@ -214,7 +214,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Adds the random card in userCard', () => {
+    it('Adds the random card in user_card', () => {
       cy.request({
         method: "POST",
         url: `${endPoint}/me/collection/card`,
@@ -351,7 +351,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Gets the 5 best user\'s ordered by score', () => {
+    it('Gets the 5 best users ordered by score', () => {
 
       cy.request({
         method: "GET",
@@ -654,7 +654,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Deletes the user\'s profil', () => {
+    it('Deletes the user\'s profile', () => {
     
       cy.request({
         method: "DELETE",
