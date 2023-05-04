@@ -6,7 +6,6 @@ const adminMiddleware = require('../services/authentification/isAdmin.js');
 const { Router } = require("express");
 const tagRouter = Router();
 
-
 /**
  * @typedef {import('../models/index').Tag} Tag;
  * @typedef {import('../services/error/APIError')} APIError;

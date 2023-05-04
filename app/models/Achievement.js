@@ -8,7 +8,7 @@ const debug = require('debug')("model:achievement");
  */
 
 /**
- * An Achievement is an object including a title, an image, a description and an user_id
+ * An Achievement is an object including a title, an image, a description and a user_id
  * @typedef {Object} Achievement
  * @property {string} title - title
  * @property {string} image - image
@@ -18,6 +18,11 @@ const debug = require('debug')("model:achievement");
 class Achievement extends Core {
     tableName = 'achievement';
 
+    /**
+     * Gets an Achievement instance corresponding to a given title
+     * @param {string} title card's title
+     * @returns {Achievement} a Card instance
+     */
     async findByTitle(title) {
         const preparedQuery = {
             text : `SELECT * FROM achievement

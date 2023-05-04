@@ -9,7 +9,6 @@ INSERT INTO "user"(firstname, lastname, email, password, birthdate, role_id)
 VALUES 
 ('eco', 'tips', 'eco.tips@gmail.com', 'password', '2023-04-14', 1);
 
-
 -- card table
 INSERT INTO card(image, title, description, environmental_rating, economic_rating, value, proposal, created_at, user_id)
 VALUES 
@@ -82,15 +81,6 @@ VALUES
 ('Travail','#c026d3'),
 ('Communauté', '#be185d'),
 ('Biodiversité', '#84cc16');
-
--- user_card table
-INSERT INTO user_card( user_id, card_id, expiration_date)
-VALUES 
-(1, 1, '2023-05-12'),
-(1, 2, '2023-05-08'),
-(1, 3, '2023-05-17'),
-(1, 4, '2023-10-12'),
-(1, 5, '2023-05-25');
 
 -- tag_card table
 INSERT INTO tag_card(tag_id, card_id)
@@ -221,6 +211,3 @@ VALUES
 (9, 50),
 (4, 50);
 
--- achievement table
--- INSERT INTO achievement(title, picture, description, user_id)
--- VALUES (?, ?, ?, ?);

@@ -50,15 +50,6 @@ achievementRouter.get("/achievement", authentificationTokenMiddleware.isAuthenti
 achievementRouter.get("/achievement/random", achievementController.getOneRandomAchievement);
 
 /**
- * @route DELETE /achievement/:id
- * @group Achievement - Deleting an achievement
- * @param {number} id - The id of the achievement to delete
- * @returns {void} - No Content (HTTP 204) response
- * @returns {APIError} error
- */
-achievementRouter.delete("/achievement/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.deleteAchievement);
-
-/**
  * @route PATCH /achievement/:id
  * @group Achievement - Updating an achievement
  * @param {number} id - The id of the achievement to update
@@ -67,5 +58,14 @@ achievementRouter.delete("/achievement/:id(\\d+)", authentificationTokenMiddlewa
  * @returns {APIError} error
  */
 achievementRouter.patch("/achievement/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, validationModule.validateAchievementEdition, achievementController.updateAchievement);
+
+/**
+ * @route DELETE /achievement/:id
+ * @group Achievement - Deleting an achievement
+ * @param {number} id - The id of the achievement to delete
+ * @returns {void} - No Content (HTTP 204) response
+ * @returns {APIError} error
+ */
+achievementRouter.delete("/achievement/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.deleteAchievement);
 
 module.exports = achievementRouter;
