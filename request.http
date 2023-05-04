@@ -2,7 +2,7 @@
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
 
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRGbzIuSHRSR0E1QWtFa0VMcGtiTkxlZ004dG5yMlpOeVA2V0w0bWc3dnNBTEZlaDMxMkEyNiIsImJpcnRoZGF0ZSI6IjE5OTEtMDQtMTNUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjIsImNyZWF0ZWRfYXQiOiIyMDIzLTA1LTA0VDA4OjMzOjM0Ljg2NVoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNS0wNFQwOTowMjo0MS4xODlaIiwiaWF0IjoxNjgzMTkxMzUyLCJleHAiOjE2ODMxOTMxNTJ9.85gtfWttQM0eZG0a1RKMTLzj6vJVKsc6V106BsROkRI
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRGbzIuSHRSR0E1QWtFa0VMcGtiTkxlZ004dG5yMlpOeVA2V0w0bWc3dnNBTEZlaDMxMkEyNiIsImJpcnRoZGF0ZSI6IjE5OTEtMDQtMTRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA1LTA0VDA4OjMzOjM0Ljg2NVoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNS0wNFQwOTozNDozNi4wMzlaIiwiaWF0IjoxNjgzMjA1OTM4LCJleHAiOjE2ODMyMDc3Mzh9.Oz_DHER1t_oQHNvl75UoqurvKC8OAhHb3e7Mdjoh6LY
 
 @refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImZpcnN0bmFtZSI6IkFtYXIiLCJsYXN0bmFtZSI6IkRpIiwiZW1haWwiOiJhbWFyLmRpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDlpSFlWMzVTNXZXVkx6YzNZMldEWi5KLy96L3F1V3NNbnMudi5KcEs3R0VjQ2lZT3Z1TGFtIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjUwLCJzY29yZSI6MCwicm9sZV9pZCI6MiwiY3JlYXRlZF9hdCI6IjIwMjMtMDUtMDJUMTE6MjA6NDguNDMzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MzAyNjQ1MiwiZXhwIjoxNjgzMDYyNDUyfQ.-ZImGhMIKB_UB1AhXfycs0D9_uYy6a_aVpK2B2O0eQ4
 ###
@@ -139,7 +139,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "cardId":14,
+    "cardId":5,
     "expirationDate":"01-01-2023"
 }
 
@@ -147,7 +147,7 @@ Authorization: {{token}}
 
 
 # UPDATES USER_CARD STATE TO TRUE
-PATCH http://localhost:3000/me/collection/card/14
+PATCH http://localhost:3000/me/collection/card/5
 Authorization: {{token}}
 
 ###

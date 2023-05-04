@@ -137,7 +137,7 @@ const achievementController = {
     },
 
     /**
-     * Updates a achievement
+     * Updates an achievement
      * @param {object} req Express' request
      * @param {object} res Express' response
      * @param {function} next Express' function executing the succeeding middleware

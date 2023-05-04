@@ -44,7 +44,7 @@ const userController = {
      * @param {object} req Express' request
      * @param {object} res Express' response
      * @param {function} next Express' function executing the succeeding middleware
-     * @return {object} return an object with jwt's access token, user's firstname and user's role_id
+     * @return {object} return an object with jwt's access token, user's firstname, role_id, ecocoins and score
      * @returns {APIError} error
      */
     async signIn (req,res,next) {

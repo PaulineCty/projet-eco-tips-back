@@ -304,7 +304,7 @@ paths:
       tags:
         - collection
       summary: Deletes a card from the user's collection
-      description: Deletes a card in the user's collection, deleting 
+      description: Deletes a card in the user's collection
       operationId: deleteUserCard
       responses:
         '204':
@@ -317,8 +317,8 @@ paths:
     post:
       tags:
         - proposal
-      summary: Add a card as a proposal
-      description: Add a user's proposed card (to be validated by an admin)
+      summary: Adds a card as a proposal
+      description: Adds a user's proposed card (to be validated by an admin)
       requestBody:
         required: true
         content:
