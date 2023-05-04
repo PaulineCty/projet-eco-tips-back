@@ -29,10 +29,9 @@ const cardController = {
                 card.image = getImagePath.getCardImagePath(card.image);
             });
 
-            // debug(cards);
             res.json(cards);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }        
     },
 
@@ -74,9 +73,9 @@ const cardController = {
                 tagCards.push(await TagCard.create({tag_id : tag, card_id : card.id}));
             }
             
-            return res.json({card, tagCards});
+            res.json({card, tagCards});
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
@@ -95,10 +94,9 @@ const cardController = {
             // adding the path to the image name
             card.image = getImagePath.getCardImagePath(card.image);
 
-            // debug(card);
             res.json(card);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
 
     },
@@ -120,10 +118,9 @@ const cardController = {
                 card.image = getImagePath.getCardImagePath(card.image);
             });
 
-            // debug(card);
             res.json(cards);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
@@ -140,13 +137,13 @@ const cardController = {
             const updatedCard = await Card.setProposalCardToFalse(req.params.id);
 
             if(!updatedCard) {
-                next(new APIError(`La carte n'a pas pu être validée.`,400));
+                return next(new APIError(`La carte n'a pas pu être validée.`,400));
             } else {
                 res.status(204).json();
             }
 
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
@@ -160,7 +157,6 @@ const cardController = {
      */
     async getAllUsersCards (req, res, next) {
         try {
-            //at the moment all cards with the corresponding user_id are returned : maybe the idea would be to have a different style in the Front highlighting the ones that are still in proposal=true so he can see which ones are public and which ones are not ?
             const cards = await Card.findByUser(req.user.id);
 
             // adding the path to the image names
@@ -168,10 +164,9 @@ const cardController = {
                 card.image = getImagePath.getCardImagePath(card.image);
             });
 
-            // debug(cards);
             res.json(cards);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         } 
     },
 
@@ -192,10 +187,9 @@ const cardController = {
                 card.image = getImagePath.getCardImagePath(card.image);
             });
 
-            // debug(cards);
             res.json(cards);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
@@ -261,13 +255,13 @@ const cardController = {
             });
 
             if(!card) {
-                next(new APIError(`La carte n'a pas pu être mise à jour.`,400));
+                return next(new APIError(`La carte n'a pas pu être mise à jour.`,400));
             } else {
-               res.status(204).json(); 
+                res.status(204).json(); 
             }
             
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
@@ -281,15 +275,19 @@ const cardController = {
      */
     async deleteCard (req, res, next) {
         try {
+            const cardToRemove = await Card.findByPk(req.params.id);
+
             const card = await Card.delete(req.params.id);
 
             if(!card) {
-                next(new APIError(`La carte n'a pas pu être supprimée.`,400));
+                return next(new APIError(`La carte n'a pas pu être supprimée.`,400));
             } else {
-               res.status(204).json({}); 
+                //removing the image only if deletion successful
+                fs.unlinkSync(`uploads/images/cards/${cardToRemove.image}`);
+                res.status(204).json(); 
             }
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
     },
 
@@ -308,11 +306,9 @@ const cardController = {
             // adding the path to the image names
             card.image = getImagePath.getCardImagePath(card.image);
 
-
-            // debug(card);
             res.json(card);
         } catch (error) {
-            next(new APIError(`Erreur interne : ${error}`,500));
+            return next(new APIError(`Erreur interne : ${error}`,500));
         }
     }
 

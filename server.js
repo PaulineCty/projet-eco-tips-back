@@ -43,7 +43,6 @@ app.use("/tag", authentificationTokenMiddleware.isAuthenticated, tagRouter);
 app.use(authentificationTokenMiddleware.isAuthenticated, userRouter);
 app.use("/ranking", authentificationTokenMiddleware.isAuthenticated, rankingRouter);
 
-
 // Error management
 const errorModule = require("./app/services/error/errorHandling");
 // 404 error

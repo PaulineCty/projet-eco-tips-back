@@ -23,7 +23,7 @@ const authentificationToken = {
    * @returns {string} JWT access token
    */
   generateRefreshToken(user) {
-    // expires in 30 minutes
+    // expires in 10 hours
     return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '10h' });
   },
 
