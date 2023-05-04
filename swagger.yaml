@@ -12,22 +12,22 @@ info:
     - [Eco Tips back Github repository](https://github.com/O-clock-Ohm/projet-03-eco-tips-back)
     - [Eco Tips front Github repository](https://github.com/O-clock-Ohm/projet-03-eco-tips-front)
 servers:
-  - url: paulinecty-server.eddi.cloud:8080
+  - url : http://tonympt-server.eddi.cloud:8080/
 tags:
   - name: authentification
-    description: Create your account/Log into the app
+    description: Create your account/Log into the application
   - name: user
     description: Operations to manage user
   - name: collection
-    description: Operations to manage your card collection
+    description: Operations to manage the user's card collection
   - name: proposal
-    description: Operations to manage the proposed cards by users
+    description: Operations to manage the user's proposed cards
   - name: tag
     description: Operations to manage the cards' tags
   - name: card
     description: Operations to manage the cards
   - name: ranking
-    description: Operations to display different rankings
+    description: Operations to display user rankings
   - name: achievement
     description: Operations to manage users' achievements
 paths:
@@ -36,7 +36,7 @@ paths:
       tags:
         - authentification
       summary: Logs into the app
-      description: Logs into the app with your email and password
+      description: Logs into the app with the user's email and password
       requestBody:
         required: true
         content:
@@ -65,7 +65,7 @@ paths:
       tags:
         - authentification
       summary: Creates an account on the app
-      description: Creates an account on the app in order to log 
+      description: Creates an account on the app in order to log in
       requestBody:
         required: true
         content:
@@ -92,8 +92,8 @@ paths:
     get:
       tags:
         - user
-      summary: Returns user's data
-      description: Returns user's data with hidden password
+      summary: Returns the user's data
+      description: Returns the user's data hiding their password
       operationId: getProfile
       responses:
         '200':
@@ -109,7 +109,7 @@ paths:
     patch:
       tags:
         - user
-      summary: Updates user's data (password not included)
+      summary: Updates the user's data (password not included)
       description: Updates one to many user's data
       operationId: updateProfile
       requestBody:
@@ -146,7 +146,7 @@ paths:
     delete:
       tags:
         - user
-      summary: Deletes user's data 
+      summary: Deletes the user profile
       description: Deletes user from the app
       operationId: deleteProfile
       responses:
@@ -231,7 +231,7 @@ paths:
       tags:
         - collection
       summary: Returns all the cards in user's collection
-      description: Returns all the user's cards (state true or false and proposal = false)
+      description: Returns all the user's cards
       operationId: getUsersCollection
       responses:
         '200':
@@ -249,7 +249,7 @@ paths:
       tags:
         - collection
       summary: Returns a random card
-      description: Returns a random card not owned by the user (proposal = false)
+      description: Returns a random validated card not owned by the user
       operationId: getOneRandomCard
       responses:
         '200':
@@ -265,8 +265,8 @@ paths:
     post:
       tags:
         - collection
-      summary: Adds a card to the user's deck
-      description: Adds a random card to the user's deck
+      summary: Adds a card to the user's collection
+      description: Adds a random card to the user's collection
       operationId: addUserCard
       responses:
         '200':
@@ -290,8 +290,8 @@ paths:
     patch:
       tags:
         - collection
-      summary: Updates user_card state to true
-      description: Updates user_card state from false to true
+      summary: Updates the card's state to finished
+      description: Updates the card's state from false to true
       operationId: updateUserCardState
       responses:
         '204':
@@ -303,8 +303,8 @@ paths:
     delete:
       tags:
         - collection
-      summary: Deletes user_card
-      description: Deletes a card in the user's deck
+      summary: Deletes a card from the user's collection
+      description: Deletes a card in the user's collection, deleting 
       operationId: deleteUserCard
       responses:
         '204':
@@ -317,8 +317,8 @@ paths:
     post:
       tags:
         - proposal
-      summary: Add a proposed card
-      description: Add a proposed card by the user
+      summary: Add a card as a proposal
+      description: Add a user's proposed card (to be validated by an admin)
       requestBody:
         required: true
         content:
@@ -341,7 +341,7 @@ paths:
       tags:
         - proposal
       summary: Returns all proposed cards (admin only)
-      description: Returns all proposed cards by users (proposal = true)
+      description: Returns all user's cards proposal
       operationId: getAllProposalCard
       responses:
         '200':
@@ -358,8 +358,8 @@ paths:
     patch:
       tags:
         - proposal
-      summary: Sets proposed cards on false (admin only)
-      description: Sets proposed cards on false (proposal = false)
+      summary: Validates a card proposed by a user (admin only)
+      description: Sets proposed card to false
       operationId: updateProposalCardToFalse
       responses:
         '204':
@@ -373,7 +373,7 @@ paths:
       tags:
         - tag
       summary: Returns all tags
-      description: Returns all tags in order to add them in the card creation
+      description: Returns all tags
       operationId: getAllTags
       responses:
         '200':
@@ -414,7 +414,7 @@ paths:
       tags:
         - tag
       summary: Updates a tag (admin only)
-      description: Updates a tag name or color
+      description: Updates a tag's name and/or color
       operationId: editTag
       responses:
         '204':
@@ -477,7 +477,7 @@ paths:
       tags:
         - card
       summary: Updates a card (admin only)
-      description: Updates a card (not the boolean proposal column)
+      description: Updates a card's data
       operationId: updateCard
       responses:
         '204':
@@ -533,8 +533,8 @@ paths:
     get:
       tags:
         - ranking
-      summary: Returns the 5 best users ordered by their card creation
-      description: Returns the 5 best users ordered by their card creation
+      summary: Returns the 5 best users ordered by their card creation amount
+      description: Returns the 5 best users ordered by their card creation amount
       operationId: getRankingCreation
       responses:
         '200':
@@ -564,7 +564,7 @@ paths:
       tags:
         - achievement
       summary: Adds an achievement
-      description: Adds a achievement
+      description: Adds an achievement
       operationId: addAchievement
       requestBody:
         required: true
@@ -588,7 +588,7 @@ paths:
       tags:
         - achievement
       summary: Returns all submitted achievements (admin only)
-      description: Returns all submitted achievements (proposal = true)
+      description: Returns all submitted achievements
       operationId: getAllProposalAchievement
       responses:
         '200':
@@ -606,7 +606,7 @@ paths:
       tags:
         - achievement
       summary: Updates an achievement to an approved state (admin only)
-      description: Updates an achievement to an approved state (proposal = false)
+      description: Updates an achievement to an approved state
       operationId: updateProposalAchievementToFalse
       responses:
         '204':
@@ -620,7 +620,7 @@ paths:
       tags:
         - achievement
       summary: Returns all approved achievements (admin only)
-      description: Returns all approved achievements (proposal = false)
+      description: Returns all approved achievements
       operationId: getAllNotProposalAchievement
       responses:
         '200':
@@ -650,8 +650,8 @@ paths:
     delete:
       tags:
         - achievement
-      summary: Deletes a achievement (admin only)
-      description: Deletes a achievement 
+      summary: Deletes an achievement (admin only)
+      description: Deletes an achievement 
       operationId: deleteAchievement
       responses:
         '204':
@@ -664,8 +664,8 @@ paths:
     get:
       tags:
         - achievement
-      summary: Returns one random approved achievement
-      description: Returns one random approved achievement (proposal = false)
+      summary: Returns a random approved achievement
+      description: Returns a random approved achievement
       operationId: getOneRandomAchievement
       responses:
         '200':
@@ -704,6 +704,21 @@ components:
           description: >
             Return the firstname of the connected user
           example: Laura
+        role_id: 
+          type: number
+          description: >
+            Return the user's role id
+          example: 1
+        score: 
+          type: number
+          description: >
+            Return the user's score
+          example: 65
+        ecocoins: 
+          type: number
+          description: >
+            Return the user's ecocoins amount
+          example: 51
       xml:
         name: token
     Sign-up:
@@ -761,10 +776,10 @@ components:
           format: date
         ecocoins: 
           type: int
-          description: The total number of user's ecocoins which allow him to get cards
+          description: The user's number of ecocoins which allow them to get cards
         score: 
           type: int
-          format: The total user's score obtained by validate cards
+          format: The user's score obtained by validating cards
       xml:
         name: user
     Card:

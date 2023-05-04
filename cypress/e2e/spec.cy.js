@@ -144,7 +144,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Gets the user\'s profil informations', () => {
+    it('Gets the user\'s profile information', () => {
 
       cy.request({
         method: "GET",
@@ -162,7 +162,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Updates the user\'s profil informations', () => {
+    it('Updates the user\'s profile information', () => {
     
       cy.request({
         method: "PATCH",
@@ -214,7 +214,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Adds the random card in userCard', () => {
+    it('Adds the random card in user_card', () => {
       cy.request({
         method: "POST",
         url: `${endPoint}/me/collection/card`,
@@ -351,7 +351,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Gets the 5 best user\'s ordered by score', () => {
+    it('Gets the 5 best users ordered by score', () => {
 
       cy.request({
         method: "GET",
@@ -654,7 +654,7 @@ describe('API Automation Test', ()=> {
     });
 
 
-    it('Deletes the user\'s profil', () => {
+    it('Deletes the user\'s profile', () => {
     
       cy.request({
         method: "DELETE",
