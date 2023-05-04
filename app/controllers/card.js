@@ -46,7 +46,6 @@ const cardController = {
      */
     async addCard (req, res, next) {
         try {
-            // CAREFUL : form names have to be the exact same than the table field name --> tags for tag_ids ?
             const { image, title, description, environmentalrating, economicrating, value, tags } = req.body;
 
             const fileParts = image.split(';base64,');
