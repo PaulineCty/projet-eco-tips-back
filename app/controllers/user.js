@@ -5,6 +5,9 @@ const authentificationToken = require('../services/authentification/authentifica
 const debug = require('debug')("controller:user");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const dayjs = require('dayjs');
+const utc = require('dayjs/plugin/utc');
+dayjs.extend(utc);
 
 /**
  * @typedef {import('../models/index').User} User;
@@ -31,7 +34,7 @@ const userController = {
 
         // Creating the new user in the user table, only standard users can be created this way (no admin)
         try {
-            await User.create({firstname, lastname, email, password: hashedPassword, birthdate});
+            await User.create({firstname, lastname, email, password: hashedPassword, birthdate : new Date(birthdate)});
             res.status(200).json();
         } catch (error) {
             return next(new APIError("Erreur lors de l'inscription", 500));
@@ -128,6 +131,9 @@ const userController = {
         try {
             // here we are not returning the password for security reasons
             const user = await User.findByPkWoPassword(req.user.id);
+
+            user.birthdate = new Intl.DateTimeFormat('default', { timeZoneName: 'short'}).format(new Date(user.birthdate));
+
             // debug(user);
             res.json(user);
         } catch (error) {
@@ -147,13 +153,15 @@ const userController = {
         const {firstname, lastname, email, birthdate} = req.body;
 
         try {
-            const updatedUser = await User.update({id: req.user.id},{firstname, lastname, email, birthdate});
+            const updatedUser = await User.update({id: req.user.id},{firstname, lastname, email, birthdate : new Date(birthdate)});
+
+            const birthdateWithOffset = new Intl.DateTimeFormat('default', { timeZoneName: 'short'}).format(new Date(updatedUser.birthdate));
 
             res.json({ 
                 firstname : updatedUser.firstname,
                 lastname : updatedUser.lastname,
                 email : updatedUser.email,
-                birthdate : updatedUser.birthdate
+                birthdate : birthdateWithOffset
             });
         } catch (error) {
             return next(new APIError("Erreur lors de la modification du profil", 500));

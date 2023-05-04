@@ -6,7 +6,7 @@ const signUp = {
     "email":"john.doe@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
-    "birthdate": "05/05/1990"
+    "birthdate": "1990-05-05"
 };
 
 const signIn = {
@@ -21,9 +21,9 @@ const adminSignIn = {
 
 const updatedUser = {
   "firstname": "John",
-  "lastname": "Doedoe",
+  "lastname": "Doe",
   "email": "john.doe@gmail.com",
-  "birthdate": "05/05/1990"
+  "birthdate": "1990-05-06"
 };
 
 const updatedPassword = {

@@ -49,7 +49,7 @@ const validationModule = {
     async validateUserEdition(req, _, next) {
         const previousUserInfo = await User.findByPk(req.user.id);
 
-        if(previousUserInfo.firstname === req.body.firstname && previousUserInfo.lastname === req.body.lastname && previousUserInfo.email === req.body.email && previousUserInfo.birthday === req.body.birthday ) {
+        if(previousUserInfo.firstname === req.body.firstname && previousUserInfo.lastname === req.body.lastname && previousUserInfo.email === req.body.email && new Intl.DateTimeFormat('default', { timeZoneName: 'short'}).format(new Date(previousUserInfo.birthdate)) === new Intl.DateTimeFormat('default', { timeZoneName: 'short'}).format(new Date(req.body.birthdate))) {
             next(new APIError('Aucune des valeurs n\'a été modifiées.', 400));
         }
 
