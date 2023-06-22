@@ -120,7 +120,7 @@ describe('API Automation Test', ()=> {
     it('Posts a new user', () => {
         cy.request({
             method: "POST",
-            url: `${endPoint}/sign-up`,
+            url: `${endPoint}/user`,
             body: signUp
         }).as('postNewUser');
 
