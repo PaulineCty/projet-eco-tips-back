@@ -319,7 +319,7 @@ describe('API Automation Test', ()=> {
     it('Adds a card as proposal', () => {
       cy.request({
         method: "POST",
-        url: `${endPoint}/me/proposal`,
+        url: `${endPoint}/me/card`,
         body: newCard,
         headers: {
           Authorization: `Bearer ${accessToken}`

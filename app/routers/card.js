@@ -9,6 +9,7 @@ const cardRouter = Router();
 
 /**
  * @typedef {import('../models/index').Card} Card;
+ * @typedef {import('../models/index').TagCard} TagCard;
  * @typedef {import('../services/error/APIError')} APIError;
  */
 
@@ -54,5 +55,17 @@ cardRouter.delete("/card/:id(\\d+)", authentificationTokenMiddleware.isAuthentic
  * @returns {APIError} error
  */
 cardRouter.get('/me/card', authentificationTokenMiddleware.isAuthenticated, cardController.getAllUsersCards);
+
+/**
+ * @route POST /me/card
+ * @group Card - Adding a card as proposal
+ * @group TagCard - Adding one or many tags to the card
+ * @param {Card} user.body.required - Card Object
+ * @return {Card} the created Card instance
+ * @return {TagCard[]} an array of the created TagCard instances
+ * @returns {APIError} error
+ */
+cardRouter.post("/me/card", authentificationTokenMiddleware.isAuthenticated, validationModule.validateCardCreation, cardController.addCard);
+
 
 module.exports = cardRouter;

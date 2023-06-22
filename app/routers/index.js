@@ -4,7 +4,6 @@ const proposalRouter = require("./proposal.js");
 const tagRouter = require("./tag.js");
 const cardRouter = require("./card.js");
 const userRouter = require("./user.js");
-const rankingRouter = require("./ranking.js");
 const achievementRouter = require("./achievement.js");
 
 module.exports = {
@@ -14,6 +13,5 @@ module.exports = {
     tagRouter,
     cardRouter,
     userRouter,
-    rankingRouter,
     achievementRouter
 };
