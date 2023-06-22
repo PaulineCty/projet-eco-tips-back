@@ -262,7 +262,7 @@ const userController = {
      * @return {User[]} an array of User instances
      * @returns {APIError} error
      */
-    async getRankingScore (req, res, next) {
+    async getUserByScore (req, res, next) {
         try {
             const users = await User.getUsersByScore();
 
@@ -280,7 +280,7 @@ const userController = {
      * @return {User[]} an array of User instances
      * @returns {APIError} error
      */
-    async getRankingCreation (req, res, next) {
+    async getUserByCardCreation (req, res, next) {
         try {
             const users = await User.getUsersByProposedCards();
 

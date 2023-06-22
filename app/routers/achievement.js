@@ -8,13 +8,12 @@ const { Router } = require("express");
 const achievementRouter = Router();
 
 /**
- * @route POST /me/achievement
- * @group Achievement - Adding an achievement as proposal
- * @param {Achievement} user.body.required - Achievement Object
- * @return {Achievement} the created Card instance
+ * @route GET /achievement
+ * @group Achievement - Getting all approved achievements
+ * @returns {Achievement[]} an array of Achievement instances
  * @returns {APIError} error
  */
-achievementRouter.post("/me/achievement", authentificationTokenMiddleware.isAuthenticated, validationModule.validateAchievementCreation, achievementController.addAchievement);
+achievementRouter.get("/achievement", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.getAllNotProposalAchievement);
 
 /**
  * @route GET /achievement/proposal
@@ -25,6 +24,24 @@ achievementRouter.post("/me/achievement", authentificationTokenMiddleware.isAuth
 achievementRouter.get("/achievement/proposal", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.getAllProposalAchievement);
 
 /**
+ * @route GET /achievement/random
+ * @group Achievement - Getting one random achievement
+ * @returns {Achievement} a Achievement instance
+ * @returns {APIError} error
+ */
+achievementRouter.get("/achievement/random", achievementController.getOneRandomAchievement);
+
+/**
+ * @route POST /me/achievement
+ * @group Achievement - Adding an achievement as proposal
+ * @param {Achievement} user.body.required - Achievement Object
+ * @return {Achievement} the created Card instance
+ * @returns {APIError} error
+ */
+achievementRouter.post("/me/achievement", authentificationTokenMiddleware.isAuthenticated, validationModule.validateAchievementCreation, achievementController.addAchievement);
+
+
+/**
  * @route PATCH /achievement/proposal/:id
  * @group Achievement - Updating an achievement to an approved state
  * @param {number} id - The id of the achievement to update
@@ -32,22 +49,6 @@ achievementRouter.get("/achievement/proposal", authentificationTokenMiddleware.i
  * @returns {APIError} error
  */
 achievementRouter.patch("/achievement/proposal/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.updateProposalAchievementToFalse);
-
-/**
- * @route GET /achievement
- * @group Achievement - Getting all approved achievements
- * @returns {Achievement[]} an array of Achievement instances
- * @returns {APIError} error
- */
-achievementRouter.get("/achievement", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, achievementController.getAllNotProposalAchievement);
-
-/**
- * @route GET /achievement/random
- * @group Achievement - Getting one random achievement
- * @returns {Achievement} a Achievement instance
- * @returns {APIError} error
- */
-achievementRouter.get("/achievement/random", achievementController.getOneRandomAchievement);
 
 /**
  * @route PATCH /achievement/:id

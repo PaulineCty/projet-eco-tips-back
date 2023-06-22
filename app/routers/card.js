@@ -13,20 +13,20 @@ const cardRouter = Router();
  */
 
 /**
- * @route GET /me/card
- * @group Card - Getting all cards created by a user
- * @returns {Card[]} an array of Card instances
- * @returns {APIError} error
- */
-cardRouter.get('/me/card', authentificationTokenMiddleware.isAuthenticated, cardController.getAllUsersCards);
-
-/**
  * @route GET /card
  * @group Card - Getting all approved cards
  * @returns {Card[]} an array of Card instances
  * @returns {APIError} error
  */
 cardRouter.get("/card", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, cardController.getAllNotProposalCard);
+
+/**
+ * @route GET /card/latest
+ * @group Card - Gets the latest created and validated card
+ * @returns {Card} a Card instance
+ * @returns {APIError} error
+ */
+cardRouter.get("/card/latest", cardController.getLatestCard);
 
 /**
  * @route PATCH /card/:id
@@ -48,11 +48,11 @@ cardRouter.patch("/card/:id(\\d+)", authentificationTokenMiddleware.isAuthentica
 cardRouter.delete("/card/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, cardController.deleteCard);
 
 /**
- * @route GET /card/latest
- * @group Card - Gets the latest created and validated card
- * @returns {Card} a Card instance
+ * @route GET /me/card
+ * @group Card - Getting all cards created by a user
+ * @returns {Card[]} an array of Card instances
  * @returns {APIError} error
  */
-cardRouter.get("/card/latest", cardController.getLatestCard);
+cardRouter.get('/me/card', authentificationTokenMiddleware.isAuthenticated, cardController.getAllUsersCards);
 
 module.exports = cardRouter;

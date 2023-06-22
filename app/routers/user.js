@@ -4,7 +4,7 @@ const validationModule = require("../services/validation/validate");
 const adminMiddleware = require('../services/authentification/isAdmin.js');
 
 const { Router } = require("express");
-const profileRouter = Router();
+const userRouter = Router();
 
 /**
  * @typedef {import('../models/index').User} User;
@@ -17,7 +17,7 @@ const profileRouter = Router();
  * @return {User} a User instance
  * @returns {APIError} error
  */
-profileRouter.get("/me/user", userController.getProfile);
+userRouter.get("/me/user", userController.getProfile);
 
 /**
  * @route PATCH /me/user
@@ -26,7 +26,7 @@ profileRouter.get("/me/user", userController.getProfile);
  * @return {object} parts of a User instance hiding any password related information
  * @returns {APIError} error
  */
-profileRouter.patch("/me/user", validationModule.validateUserEdition, userController.updateProfile);
+userRouter.patch("/me/user", validationModule.validateUserEdition, userController.updateProfile);
 
 /**
  * @route PATCH /me/user/password
@@ -35,7 +35,7 @@ profileRouter.patch("/me/user", validationModule.validateUserEdition, userContro
  * @return {void} - No Content (HTTP 204) response
  * @returns {APIError} error
  */
-profileRouter.patch("/me/user/password", validationModule.validateUserPasswordEdition, userController.updatePassword);
+userRouter.patch("/me/user/password", validationModule.validateUserPasswordEdition, userController.updatePassword);
 
 /**
  * @route DELETE /me/user
@@ -43,7 +43,8 @@ profileRouter.patch("/me/user/password", validationModule.validateUserPasswordEd
  * @returns {void} - No Content (HTTP 204) response
  * @returns {APIError} error
  */
-profileRouter.delete("/me/user", userController.deleteProfile);
+userRouter.delete("/me/user", userController.deleteProfile);
+
 
 /**
  * @route GET /user
@@ -51,7 +52,23 @@ profileRouter.delete("/me/user", userController.deleteProfile);
  * @return {User[]} an array of User instances
  * @returns {APIError} error
  */
-profileRouter.get("/user", adminMiddleware, userController.getAllUsers);
+userRouter.get("/user", adminMiddleware, userController.getAllUsers);
+
+/**
+ * @route GET /user/score
+ * @group User - Gets the 5 best user's ordered by score
+ * @returns {User[]} an array of User instances
+ * @returns {APIError} error
+ */
+userRouter.get("/user/score", userController.getUserByScore);
+
+/**
+ * @route GET /user/creation
+ * @group User - Gets the 5 best users ordered by card creation
+ * @returns {User[]} an array of User instances
+ * @returns {APIError} error
+ */
+userRouter.get("/user/creation", userController.getUserByCardCreation);
 
 /**
  * @route PATCH /user
@@ -60,7 +77,7 @@ profileRouter.get("/user", adminMiddleware, userController.getAllUsers);
  * @returns {void} - No Content (HTTP 204) response
  * @returns {APIError} error
  */
-profileRouter.patch("/user/:id(\\d+)", adminMiddleware, userController.updateUserAsAdmin);
+userRouter.patch("/user/:id(\\d+)", adminMiddleware, userController.updateUserAsAdmin);
 
 
-module.exports = profileRouter;
+module.exports = userRouter;

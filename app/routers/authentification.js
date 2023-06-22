@@ -11,12 +11,12 @@ const authentificationRouter = Router();
  */
 
 /**
- * @route POST /user
+ * @route POST /sign-up
  * @group User - Managing sign up
  * @returns {void} - No Content (HTTP 200) response
  * @returns {APIError} error
  */
-authentificationRouter.post("/user", validationModule.validateUserCreation, userController.signUp);
+authentificationRouter.post("/sign-up", validationModule.validateUserCreation, userController.signUp);
 
 /**
  * @route POST /sign-in

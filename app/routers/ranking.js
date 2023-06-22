@@ -9,20 +9,6 @@ const rankingRouter = Router();
  * @typedef {import('../services/error/APIError')} APIError;
  */
 
-/**
- * @route GET /ranking/score
- * @group User - Gets the 5 best user's ordered by score
- * @returns {User[]} an array of User instances
- * @returns {APIError} error
- */
-rankingRouter.get("/score", userController.getRankingScore);
 
-/**
- * @route GET /ranking/creation
- * @group User - Gets the 5 best users ordered by card creation
- * @returns {User[]} an array of User instances
- * @returns {APIError} error
- */
-rankingRouter.get("/creation", userController.getRankingCreation);
 
 module.exports = rankingRouter;

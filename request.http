@@ -13,13 +13,13 @@
 
 
 # ACCOUNT CREATION
-POST http://localhost:3000/user
+POST http://localhost:3000/sign-up
 Content-Type: application/json
 
 {
     "firstname": "Amar",
     "lastname": "Di",
-    "email":"amar.di@gmail.com",
+    "email":"amar.di2@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "1990-05-15"
@@ -306,14 +306,14 @@ Authorization: {{token}}
 
 
 # RETURNS THE 5 TOP 5 USERS WITH THE HIGHEST SCORES
-GET http://localhost:3000/ranking/score
+GET http://localhost:3000/user/score
 Authorization: {{token}}
 
 ###
 
 
 # RETURNS THE TOP 5 USERS WITH THE HIGHEST CARD CREATION AMOUNT
-GET http://localhost:3000/ranking/creation
+GET http://localhost:3000/user/creation
 Authorization: {{token}}
 
 ###
