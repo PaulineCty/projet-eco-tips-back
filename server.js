@@ -38,7 +38,6 @@ app.use(authentificationRouter);
 app.use(cardRouter);
 app.use(achievementRouter);
 app.use("/me/collection", authentificationTokenMiddleware.isAuthenticated, collectionRouter);
-// app.use(authentificationTokenMiddleware.isAuthenticated, proposalRouter);
 app.use("/tag", authentificationTokenMiddleware.isAuthenticated, tagRouter);
 app.use(authentificationTokenMiddleware.isAuthenticated, userRouter);
 

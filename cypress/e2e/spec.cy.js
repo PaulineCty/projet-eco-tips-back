@@ -449,7 +449,7 @@ describe('API Automation Test', ()=> {
 
       cy.request({
         method: "GET",
-        url: `${endPoint}/proposal`,
+        url: `${endPoint}/card/proposal`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
@@ -465,7 +465,7 @@ describe('API Automation Test', ()=> {
     it('Updates a card to an approved state', () => {
       cy.request({
         method: "PATCH",
-        url: `${endPoint}/proposal/${newCardId}`,
+        url: `${endPoint}/card/proposal/${newCardId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }

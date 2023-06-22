@@ -183,14 +183,14 @@ Authorization: {{token}}
 
 
 # RETURNS ALL PROPOSED CARDS (ADMIN ONLY)
-GET http://localhost:3000/proposal
+GET http://localhost:3000/card/proposal
 Authorization: {{token}}
 
 ###
 
 
 # SETS PROPOSED CARDS ON FALSE (ADMIN ONLY)
-PATCH http://localhost:3000/proposal/51
+PATCH http://localhost:3000/card/proposal/51
 Authorization: {{token}}
 
 ###

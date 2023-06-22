@@ -22,12 +22,30 @@ const cardRouter = Router();
 cardRouter.get("/card", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, cardController.getAllNotProposalCard);
 
 /**
+ * @route GET /proposal
+ * @group Card - Getting all proposed cards
+ * @return {Card[]} an array of Card instances
+ * @returns {APIError} error
+ */
+cardRouter.get("/card/proposal", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, cardController.getAllProposalCard);
+
+
+/**
  * @route GET /card/latest
  * @group Card - Gets the latest created and validated card
  * @returns {Card} a Card instance
  * @returns {APIError} error
  */
 cardRouter.get("/card/latest", cardController.getLatestCard);
+
+/**
+ * @route PATCH /proposal/:id
+ * @group Card - Updating a card to an approved state
+ * @param {number} id - The id of the card to update
+ * @returns {void} - No Content (HTTP 204) response
+ * @returns {APIError} error
+ */
+cardRouter.patch("/card/proposal/:id(\\d+)", authentificationTokenMiddleware.isAuthenticated, adminMiddleware, cardController.updateProposalCardToFalse);
 
 /**
  * @route PATCH /card/:id
