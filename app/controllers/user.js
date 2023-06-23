@@ -63,8 +63,8 @@ const userController = {
             }
 
             // Generating a token and redirecting to the home page
-            const accessToken = authentificationToken.generateAccessToken({id : user.id});
-            const refreshToken = authentificationToken.generateRefreshToken({id : user.id});
+            const accessToken = authentificationToken.generateAccessToken({id : user.id, role_id: user.role_id});
+            const refreshToken = authentificationToken.generateRefreshToken({id : user.id, role_id: user.role_id});
 
             res.json({ 
                 accessToken,
@@ -109,7 +109,7 @@ const userController = {
             delete user.iat;
             delete user.exp;
 
-            const refreshedToken = authentificationToken.generateAccessToken({id : user.id});
+            const refreshedToken = authentificationToken.generateAccessToken({id : user.id, role_id: user.role_id});
             res.json({
                 accessToken: refreshedToken,
             });
