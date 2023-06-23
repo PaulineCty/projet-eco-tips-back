@@ -64,7 +64,6 @@ const userController = {
 
             // Generating a token and redirecting to the home page
             const accessToken = authentificationToken.generateAccessToken({id : user.id});
-            console.log(user.id);
             const refreshToken = authentificationToken.generateRefreshToken({id : user.id});
 
             res.json({ 
