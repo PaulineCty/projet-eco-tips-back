@@ -100,7 +100,7 @@ const userController = {
                 return next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
             } 
             // Checking if the user still exists
-            const userCheck = await User.findByEmail(user.email);
+            const userCheck = await User.findByPk(user.id);
             
             if(!userCheck) {
                 return next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));

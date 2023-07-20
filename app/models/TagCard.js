@@ -77,6 +77,7 @@ class TagCard extends Core {
             text: `INSERT INTO tag_card(tag_id, card_id) VALUES ${filters.join(',')};`,
             values
         };
+        
         const result = await this.client.query(preparedQuery);
 
         return result.rowCount;

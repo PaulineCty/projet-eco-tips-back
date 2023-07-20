@@ -2,9 +2,9 @@
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
 
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjg3NDQ0NjMyLCJleHAiOjE2ODc0NDY0MzJ9.RVWWfJEwZoQ806H7e1xn4O82J2xiCbiSDdpIuTBYQaU
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGVfaWQiOjIsImlhdCI6MTY4ODQwNDkwNCwiZXhwIjoxNjg4NDA2NzA0fQ.dLBVYz-oyrPwcUWNgW3tAfh9RHQ96tZlFB1X2ZVnFTA
 
-@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImZpcnN0bmFtZSI6IkFtYXIiLCJsYXN0bmFtZSI6IkRpIiwiZW1haWwiOiJhbWFyLmRpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDlpSFlWMzVTNXZXVkx6YzNZMldEWi5KLy96L3F1V3NNbnMudi5KcEs3R0VjQ2lZT3Z1TGFtIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjUwLCJzY29yZSI6MCwicm9sZV9pZCI6MiwiY3JlYXRlZF9hdCI6IjIwMjMtMDUtMDJUMTE6MjA6NDguNDMzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MzAyNjQ1MiwiZXhwIjoxNjgzMDYyNDUyfQ.-ZImGhMIKB_UB1AhXfycs0D9_uYy6a_aVpK2B2O0eQ4
+@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwicm9sZV9pZCI6MiwiaWF0IjoxNjg4MzkyODYwLCJleHAiOjE2ODg0Mjg4NjB9.ThxDyjEIKmCWtcjIceEvWt2CQrHdnRx1PF6wiVD0QH8
 ###
 
 # /********************************************\ #
@@ -19,7 +19,7 @@ Content-Type: application/json
 {
     "firstname": "Amar",
     "lastname": "Di",
-    "email":"amar.di2@gmail.com",
+    "email":"amar.di@gmail.com",
     "password":"Azerty123!",
     "confirmpassword": "Azerty123!",
     "birthdate": "1990-05-15"
@@ -33,7 +33,7 @@ POST http://localhost:3000/sign-in
 Content-Type: application/json
 
 {
-    "email":"amar.di@gmail.com",
+    "email":"paulinecauty@gmail.com",
     "password":"Azerty123!"
 }
 
@@ -139,7 +139,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "cardId":5,
+    "cardId":70,
     "expirationDate":"01-01-2023"
 }
 
@@ -221,12 +221,12 @@ Authorization: {{token}}
 
 
 # UPDATES A TAG (ADMIN ONLY)
-PATCH http://localhost:3000/tag/22
+PATCH http://localhost:3000/tag/36
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "name": "Machin",
+    "name": "Truc",
     "color":"#94a3b7"
 }
 
@@ -265,7 +265,7 @@ Authorization: {{token}}
 
 
 # UPDATES A CARD (ADMIN ONLY)
-PATCH http://localhost:3000/card/45
+PATCH http://localhost:3000/card/76
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -275,7 +275,7 @@ Authorization: {{token}}
     "environmentalrating": 5,
     "economicrating": 3,
     "value": 55,
-    "tags": [8]
+    "tags": [8,9]
 }
 
 # {
