@@ -63,8 +63,8 @@ const userController = {
             }
 
             // Generating a token and redirecting to the home page
-            const accessToken = authentificationToken.generateAccessToken(user);
-            const refreshToken = authentificationToken.generateRefreshToken(user);
+            const accessToken = authentificationToken.generateAccessToken({id : user.id, role_id: user.role_id});
+            const refreshToken = authentificationToken.generateRefreshToken({id : user.id, role_id: user.role_id});
 
             res.json({ 
                 accessToken,
@@ -100,7 +100,7 @@ const userController = {
                 return next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
             } 
             // Checking if the user still exists
-            const userCheck = await User.findByEmail(user.email);
+            const userCheck = await User.findByPk(user.id);
             
             if(!userCheck) {
                 return next(new APIError("Vous n'êtes pas autorisé à accéder à cette page.", 401));
@@ -109,7 +109,7 @@ const userController = {
             delete user.iat;
             delete user.exp;
 
-            const refreshedToken = authentificationToken.generateAccessToken(user);
+            const refreshedToken = authentificationToken.generateAccessToken({id : user.id, role_id: user.role_id});
             res.json({
                 accessToken: refreshedToken,
             });
@@ -262,7 +262,7 @@ const userController = {
      * @return {User[]} an array of User instances
      * @returns {APIError} error
      */
-    async getRankingScore (req, res, next) {
+    async getUserByScore (req, res, next) {
         try {
             const users = await User.getUsersByScore();
 
@@ -280,7 +280,7 @@ const userController = {
      * @return {User[]} an array of User instances
      * @returns {APIError} error
      */
-    async getRankingCreation (req, res, next) {
+    async getUserByCardCreation (req, res, next) {
         try {
             const users = await User.getUsersByProposedCards();
 

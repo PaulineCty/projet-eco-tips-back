@@ -7,11 +7,13 @@ Eco Tips est une application web qui permet, de manière ludique, à ses utilisa
 
 ### Créer la base de données et importer les données
 
-1. Utiliser la commande `CREATE USER ecotips WITH PASSWORD 'ecotips' -h localhost` afin de créer un utilisateur pour votre BDD.
-2. Puis utiliser la commande `CREATE DATABASE ecotips OWNER ecotips -h localhost` afin de créer votre BDD puis CTRL+D.
-3. Utiliser la commande `psql -U ecotips -d ecotips -f migration/revert/1.create_tables.sql -h localhost`.
-4. Utiliser la commande `psql -U ecotips -d ecotips -f migration/deploy/1.create_tables.sql -h localhost`.
-5. Puis utiliser la commande `psql -U ecotips -d ecotips -f data/import_data.sql -h localhost`.
+1. Installer les dépendances avec `npm install`.
+2. Utiliser la commande `sudo -i -u postgres psql`.
+3. Utiliser la commande `CREATE USER ecotips WITH PASSWORD 'ecotips'` afin de créer un utilisateur pour votre BDD.
+4. Puis utiliser la commande `CREATE DATABASE ecotips OWNER ecotips;` afin de créer votre BDD puis CTRL+D.
+5. Utiliser la commande `psql -U ecotips -d ecotips -f migration/revert/1.create_tables.sql -h localhost`.
+6. Utiliser la commande `psql -U ecotips -d ecotips -f migration/deploy/1.create_tables.sql -h localhost`.
+7. Puis utiliser la commande `psql -U ecotips -d ecotips -f data/import_data.sql -h localhost`.
 
 Toute la documentation de l'api est disponible sur la route `/api-docs`.
 
@@ -70,7 +72,7 @@ Toute la documentation de l'api est disponible sur la route `/api-docs`.
 4. (Optionnel : pas pour la première installation du projet !) Créer la base de données avec `CREATE DATABASE ecotips OWNER ecotips;` puis vérifier avec `\l`. Quitter avec Ctrl+D.
 5. Utiliser la commande `psql -U ecotips -d ecotips -f migration/deploy/1.create_tables.sql -h localhost` pour créer les tables dans la base de données.
 6. Utiliser la commande pour importer les données avec `psql -U ecotips -d ecotips -f data/import_data.sql -h localhost`.
-7. Créer deux utilisateurs (email : 'laura.teur@gmail.com' et 'jean.biance@gmail.com', mdp : Azerty123!) en se connectant au serveur et en utilisant la route /sign-up avec Insomnia par exemple ou directement depuis l'IHM côté front. Pour cela réaliser l'étape 11 et connecter vous au serveur (voir étape 2 du prochain chapitre). Une fois les utilisateurs créés, reprendre à l'étape 7.
+7. Créer deux utilisateurs (email : 'laura.teur@gmail.com' et 'jean.biance@gmail.com', mdp : Azerty123!) en se connectant au serveur et en utilisant la route POST /user avec Insomnia par exemple ou directement depuis l'IHM côté front. Pour cela réaliser l'étape 11 et connecter vous au serveur (voir étape 2 du prochain chapitre). Une fois les utilisateurs créés, reprendre à l'étape 7.
 8. Utiliser la commande `psql -U ecotips -d ecotips -h localhost`.
 9. Ajouter des cartes au premier utilisateur créé avec `INSERT INTO user_card ( user_id, card_id, expiration_date) VALUES (2,1,'2023-05-25'), (2,25,'2023-03-05'), (2,48,'2023-02-05'), (2,10,'2023-01-01');`.
 10. Passer une des cartes en statut fini avec `UPDATE user_card SET state = true WHERE user_id = 2 AND card_id = 25;`.

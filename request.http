@@ -2,9 +2,9 @@
 # /*************  TOKEN  VARIABLE  *************\ #
 # /*********************************************\ #
 
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3RuYW1lIjoiSmVhbiIsImxhc3RuYW1lIjoiQmlhbmNlIiwiZW1haWwiOiJqZWFuLmJpYW5jZUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRGbzIuSHRSR0E1QWtFa0VMcGtiTkxlZ004dG5yMlpOeVA2V0w0bWc3dnNBTEZlaDMxMkEyNiIsImJpcnRoZGF0ZSI6IjE5OTEtMDQtMTRUMjI6MDA6MDAuMDAwWiIsImVjb2NvaW5zIjo1MCwic2NvcmUiOjAsInJvbGVfaWQiOjEsImNyZWF0ZWRfYXQiOiIyMDIzLTA1LTA0VDA4OjMzOjM0Ljg2NVoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNS0wNFQwOTozNDozNi4wMzlaIiwiaWF0IjoxNjgzMjA1OTM4LCJleHAiOjE2ODMyMDc3Mzh9.Oz_DHER1t_oQHNvl75UoqurvKC8OAhHb3e7Mdjoh6LY
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGVfaWQiOjIsImlhdCI6MTY4ODQwNDkwNCwiZXhwIjoxNjg4NDA2NzA0fQ.dLBVYz-oyrPwcUWNgW3tAfh9RHQ96tZlFB1X2ZVnFTA
 
-@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImZpcnN0bmFtZSI6IkFtYXIiLCJsYXN0bmFtZSI6IkRpIiwiZW1haWwiOiJhbWFyLmRpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDlpSFlWMzVTNXZXVkx6YzNZMldEWi5KLy96L3F1V3NNbnMudi5KcEs3R0VjQ2lZT3Z1TGFtIiwiYmlydGhkYXRlIjoiMTk5MC0wNS0wNFQyMjowMDowMC4wMDBaIiwiZWNvY29pbnMiOjUwLCJzY29yZSI6MCwicm9sZV9pZCI6MiwiY3JlYXRlZF9hdCI6IjIwMjMtMDUtMDJUMTE6MjA6NDguNDMzWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY4MzAyNjQ1MiwiZXhwIjoxNjgzMDYyNDUyfQ.-ZImGhMIKB_UB1AhXfycs0D9_uYy6a_aVpK2B2O0eQ4
+@refreshToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwicm9sZV9pZCI6MiwiaWF0IjoxNjg4MzkyODYwLCJleHAiOjE2ODg0Mjg4NjB9.ThxDyjEIKmCWtcjIceEvWt2CQrHdnRx1PF6wiVD0QH8
 ###
 
 # /********************************************\ #
@@ -33,7 +33,7 @@ POST http://localhost:3000/sign-in
 Content-Type: application/json
 
 {
-    "email":"amar.di@gmail.com",
+    "email":"paulinecauty@gmail.com",
     "password":"Azerty123!"
 }
 
@@ -139,7 +139,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "cardId":5,
+    "cardId":70,
     "expirationDate":"01-01-2023"
 }
 
@@ -165,7 +165,7 @@ Authorization: {{token}}
 
 
 # ADDS A PROPOSED CARD
-POST http://localhost:3000/me/proposal
+POST http://localhost:3000/me/card
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -183,14 +183,14 @@ Authorization: {{token}}
 
 
 # RETURNS ALL PROPOSED CARDS (ADMIN ONLY)
-GET http://localhost:3000/proposal
+GET http://localhost:3000/card/proposal
 Authorization: {{token}}
 
 ###
 
 
 # SETS PROPOSED CARDS ON FALSE (ADMIN ONLY)
-PATCH http://localhost:3000/proposal/51
+PATCH http://localhost:3000/card/proposal/51
 Authorization: {{token}}
 
 ###
@@ -221,12 +221,12 @@ Authorization: {{token}}
 
 
 # UPDATES A TAG (ADMIN ONLY)
-PATCH http://localhost:3000/tag/22
+PATCH http://localhost:3000/tag/36
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "name": "Machin",
+    "name": "Truc",
     "color":"#94a3b7"
 }
 
@@ -265,7 +265,7 @@ Authorization: {{token}}
 
 
 # UPDATES A CARD (ADMIN ONLY)
-PATCH http://localhost:3000/card/45
+PATCH http://localhost:3000/card/76
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -275,7 +275,7 @@ Authorization: {{token}}
     "environmentalrating": 5,
     "economicrating": 3,
     "value": 55,
-    "tags": [8]
+    "tags": [8,9]
 }
 
 # {
@@ -306,14 +306,14 @@ Authorization: {{token}}
 
 
 # RETURNS THE 5 TOP 5 USERS WITH THE HIGHEST SCORES
-GET http://localhost:3000/ranking/score
+GET http://localhost:3000/user/score
 Authorization: {{token}}
 
 ###
 
 
 # RETURNS THE TOP 5 USERS WITH THE HIGHEST CARD CREATION AMOUNT
-GET http://localhost:3000/ranking/creation
+GET http://localhost:3000/user/creation
 Authorization: {{token}}
 
 ###

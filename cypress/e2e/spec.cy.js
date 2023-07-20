@@ -319,7 +319,7 @@ describe('API Automation Test', ()=> {
     it('Adds a card as proposal', () => {
       cy.request({
         method: "POST",
-        url: `${endPoint}/me/proposal`,
+        url: `${endPoint}/me/card`,
         body: newCard,
         headers: {
           Authorization: `Bearer ${accessToken}`
@@ -355,13 +355,13 @@ describe('API Automation Test', ()=> {
 
       cy.request({
         method: "GET",
-        url: `${endPoint}/ranking/score`,
+        url: `${endPoint}/user/score`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
-      }).as('getRankingScore');
+      }).as('getUserByScore');
 
-      cy.get('@getRankingScore').then( response => {
+      cy.get('@getUserByScore').then( response => {
         expect(response.status).to.eq(200);
         cy.log(JSON.stringify(response.body));
       });
@@ -372,13 +372,13 @@ describe('API Automation Test', ()=> {
 
       cy.request({
         method: "GET",
-        url: `${endPoint}/ranking/creation`,
+        url: `${endPoint}/user/creation`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
-      }).as('getRankingCreation');
+      }).as('getUserByCreation');
 
-      cy.get('@getRankingCreation').then( response => {
+      cy.get('@getUserByCreation').then( response => {
         expect(response.status).to.eq(200);
         cy.log(JSON.stringify(response.body));
       });
@@ -449,7 +449,7 @@ describe('API Automation Test', ()=> {
 
       cy.request({
         method: "GET",
-        url: `${endPoint}/proposal`,
+        url: `${endPoint}/card/proposal`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
@@ -465,7 +465,7 @@ describe('API Automation Test', ()=> {
     it('Updates a card to an approved state', () => {
       cy.request({
         method: "PATCH",
-        url: `${endPoint}/proposal/${newCardId}`,
+        url: `${endPoint}/card/proposal/${newCardId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         }

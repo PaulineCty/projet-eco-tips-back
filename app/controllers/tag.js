@@ -60,7 +60,7 @@ const tagController = {
             const tag = await Tag.update( { id : req.params.id }, { name, color });
 
             if(!tag) {
-                return next(new APIError(`La catégorie n'a pas pu être créée.`,400));
+                return next(new APIError(`La catégorie n'a pas pu être modifiée.`,400));
             } else {
                res.status(204).json(); 
             }
